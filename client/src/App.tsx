@@ -6,11 +6,14 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import Chat from "./pages/Chat";
+import Auth from "./pages/Auth";
 
 function Router() {
   return (
     <Switch>
       <Route path={"/"} component={Home} />
+      <Route path={"/login"} component={Auth} />
+      <Route path={"/signup"} component={Auth} />
       <Route path={"/room/:room"} component={Chat} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
