@@ -99,6 +99,13 @@ export default function Chat() {
       }
     });
 
+    socket.on("nickname_taken", () => {
+      console.log("❌ Nickname is already taken, please choose another");
+      alert("This nickname is already taken! Please choose a different one.");
+      setEditingNickname(true);
+      setNewNickname(nickname);
+    });
+
     socket.on("message_history", (msgs: Message[]) => {
       console.log("📜 Message history received:", msgs.length, "messages");
       setMessages(msgs);
@@ -206,6 +213,7 @@ export default function Chat() {
       socket.off("user_joined");
       socket.off("user_left");
       socket.off("nickname_changed");
+      socket.off("nickname_taken");
       socket.off("disconnect");
     };
   }, [roomId, nickname]);

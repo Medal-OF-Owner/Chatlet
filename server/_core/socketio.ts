@@ -1,6 +1,6 @@
 import { Server as SocketIOServer } from "socket.io";
 import { Server as HTTPServer } from "http";
-import { addMessage, getMessages } from "../db";
+import { addMessage, getMessages, reserveNickname, releaseNickname, checkNicknameAvailable } from "../db";
 
 interface SocketUser {
   id: string;
@@ -25,6 +25,22 @@ export function setupSocketIO(httpServer: HTTPServer) {
     socket.on("join_room", async (data: { roomId: number; nickname: string }) => {
       const { roomId, nickname } = data;
 
+      // Check if nickname is available
+      const available = await checkNicknameAvailable(nickname);
+      if (!available) {
+        console.log(`❌ Nickname "${nickname}" is already taken`);
+        socket.emit("nickname_taken", { nickname });
+        return;
+      }
+
+      // Try to reserve the nickname
+      const reserved = await reserveNickname(nickname);
+      if (!reserved) {
+        console.log(`❌ Failed to reserve nickname "${nickname}"`);
+        socket.emit("nickname_taken", { nickname });
+        return;
+      }
+
       socket.join(`room_${roomId}`);
 
       const user: SocketUser = {
@@ -38,6 +54,7 @@ export function setupSocketIO(httpServer: HTTPServer) {
       // Notify others that user joined
       io.to(`room_${roomId}`).emit("user_joined", {
         nickname,
+        userId: socket.id,
         timestamp: new Date(),
       });
 
@@ -45,7 +62,7 @@ export function setupSocketIO(httpServer: HTTPServer) {
       const messages = await getMessages(roomId, 50);
       socket.emit("message_history", messages);
 
-      console.log(`${nickname} joined room ${roomId}`);
+      console.log(`✅ ${nickname} joined room ${roomId}`);
     });
 
     // Send message
@@ -110,15 +127,19 @@ export function setupSocketIO(httpServer: HTTPServer) {
     });
 
     // Disconnect
-    socket.on("disconnect", () => {
+    socket.on("disconnect", async () => {
       const user = users.get(socket.id);
       if (user) {
+        // Release the nickname
+        await releaseNickname(user.nickname);
+        
         io.to(`room_${user.roomId}`).emit("user_left", {
           nickname: user.nickname,
+          userId: socket.id,
           timestamp: new Date(),
         });
         users.delete(socket.id);
-        console.log(`${user.nickname} left room ${user.roomId}`);
+        console.log(`👋 ${user.nickname} left room ${user.roomId}`);
       }
     });
   });
