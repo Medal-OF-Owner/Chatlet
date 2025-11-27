@@ -1,7 +1,7 @@
-import { eq, desc } from "drizzle-orm";
+import { eq, desc, and } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
-import { InsertUser, users, rooms, messages } from "../drizzle/schema";
+import { InsertUser, users, rooms, messages, activeNicknames } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -119,4 +119,31 @@ export async function addMessage(roomId: number, nickname: string, content: stri
   if (!db) throw new Error("Database not available");
 
   return await db.insert(messages).values({ roomId, nickname, content, fontFamily });
+}
+
+export async function checkNicknameAvailable(nickname: string): Promise<boolean> {
+  const db = await getDb();
+  if (!db) return true;
+
+  const existing = await db.select().from(activeNicknames).where(eq(activeNicknames.nickname, nickname)).limit(1);
+  return existing.length === 0;
+}
+
+export async function reserveNickname(nickname: string): Promise<boolean> {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  try {
+    await db.insert(activeNicknames).values({ nickname });
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+export async function releaseNickname(nickname: string): Promise<void> {
+  const db = await getDb();
+  if (!db) return;
+
+  await db.delete(activeNicknames).where(eq(activeNicknames.nickname, nickname));
 }
