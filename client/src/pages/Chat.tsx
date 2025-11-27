@@ -7,7 +7,7 @@ import { generateRandomNickname } from "@shared/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
-import { Send, Video, Mic, Home, Edit2, Check, X } from "lucide-react";
+import { Send, Video, Mic, Home, Edit2, Check, X, Smile } from "lucide-react";
 
 interface Message {
   id?: number;
@@ -41,11 +41,14 @@ export default function Chat() {
   const [editingNickname, setEditingNickname] = useState(false);
   const [newNickname, setNewNickname] = useState("");
   const [usedNicknames, setUsedNicknames] = useState<Set<string>>(new Set());
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const remoteVideoRefs = useRef<Map<string, HTMLVideoElement>>(new Map());
   const socketRef = useRef(getSocket());
   const webrtcRef = useRef<WebRTCManager | null>(null);
+
+  const emojis = ["😀", "😂", "😍", "🥰", "😎", "🤔", "😢", "😡", "🔥", "💯", "👍", "👏", "🎉", "🎊", "🚀", "💡", "⭐", "🌟", "💪", "🙌"];
 
   const createRoomMutation = trpc.chat.getOrCreateRoom.useMutation();
 
@@ -342,6 +345,11 @@ export default function Chat() {
     setEditingNickname(false);
   };
 
+  const handleEmojiClick = (emoji: string) => {
+    setMessage((prev) => prev + emoji);
+    setShowEmojiPicker(false);
+  };
+
   if (!nickname) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 flex items-center justify-center">
@@ -494,14 +502,21 @@ export default function Chat() {
                 </select>
               </div>
 
-              <div className="flex gap-2">
+              <div className="flex gap-2 relative">
                 <Input
                   placeholder="Type a message..."
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-400"
+                  className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-400 flex-1"
                   style={{ color: textColor }}
                 />
+                <Button
+                  type="button"
+                  onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+                  className="bg-slate-700 hover:bg-slate-600"
+                >
+                  <Smile className="w-4 h-4" />
+                </Button>
                 <Button
                   type="submit"
                   disabled={!connected}
@@ -510,6 +525,21 @@ export default function Chat() {
                   <Send className="w-4 h-4" />
                 </Button>
               </div>
+
+              {showEmojiPicker && (
+                <div className="bg-slate-700 border border-slate-600 rounded p-3 grid grid-cols-10 gap-2">
+                  {emojis.map((emoji) => (
+                    <button
+                      key={emoji}
+                      type="button"
+                      onClick={() => handleEmojiClick(emoji)}
+                      className="text-2xl hover:bg-slate-600 rounded p-1 transition"
+                    >
+                      {emoji}
+                    </button>
+                  ))}
+                </div>
+              )}
             </form>
           </Card>
         </div>
