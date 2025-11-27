@@ -55,3 +55,15 @@ export const activeNicknames = pgTable("activeNicknames", {
   nickname: varchar("nickname", { length: 50 }).primaryKey(),
   connectedAt: timestamp("connectedAt").notNull().defaultNow(),
 });
+
+export const accounts = pgTable("accounts", {
+  id: serial("id").primaryKey(),
+  email: varchar("email", { length: 320 }).notNull().unique(),
+  nickname: varchar("nickname", { length: 100 }).notNull().unique(),
+  passwordHash: varchar("passwordHash", { length: 255 }).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  lastLogin: timestamp("lastLogin").defaultNow().notNull(),
+});
+
+export type Account = typeof accounts.$inferSelect;
+export type InsertAccount = typeof accounts.$inferInsert;

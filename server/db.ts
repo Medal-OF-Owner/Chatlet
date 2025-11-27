@@ -1,8 +1,9 @@
-import { eq, desc, and } from "drizzle-orm";
+import { eq, desc, and, lt } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
-import { InsertUser, users, rooms, messages, activeNicknames } from "../drizzle/schema";
+import { InsertUser, users, rooms, messages, activeNicknames, accounts } from "../drizzle/schema";
 import { ENV } from './_core/env';
+import * as bcrypt from "bcryptjs";
 
 let _db: ReturnType<typeof drizzle> | null = null;
 
@@ -146,4 +147,66 @@ export async function releaseNickname(nickname: string): Promise<void> {
   if (!db) return;
 
   await db.delete(activeNicknames).where(eq(activeNicknames.nickname, nickname));
+}
+
+export async function createAccount(email: string, nickname: string, password: string): Promise<{ success: boolean; error?: string }> {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  try {
+    const existingEmail = await db.select().from(accounts).where(eq(accounts.email, email)).limit(1);
+    if (existingEmail.length > 0) {
+      return { success: false, error: "Email already exists" };
+    }
+
+    const existingNickname = await db.select().from(accounts).where(eq(accounts.nickname, nickname)).limit(1);
+    if (existingNickname.length > 0) {
+      return { success: false, error: "Nickname already registered" };
+    }
+
+    const passwordHash = await bcrypt.hash(password, 10);
+    await db.insert(accounts).values({ email, nickname, passwordHash });
+    return { success: true };
+  } catch (error) {
+    console.error("[Database] Failed to create account:", error);
+    return { success: false, error: "Failed to create account" };
+  }
+}
+
+export async function login(email: string, password: string): Promise<{ success: boolean; account?: { id: number; email: string; nickname: string }; error?: string }> {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  try {
+    const account = await db.select().from(accounts).where(eq(accounts.email, email)).limit(1);
+    if (account.length === 0) {
+      return { success: false, error: "Email not found" };
+    }
+
+    const isValid = await bcrypt.compare(password, account[0].passwordHash);
+    if (!isValid) {
+      return { success: false, error: "Invalid password" };
+    }
+
+    // Update lastLogin
+    await db.update(accounts).set({ lastLogin: new Date() }).where(eq(accounts.id, account[0].id));
+
+    return { success: true, account: { id: account[0].id, email: account[0].email, nickname: account[0].nickname } };
+  } catch (error) {
+    console.error("[Database] Failed to login:", error);
+    return { success: false, error: "Login failed" };
+  }
+}
+
+export async function cleanupExpiredAccounts(): Promise<void> {
+  const db = await getDb();
+  if (!db) return;
+
+  try {
+    const oneMonthAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
+    await db.delete(accounts).where(lt(accounts.lastLogin, oneMonthAgo));
+    console.log("✅ Cleaned up expired accounts");
+  } catch (error) {
+    console.error("[Database] Failed to cleanup accounts:", error);
+  }
 }
