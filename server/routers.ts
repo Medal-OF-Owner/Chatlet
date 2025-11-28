@@ -76,9 +76,10 @@ export const appRouter = router({
         nickname: z.string().min(1).max(100),
         content: z.string().min(1),
         fontFamily: z.string().optional(),
+        profileImage: z.string().optional(),
       }))
       .mutation(async ({ input }) => {
-        return await addMessage(input.roomId, input.nickname, input.content, input.fontFamily);
+        return await addMessage(input.roomId, input.nickname, input.content, input.fontFamily, input.profileImage);
       }),
   }),
 });

@@ -452,9 +452,12 @@ export default function Chat() {
                   >
                     {msg.nickname !== "System" && (
                       <div className="flex justify-between items-start gap-2 mb-1">
-                        <span className="font-semibold text-blue-400">
-                          {msg.nickname}
-                        </span>
+                        <div className="flex items-center gap-2">
+                          <Avatar src={msg.profileImage} nickname={msg.nickname} size="sm" />
+                          <span className="font-semibold text-blue-400">
+                            {msg.nickname}
+                          </span>
+                        </div>
                         <span className="text-xs text-slate-400">
                           {new Date(msg.createdAt).toLocaleTimeString()}
                         </span>
@@ -478,6 +481,13 @@ export default function Chat() {
 
           {/* Input Area */}
           <Card className="bg-slate-800 border-slate-700 p-4">
+            <div className="mb-3 pb-3 border-b border-slate-700">
+              <ProfileImageUpload
+                nickname={displayNickname}
+                currentImage={profileImage}
+                onImageChange={setProfileImage}
+              />
+            </div>
             <form onSubmit={handleSendMessage} className="space-y-3">
               <div className="flex gap-2">
                 <select

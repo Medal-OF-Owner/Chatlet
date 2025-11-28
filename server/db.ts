@@ -117,11 +117,11 @@ export async function getMessages(roomId: number, limit: number = 50) {
   return await db.select().from(messages).where(eq(messages.roomId, roomId)).orderBy(desc(messages.createdAt)).limit(limit);
 }
 
-export async function addMessage(roomId: number, nickname: string, content: string, fontFamily?: string) {
+export async function addMessage(roomId: number, nickname: string, content: string, fontFamily?: string, profileImage?: string) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
 
-  return await db.insert(messages).values({ roomId, nickname, content, fontFamily });
+  return await db.insert(messages).values({ roomId, nickname, content, fontFamily, profileImage });
 }
 
 export async function checkNicknameAvailable(nickname: string): Promise<boolean> {
