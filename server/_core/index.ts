@@ -14,15 +14,26 @@ import { setupSocketIO } from "./socketio";
 
 // Run database migrations on startup
 async function runMigrations() {
-  if (!process.env.DATABASE_URL) {
-    console.log("[DB] DATABASE_URL not set, skipping migrations");
+  // Wait for DATABASE_URL to be available (Render may inject it with delay)
+  let dbUrl = process.env.DATABASE_URL;
+  let attempts = 0;
+  
+  while (!dbUrl && attempts < 10) {
+    attempts++;
+    console.log(`[DB] DATABASE_URL not set (attempt ${attempts}/10), waiting...`);
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    dbUrl = process.env.DATABASE_URL;
+  }
+  
+  if (!dbUrl) {
+    console.error("[DB] DATABASE_URL not available after retries, skipping migrations");
     return;
   }
 
   try {
     console.log("[DB] Creating tables if needed...");
     const pool = new Pool({
-      connectionString: process.env.DATABASE_URL,
+      connectionString: dbUrl,
       ssl: process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : false,
     });
     
