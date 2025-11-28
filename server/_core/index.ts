@@ -40,7 +40,14 @@ async function runMigrations() {
     const db = drizzle(pool);
 
     // Create role enum
-    await db.execute(sql`CREATE TYPE role AS ENUM ('user', 'admin') ON CONFLICT DO NOTHING`).catch(() => {});
+    try {
+      await db.execute(sql`CREATE TYPE IF NOT EXISTS role AS ENUM ('user', 'admin')`);
+    } catch (err: any) {
+      // Type might already exist, continue
+      if (!err.message?.includes('already exists')) {
+        console.warn("[DB] Failed to create role enum:", err.message);
+      }
+    }
 
     // Create tables
     await db.execute(sql`
