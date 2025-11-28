@@ -358,26 +358,45 @@ export default function Chat() {
 
   if (!nickname) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 flex items-center justify-center">
-        <Card className="bg-slate-800 border-slate-700 p-8 w-full max-w-md">
-          <h1 className="text-2xl font-bold text-white mb-6">Loading...</h1>
+      <div 
+        className="min-h-screen relative overflow-hidden flex items-center justify-center"
+        style={{
+          backgroundImage: 'url(/space-bg.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed'
+        }}
+      >
+        <div className="absolute inset-0 bg-black/40 pointer-events-none"></div>
+        <Card className="relative z-10 bg-gradient-to-br from-purple-900/50 via-slate-900/70 to-slate-900/50 backdrop-blur-xl border-2 border-cyan-400/50 p-8 w-full max-w-md rounded-3xl shadow-2xl" style={{ boxShadow: '0 0 30px rgba(0, 217, 255, 0.3), 0 0 60px rgba(255, 0, 255, 0.2)' }}>
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent mb-6">Loading...</h1>
         </Card>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800">
+    <div 
+      className="min-h-screen relative overflow-hidden"
+      style={{
+        backgroundImage: 'url(/space-bg.jpg)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed'
+      }}
+    >
+      <div className="absolute inset-0 bg-black/40 pointer-events-none"></div>
+      <div className="relative z-10">
       {/* Header */}
-      <div className="bg-slate-800 border-b border-slate-700 p-4">
+      <div className="bg-gradient-to-b from-slate-900/60 to-transparent border-b border-cyan-400/30 p-4 backdrop-blur-sm">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <Link href="/" className="text-slate-300 hover:text-white flex items-center gap-2">
+            <Link href="/" className="text-cyan-400 hover:text-cyan-300 flex items-center gap-2 font-semibold">
               <Home className="w-4 h-4" />
               Home
             </Link>
-            <h1 className="text-2xl font-bold text-white">/{room}</h1>
-            <span className={`text-sm ${connected ? "text-green-400" : "text-red-400"}`}>
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent">/{room}</h1>
+            <span className={`text-sm font-semibold ${connected ? "text-cyan-400" : "text-red-400"}`}>
               {connected ? "● Connected" : "● Disconnected"}
             </span>
           </div>
@@ -437,7 +456,7 @@ export default function Chat() {
         {/* Chat Area */}
         <div className="lg:col-span-2 flex flex-col gap-4">
           {/* Messages */}
-          <Card className="flex-1 bg-slate-800 border-slate-700 p-4 overflow-y-auto">
+          <Card className="flex-1 bg-gradient-to-br from-purple-900/40 via-slate-900/50 to-slate-900/40 backdrop-blur-md border-2 border-cyan-400/40 p-4 overflow-y-auto rounded-2xl shadow-lg" style={{ boxShadow: '0 0 20px rgba(0, 217, 255, 0.2)' }}>
             <div className="space-y-4">
               {!messages || messages.length === 0 ? (
                 <div className="text-center text-slate-400 py-8">
@@ -483,7 +502,7 @@ export default function Chat() {
           </Card>
 
           {/* Input Area */}
-          <Card className="bg-slate-800 border-slate-700 p-4">
+          <Card className="bg-gradient-to-br from-purple-900/40 via-slate-900/50 to-slate-900/40 backdrop-blur-md border-2 border-cyan-400/40 p-4 rounded-2xl shadow-lg" style={{ boxShadow: '0 0 20px rgba(0, 217, 255, 0.2)' }}>
             <ProfileImageUpload
               nickname={displayNickname}
               currentImage={profileImage}
