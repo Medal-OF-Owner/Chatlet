@@ -66,7 +66,7 @@ export default function Chat() {
     { value: "#a855f7", label: "Violet" },
   ];
 
-  // Initialize room and generate random nickname
+  // Initialize room and generate random nickname (keep same pseudo across rooms)
   useEffect(() => {
     if (!room) return;
 
@@ -75,10 +75,14 @@ export default function Chat() {
         const result = await createRoomMutation.mutateAsync({ slug: room });
         setRoomId(result.id);
 
-        // Generate random nickname
-        const randomNick = generateRandomNickname();
-        setNickname(randomNick);
-        setDisplayNickname(randomNick);
+        // Get or create nickname for session
+        let sessionNick = sessionStorage.getItem("sessionNickname");
+        if (!sessionNick) {
+          sessionNick = generateRandomNickname();
+          sessionStorage.setItem("sessionNickname", sessionNick);
+        }
+        setNickname(sessionNick);
+        setDisplayNickname(sessionNick);
       } catch (error) {
         console.error("Failed to create/get room:", error);
       }
