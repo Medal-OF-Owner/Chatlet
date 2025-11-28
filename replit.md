@@ -24,7 +24,7 @@ This is a real-time chat application built with React, Socket.IO, and WebRTC. It
 - Custom font selection for messages
 - Message persistence in PostgreSQL database
 - Profile images (circular avatars next to messages)
-- **NEW**: Neon cyberpunk design with space background on all pages
+- Neon cyberpunk design with space background on all pages
 - Responsive design for desktop and mobile
 
 ### Directory Structure
@@ -53,69 +53,54 @@ This is a real-time chat application built with React, Socket.IO, and WebRTC. It
 
 ## Recent Changes
 
-### November 28, 2024 - Neon Cyberpunk Design Implementation
-**Complete UI Redesign with Cyan/Magenta Neon Theme**
+### November 28, 2024 - Database Fix & Neon Design Complete
+**Fixed profileImage column issue and finalized UI redesign**
 
-#### Changes Made:
-1. **Home Page (Home.tsx)** - Full redesign
+#### Database Fix:
+- Added missing `profileImage` column to `messages` table (text type, nullable)
+- This column stores profile image URLs for user avatars in chat
+- Fixed DrizzleQueryError that was preventing messages from being sent
+
+#### UI Redesign Complete:
+1. **Home Page (Home.tsx)**
    - Neon cyan/magenta gradient text
    - Space background (space-bg.jpg) with 40% black overlay
    - Animated starfield effect
-   - Glowing border cards with cyan/magenta gradients
-   - Floating logo animation
-   - "Enter Room" button with hover scale effect
+   - Glowing border cards
 
 2. **Auth Pages (Auth.tsx)**
-   - Login/Signup pages styled with neon design
-   - Cyan border buttons and inputs
-   - Gradient text for titles
-   - Glowing shadow effects
+   - Login/Signup with neon design
+   - Cyan borders and gradient text
 
 3. **Password Reset Pages**
    - ForgotPassword.tsx - neon design
    - ResetPassword.tsx - neon design
-   - VerifyEmail.tsx - neon design with cyan spinner
+   - VerifyEmail.tsx - neon cyan design
 
 4. **Error Page (NotFound.tsx)**
    - 404 page with neon cyan design
-   - Space background matching other pages
-   - Gradient heading and cyan button
+   - Space background
 
 5. **Chat Page (Chat.tsx)**
    - Space background with 40% overlay
-   - Header with cyan gradient text and borders
-   - Messages card with neon glow effect
+   - Header with cyan gradient text
+   - Messages card with neon glow
    - Input area with neon styling
-   - Media controls sidebar with matching design
-   - All cards have cyan borders + glow shadow
-
-6. **New Asset**
-   - Added `client/public/space-bg.jpg` - space/nebula background image
-   - Atténuated with 40% black overlay for readability
+   - Fixed JSX closing tags
 
 #### Design System:
 - **Colors**: Cyan (#00d9ff) + Magenta (#ff00ff) + Purple gradients
 - **Borders**: 2px cyan with glow effects
 - **Text**: Gradient cyan to lighter cyan
-- **Buttons**: Cyan gradient with hover glow and scale effect
+- **Buttons**: Cyan gradient with hover glow and scale
 - **Backgrounds**: Translucent purple/slate with backdrop blur
-- **Effects**: Animated stars, floating elements, neon glow shadows
 
-#### CSS/Tailwind Classes Used:
-- `bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent` - Gradient text
-- `border-2 border-cyan-400/50` - Neon borders
-- `box-shadow: 0 0 30px rgba(0, 217, 255, 0.3), 0 0 60px rgba(255, 0, 255, 0.2)` - Glow effect
-- `backdrop-blur-xl` - Glass morphism
-- `hover:shadow-xl hover:shadow-cyan-400/50` - Hover glow
-- `transform hover:scale-105` - Hover scale
-
-### November 27, 2024 - Replit Environment Setup
-- Moved project from GitHub import to root directory
-- Updated Vite configuration for Replit proxy support
-- Updated server configuration for Replit environment
-- Installed all dependencies with pnpm
-- Ran database migrations to PostgreSQL
-- Configured deployment for autoscale production environment
+### Previous Session - November 27, 2024
+- Replit environment setup
+- Moved project to root directory
+- Updated Vite/server configuration
+- Installed dependencies with pnpm
+- Configured autoscale deployment
 
 ## Development
 
@@ -123,40 +108,40 @@ This is a real-time chat application built with React, Socket.IO, and WebRTC. It
 ```bash
 pnpm dev
 ```
-Starts the server on port 5000 with hot module replacement.
+Starts on port 5000 with hot reload.
 
 ### Database
 PostgreSQL with Drizzle ORM:
 - **Schema**: `drizzle/schema.ts`
-- **Migrations**: `pnpm drizzle-kit push`
-- **Connection**: `DATABASE_URL` environment variable
+- **Sync**: `pnpm drizzle-kit push`
+- **Connection**: `DATABASE_URL` (set by Replit)
 
 ### Environment Variables
-- `DATABASE_URL`: PostgreSQL connection string (set by Replit)
+- `DATABASE_URL`: PostgreSQL connection (Replit)
 - `NODE_ENV`: development or production
-- `PORT`: Server port (defaults to 5000)
+- `PORT`: Server port (5000)
 - Optional: `OAUTH_SERVER_URL`, `VITE_OAUTH_PORTAL_URL`, `VITE_APP_ID`
 
 ## API Structure
 
 ### Socket.IO Events
 **Client → Server:**
-- `join_room`: Join a chat room
-- `send_message`: Send a message with colors/fonts
-- `change_nickname`: Change user nickname
-- `user_left`: User left the room
+- `join_room`: Join chat room
+- `send_message`: Send message with fonts
+- `change_nickname`: Change nickname
+- `user_left`: User left
 
 **Server → Client:**
-- `message_history`: Initial message history
-- `new_message`: New message received
-- `user_joined`: User joined notification
-- `user_left`: User left notification
+- `message_history`: Initial history
+- `new_message`: New message
+- `user_joined`: User joined
+- `user_left`: User left
 
 ### tRPC Procedures
-- `chat.getOrCreateRoom`: Create or retrieve room
-- `chat.getMessages`: Get message history
+- `chat.getOrCreateRoom`: Create/retrieve room
+- `chat.getMessages`: Get history
 - `chat.sendMessage`: Send message
-- `auth.signup/login`: Authentication endpoints
+- `auth.signup/login`: Authentication
 
 ## Deployment
 
@@ -166,14 +151,14 @@ PostgreSQL with Drizzle ORM:
 - **Environment**: Autoscale
 - **Database**: PostgreSQL via `DATABASE_URL`
 
-## Current Limitations & Notes
-- OAuth warnings non-critical - app works without OAuth
-- WebRTC requires HTTPS in production (Replit provides)
-- Anonymous access by default
-- Profile images persist in DB for registered users, session-only for anonymous
-- Space background image at `client/public/space-bg.jpg`
+## Current Status & Notes
+- ✅ All UI pages redesigned with neon cyberpunk aesthetic
+- ✅ Database profileImage column added and working
+- ✅ OAuth warnings non-critical
+- ✅ WebRTC works (requires HTTPS in production)
+- ⚠️ Workflow needs restart after git push to see changes live
 
 ## User Preferences
-- **Language**: French (parle français avec réponses courtes)
+- **Language**: French (short responses)
 - **Design**: Neon cyberpunk cyan/magenta + space theme
-- **Communication**: Brief, direct responses
+- **Communication**: Brief, direct
