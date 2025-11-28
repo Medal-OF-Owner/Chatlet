@@ -8,8 +8,9 @@ import { toast } from "sonner";
 export default function ForgotPassword() {
   const [, navigate] = useLocation();
   const [email, setEmail] = useState("");
-  const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
+  
+  const resetMutation = trpc.auth.requestPasswordReset.useMutation();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -18,9 +19,8 @@ export default function ForgotPassword() {
       return;
     }
 
-    setLoading(true);
     try {
-      const result = await trpc.auth.requestPasswordReset.mutate({ email });
+      const result = await resetMutation.mutateAsync({ email });
       if (result.success) {
         setSent(true);
         toast.success("Email de réinitialisation envoyé!");
@@ -29,8 +29,6 @@ export default function ForgotPassword() {
       }
     } catch (error) {
       toast.error("Erreur lors de l'envoi de l'email");
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -72,17 +70,17 @@ export default function ForgotPassword() {
               placeholder="ton.email@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              disabled={loading}
+              disabled={resetMutation.isPending}
               className="w-full"
             />
           </div>
 
           <Button
             type="submit"
-            disabled={loading}
+            disabled={resetMutation.isPending}
             className="w-full"
           >
-            {loading ? "Envoi en cours..." : "Envoyer le lien"}
+            {resetMutation.isPending ? "Envoi en cours..." : "Envoyer le lien"}
           </Button>
         </form>
 

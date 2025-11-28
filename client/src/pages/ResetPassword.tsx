@@ -10,8 +10,9 @@ export default function ResetPassword() {
   const [token, setToken] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
-  const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+
+  const resetMutation = trpc.auth.resetPassword.useMutation();
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -42,9 +43,8 @@ export default function ResetPassword() {
       return;
     }
 
-    setLoading(true);
     try {
-      const result = await trpc.auth.resetPassword.mutate({
+      const result = await resetMutation.mutateAsync({
         token,
         newPassword: password,
       });
@@ -58,8 +58,6 @@ export default function ResetPassword() {
       }
     } catch (error) {
       toast.error("Erreur lors de la réinitialisation");
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -95,7 +93,7 @@ export default function ResetPassword() {
               placeholder="Au moins 6 caractères"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              disabled={loading}
+              disabled={resetMutation.isPending}
               className="w-full"
             />
           </div>
@@ -109,17 +107,17 @@ export default function ResetPassword() {
               placeholder="Confirme ton mot de passe"
               value={passwordConfirm}
               onChange={(e) => setPasswordConfirm(e.target.value)}
-              disabled={loading}
+              disabled={resetMutation.isPending}
               className="w-full"
             />
           </div>
 
           <Button
             type="submit"
-            disabled={loading}
+            disabled={resetMutation.isPending}
             className="w-full"
           >
-            {loading ? "Réinitialisation..." : "Réinitialiser le mot de passe"}
+            {resetMutation.isPending ? "Réinitialisation..." : "Réinitialiser le mot de passe"}
           </Button>
         </form>
       </div>

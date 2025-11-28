@@ -8,6 +8,8 @@ export default function VerifyEmail() {
   const [status, setStatus] = useState<"loading" | "success" | "error">("loading");
   const [message, setMessage] = useState("");
 
+  const verifyMutation = trpc.auth.verifyEmail.useMutation();
+
   useEffect(() => {
     const verify = async () => {
       const params = new URLSearchParams(window.location.search);
@@ -20,7 +22,7 @@ export default function VerifyEmail() {
       }
 
       try {
-        const result = await trpc.auth.verifyEmail.mutate({ token });
+        const result = await verifyMutation.mutateAsync({ token });
         if (result.success) {
           setStatus("success");
           setMessage("Email vérifié avec succès!");
@@ -39,7 +41,7 @@ export default function VerifyEmail() {
     };
 
     verify();
-  }, [navigate]);
+  }, [navigate, verifyMutation]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 flex items-center justify-center p-4">
