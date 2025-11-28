@@ -20,7 +20,7 @@ export default function ForgotPassword() {
 
     setLoading(true);
     try {
-      const result = await trpc.auth.requestPasswordReset.mutateAsync({ email });
+      const result = await trpc.auth.requestPasswordReset.mutate({ email });
       if (result.success) {
         setSent(true);
         toast.success("Email de réinitialisation envoyé!");

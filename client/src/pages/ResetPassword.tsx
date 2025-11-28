@@ -44,7 +44,7 @@ export default function ResetPassword() {
 
     setLoading(true);
     try {
-      const result = await trpc.auth.resetPassword.mutateAsync({
+      const result = await trpc.auth.resetPassword.mutate({
         token,
         newPassword: password,
       });

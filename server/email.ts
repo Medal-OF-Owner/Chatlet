@@ -1,7 +1,7 @@
 import sgMail from "@sendgrid/mail";
 
 const API_KEY = process.env.SENDGRID_API_KEY;
-const FROM_EMAIL = "noreply@chatlet.app";
+const FROM_EMAIL = process.env.SENDGRID_FROM_EMAIL || "noreply@chatlet.app";
 
 if (!API_KEY) {
   console.warn("[SendGrid] API key not configured");
