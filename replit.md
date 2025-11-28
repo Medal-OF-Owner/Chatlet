@@ -3,8 +3,8 @@
 ## Overview
 This is a real-time chat application built with React, Socket.IO, and WebRTC. It allows users to create custom chat rooms, send messages with custom fonts, and optionally share camera/microphone via WebRTC.
 
-**Current Status**: Fully functional and running on Replit
-**Last Updated**: November 27, 2024
+**Current Status**: Fully functional with neon cyberpunk design
+**Last Updated**: November 28, 2024
 
 ## Project Architecture
 
@@ -14,6 +14,7 @@ This is a real-time chat application built with React, Socket.IO, and WebRTC. It
 - **Database**: PostgreSQL (Replit-hosted)
 - **Real-time Communication**: Socket.IO + WebRTC (simple-peer)
 - **Package Manager**: pnpm
+- **Design**: Neon cyan/magenta theme with space background
 
 ### Key Features
 - Real-time messaging with Socket.IO
@@ -22,12 +23,15 @@ This is a real-time chat application built with React, Socket.IO, and WebRTC. It
 - Camera and microphone sharing via WebRTC
 - Custom font selection for messages
 - Message persistence in PostgreSQL database
+- Profile images (circular avatars next to messages)
+- **NEW**: Neon cyberpunk design with space background on all pages
 - Responsive design for desktop and mobile
 
 ### Directory Structure
 ```
 .
 ├── client/              # Frontend React application
+│   ├── public/          # Static files (space-bg.jpg background image)
 │   ├── src/
 │   │   ├── components/  # React components (UI library)
 │   │   ├── pages/       # Page components (Home, Chat, etc.)
@@ -49,18 +53,66 @@ This is a real-time chat application built with React, Socket.IO, and WebRTC. It
 
 ## Recent Changes
 
+### November 28, 2024 - Neon Cyberpunk Design Implementation
+**Complete UI Redesign with Cyan/Magenta Neon Theme**
+
+#### Changes Made:
+1. **Home Page (Home.tsx)** - Full redesign
+   - Neon cyan/magenta gradient text
+   - Space background (space-bg.jpg) with 40% black overlay
+   - Animated starfield effect
+   - Glowing border cards with cyan/magenta gradients
+   - Floating logo animation
+   - "Enter Room" button with hover scale effect
+
+2. **Auth Pages (Auth.tsx)**
+   - Login/Signup pages styled with neon design
+   - Cyan border buttons and inputs
+   - Gradient text for titles
+   - Glowing shadow effects
+
+3. **Password Reset Pages**
+   - ForgotPassword.tsx - neon design
+   - ResetPassword.tsx - neon design
+   - VerifyEmail.tsx - neon design with cyan spinner
+
+4. **Error Page (NotFound.tsx)**
+   - 404 page with neon cyan design
+   - Space background matching other pages
+   - Gradient heading and cyan button
+
+5. **Chat Page (Chat.tsx)**
+   - Space background with 40% overlay
+   - Header with cyan gradient text and borders
+   - Messages card with neon glow effect
+   - Input area with neon styling
+   - Media controls sidebar with matching design
+   - All cards have cyan borders + glow shadow
+
+6. **New Asset**
+   - Added `client/public/space-bg.jpg` - space/nebula background image
+   - Atténuated with 40% black overlay for readability
+
+#### Design System:
+- **Colors**: Cyan (#00d9ff) + Magenta (#ff00ff) + Purple gradients
+- **Borders**: 2px cyan with glow effects
+- **Text**: Gradient cyan to lighter cyan
+- **Buttons**: Cyan gradient with hover glow and scale effect
+- **Backgrounds**: Translucent purple/slate with backdrop blur
+- **Effects**: Animated stars, floating elements, neon glow shadows
+
+#### CSS/Tailwind Classes Used:
+- `bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent` - Gradient text
+- `border-2 border-cyan-400/50` - Neon borders
+- `box-shadow: 0 0 30px rgba(0, 217, 255, 0.3), 0 0 60px rgba(255, 0, 255, 0.2)` - Glow effect
+- `backdrop-blur-xl` - Glass morphism
+- `hover:shadow-xl hover:shadow-cyan-400/50` - Hover glow
+- `transform hover:scale-105` - Hover scale
+
 ### November 27, 2024 - Replit Environment Setup
 - Moved project from GitHub import to root directory
-- Updated Vite configuration for Replit proxy support:
-  - Changed port from 3000 to 5000
-  - Added Replit domain hosts (`.replit.dev`, `.replit.app`, `.replit.co`)
-  - Set host to `0.0.0.0` for external access
-  - Added HMR clientPort configuration for SSL proxy
-  - Added `global: 'globalThis'` polyfill for simple-peer compatibility
-  - Added `vite-plugin-node-polyfills` to fix WebRTC/simple-peer Node.js module compatibility
-- Updated server configuration:
-  - Changed default port to 5000
-  - Set server to listen on `0.0.0.0` for Replit environment
+- Updated Vite configuration for Replit proxy support
+- Updated server configuration for Replit environment
 - Installed all dependencies with pnpm
 - Ran database migrations to PostgreSQL
 - Configured deployment for autoscale production environment
@@ -68,70 +120,60 @@ This is a real-time chat application built with React, Socket.IO, and WebRTC. It
 ## Development
 
 ### Running Locally
-The development server is configured to run automatically via the workflow:
 ```bash
 pnpm dev
 ```
-This starts the server on port 5000 with hot module replacement.
+Starts the server on port 5000 with hot module replacement.
 
 ### Database
-The application uses PostgreSQL with Drizzle ORM:
-- **Schema**: Defined in `drizzle/schema.ts`
-- **Migrations**: Run with `pnpm drizzle-kit push`
-- **Connection**: Uses `DATABASE_URL` environment variable (automatically set by Replit)
+PostgreSQL with Drizzle ORM:
+- **Schema**: `drizzle/schema.ts`
+- **Migrations**: `pnpm drizzle-kit push`
+- **Connection**: `DATABASE_URL` environment variable
 
 ### Environment Variables
-Required variables (automatically configured in Replit):
 - `DATABASE_URL`: PostgreSQL connection string (set by Replit)
-- `NODE_ENV`: Set to `development` or `production`
+- `NODE_ENV`: development or production
 - `PORT`: Server port (defaults to 5000)
+- Optional: `OAUTH_SERVER_URL`, `VITE_OAUTH_PORTAL_URL`, `VITE_APP_ID`
 
-Optional OAuth variables (for authentication features):
-- `OAUTH_SERVER_URL`: OAuth server URL (shows warning if not set, but app works without it)
-- `VITE_OAUTH_PORTAL_URL`: OAuth portal URL
-- `VITE_APP_ID`: Application ID
+## API Structure
 
-### API Structure
-
-#### Socket.IO Events
+### Socket.IO Events
 **Client → Server:**
 - `join_room`: Join a chat room
-- `send_message`: Send a message to a room
-
-**Server → Client:**
-- `message_history`: Initial message history on room join
-- `new_message`: New message received
-- `user_joined`: User joined the room
+- `send_message`: Send a message with colors/fonts
+- `change_nickname`: Change user nickname
 - `user_left`: User left the room
 
-#### tRPC Procedures
-- `chat.getOrCreateRoom`: Create or retrieve a chat room by slug
-- `chat.getMessages`: Get message history for a room
-- `chat.sendMessage`: Send a message (also broadcasts via Socket.IO)
+**Server → Client:**
+- `message_history`: Initial message history
+- `new_message`: New message received
+- `user_joined`: User joined notification
+- `user_left`: User left notification
+
+### tRPC Procedures
+- `chat.getOrCreateRoom`: Create or retrieve room
+- `chat.getMessages`: Get message history
+- `chat.sendMessage`: Send message
+- `auth.signup/login`: Authentication endpoints
 
 ## Deployment
 
 ### Production Configuration
-The app is configured for Replit Autoscale deployment:
 - **Build**: `pnpm install --prod=false && pnpm build`
 - **Start**: `pnpm start`
-- **Environment**: Autoscale (stateless, scales with traffic)
+- **Environment**: Autoscale
+- **Database**: PostgreSQL via `DATABASE_URL`
 
-Production deployment will:
-1. Install all dependencies
-2. Build the frontend with Vite
-3. Bundle the backend with esbuild
-4. Serve static files from `dist/public`
-5. Run the production server on port 5000
-
-### Database in Production
-The PostgreSQL database is already set up and will be available in production via the same `DATABASE_URL` environment variable.
-
-## Notes
-- The OAuth configuration warnings in the logs are non-critical - the app works without OAuth
-- WebRTC features (camera/microphone) require HTTPS in production (Replit provides this)
-- The app uses anonymous access by default, no user authentication required
-- Node.js polyfills are configured via vite-plugin-node-polyfills to support WebRTC/simple-peer in the browser
+## Current Limitations & Notes
+- OAuth warnings non-critical - app works without OAuth
+- WebRTC requires HTTPS in production (Replit provides)
+- Anonymous access by default
+- Profile images persist in DB for registered users, session-only for anonymous
+- Space background image at `client/public/space-bg.jpg`
 
 ## User Preferences
-None specified yet.
+- **Language**: French (parle français avec réponses courtes)
+- **Design**: Neon cyberpunk cyan/magenta + space theme
+- **Communication**: Brief, direct responses
