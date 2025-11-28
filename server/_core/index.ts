@@ -86,6 +86,10 @@ async function runMigrations() {
         email VARCHAR(320) NOT NULL UNIQUE,
         nickname VARCHAR(100) NOT NULL UNIQUE,
         "passwordHash" VARCHAR(255) NOT NULL,
+        "emailVerified" TIMESTAMP,
+        "verificationToken" VARCHAR(255),
+        "resetToken" VARCHAR(255),
+        "resetTokenExpiry" TIMESTAMP,
         "createdAt" TIMESTAMP NOT NULL DEFAULT NOW(),
         "lastLogin" TIMESTAMP NOT NULL DEFAULT NOW()
       )

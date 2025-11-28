@@ -4,6 +4,8 @@ import { Pool } from "pg";
 import { InsertUser, users, rooms, messages, activeNicknames, accounts } from "../drizzle/schema";
 import { ENV } from './_core/env';
 import * as bcrypt from "bcryptjs";
+import { sendVerificationEmail, sendPasswordResetEmail } from "./email";
+import { nanoid } from "nanoid";
 
 let _db: ReturnType<typeof drizzle> | null = null;
 
@@ -165,11 +167,83 @@ export async function createAccount(email: string, nickname: string, password: s
     }
 
     const passwordHash = await bcrypt.hash(password, 10);
-    await db.insert(accounts).values({ email, nickname, passwordHash });
+    const verificationToken = nanoid(32);
+    await db.insert(accounts).values({ email, nickname, passwordHash, verificationToken });
+    
+    // Send verification email
+    await sendVerificationEmail(email, verificationToken);
+    
     return { success: true };
   } catch (error) {
     console.error("[Database] Failed to create account:", error);
     return { success: false, error: "Failed to create account" };
+  }
+}
+
+export async function verifyEmail(token: string): Promise<{ success: boolean; error?: string }> {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  try {
+    const account = await db.select().from(accounts).where(eq(accounts.verificationToken, token)).limit(1);
+    if (account.length === 0) {
+      return { success: false, error: "Invalid verification token" };
+    }
+
+    await db.update(accounts).set({ emailVerified: new Date(), verificationToken: null }).where(eq(accounts.id, account[0].id));
+    return { success: true };
+  } catch (error) {
+    console.error("[Database] Failed to verify email:", error);
+    return { success: false, error: "Verification failed" };
+  }
+}
+
+export async function requestPasswordReset(email: string): Promise<{ success: boolean; error?: string }> {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  try {
+    const account = await db.select().from(accounts).where(eq(accounts.email, email)).limit(1);
+    if (account.length === 0) {
+      // For security, don't reveal if email exists
+      return { success: true };
+    }
+
+    const resetToken = nanoid(32);
+    const resetTokenExpiry = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
+    await db.update(accounts).set({ resetToken, resetTokenExpiry }).where(eq(accounts.id, account[0].id));
+    
+    // Send reset email
+    await sendPasswordResetEmail(email, resetToken);
+    
+    return { success: true };
+  } catch (error) {
+    console.error("[Database] Failed to request password reset:", error);
+    return { success: false, error: "Failed to request reset" };
+  }
+}
+
+export async function resetPassword(token: string, newPassword: string): Promise<{ success: boolean; error?: string }> {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  try {
+    const account = await db.select().from(accounts).where(eq(accounts.resetToken, token)).limit(1);
+    if (account.length === 0) {
+      return { success: false, error: "Invalid reset token" };
+    }
+
+    if (!account[0].resetTokenExpiry || account[0].resetTokenExpiry < new Date()) {
+      return { success: false, error: "Reset token expired" };
+    }
+
+    const passwordHash = await bcrypt.hash(newPassword, 10);
+    await db.update(accounts).set({ passwordHash, resetToken: null, resetTokenExpiry: null }).where(eq(accounts.id, account[0].id));
+    
+    return { success: true };
+  } catch (error) {
+    console.error("[Database] Failed to reset password:", error);
+    return { success: false, error: "Password reset failed" };
   }
 }
 

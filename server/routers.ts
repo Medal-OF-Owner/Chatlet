@@ -3,7 +3,7 @@ import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router } from "./_core/trpc";
 import { z } from "zod";
-import { getOrCreateRoom, getMessages, addMessage, createAccount, login, cleanupExpiredAccounts } from "./db";
+import { getOrCreateRoom, getMessages, addMessage, createAccount, login, cleanupExpiredAccounts, verifyEmail, requestPasswordReset, resetPassword } from "./db";
 
 export const appRouter = router({
   system: systemRouter,
@@ -32,6 +32,28 @@ export const appRouter = router({
       }))
       .mutation(async ({ input }) => {
         return await login(input.email, input.password);
+      }),
+    verifyEmail: publicProcedure
+      .input(z.object({
+        token: z.string(),
+      }))
+      .mutation(async ({ input }) => {
+        return await verifyEmail(input.token);
+      }),
+    requestPasswordReset: publicProcedure
+      .input(z.object({
+        email: z.string().email(),
+      }))
+      .mutation(async ({ input }) => {
+        return await requestPasswordReset(input.email);
+      }),
+    resetPassword: publicProcedure
+      .input(z.object({
+        token: z.string(),
+        newPassword: z.string().min(6),
+      }))
+      .mutation(async ({ input }) => {
+        return await resetPassword(input.token, input.newPassword);
       }),
   }),
 

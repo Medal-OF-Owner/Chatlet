@@ -61,6 +61,10 @@ export const accounts = pgTable("accounts", {
   email: varchar("email", { length: 320 }).notNull().unique(),
   nickname: varchar("nickname", { length: 100 }).notNull().unique(),
   passwordHash: varchar("passwordHash", { length: 255 }).notNull(),
+  emailVerified: timestamp("emailVerified"),
+  verificationToken: varchar("verificationToken", { length: 255 }),
+  resetToken: varchar("resetToken", { length: 255 }),
+  resetTokenExpiry: timestamp("resetTokenExpiry"),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   lastLogin: timestamp("lastLogin").defaultNow().notNull(),
 });
