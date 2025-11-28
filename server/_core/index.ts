@@ -1,7 +1,10 @@
 import "dotenv/config";
 import express from "express";
 import { createServer } from "http";
-import { execSync } from "child_process";
+import { migrate } from "drizzle-orm/node-postgres/migrator";
+import { drizzle } from "drizzle-orm/node-postgres";
+import { Pool } from "pg";
+import path from "path";
 
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { registerOAuthRoutes } from "./oauth";
@@ -12,12 +15,23 @@ import { setupSocketIO } from "./socketio";
 
 // Run database migrations on startup
 async function runMigrations() {
+  if (!process.env.DATABASE_URL) {
+    console.log("[DB] DATABASE_URL not set, skipping migrations");
+    return;
+  }
+
   try {
-    if (process.env.NODE_ENV === "production") {
-      console.log("[DB] Running migrations...");
-      execSync("pnpm exec drizzle-kit push:pg --force-cli", { stdio: "inherit" });
-      console.log("[DB] Migrations completed!");
-    }
+    console.log("[DB] Running migrations...");
+    const pool = new Pool({
+      connectionString: process.env.DATABASE_URL,
+      ssl: process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : false,
+    });
+    
+    const db = drizzle(pool);
+    const migrationsFolder = path.join(process.cwd(), "drizzle");
+    await migrate(db, { migrationsFolder });
+    console.log("[DB] Migrations completed!");
+    await pool.end();
   } catch (err) {
     console.error("[DB] Migration error:", err);
     throw err;
