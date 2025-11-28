@@ -95,6 +95,24 @@ async function runMigrations() {
       )
     `);
 
+    // Add missing columns if they don't exist
+    await db.execute(sql`
+      ALTER TABLE accounts
+      ADD COLUMN IF NOT EXISTS "emailVerified" TIMESTAMP
+    `);
+    await db.execute(sql`
+      ALTER TABLE accounts
+      ADD COLUMN IF NOT EXISTS "verificationToken" VARCHAR(255)
+    `);
+    await db.execute(sql`
+      ALTER TABLE accounts
+      ADD COLUMN IF NOT EXISTS "resetToken" VARCHAR(255)
+    `);
+    await db.execute(sql`
+      ALTER TABLE accounts
+      ADD COLUMN IF NOT EXISTS "resetTokenExpiry" TIMESTAMP
+    `);
+
     console.log("[DB] Tables created/verified!");
     await pool.end();
   } catch (err) {
