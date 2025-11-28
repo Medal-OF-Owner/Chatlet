@@ -89,31 +89,31 @@ export default function Home() {
             {/* Left Card - Join Room */}
             <div className="relative group">
               <div className="absolute inset-0 bg-gradient-to-br from-pink-500/20 to-purple-500/20 rounded-3xl blur-2xl group-hover:blur-3xl transition-all opacity-0 group-hover:opacity-100"></div>
-              <div className="relative bg-gradient-to-br from-purple-900/30 via-slate-900/50 to-slate-900/30 backdrop-blur-xl rounded-3xl p-12 glow-border">
-                <h2 className="text-5xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent mb-4">
+              <div className="relative bg-gradient-to-br from-purple-900/50 via-slate-900/70 to-slate-900/50 backdrop-blur-xl rounded-3xl p-12 glow-border">
+                <h2 className="text-6xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent mb-4">
                   Join a Room
                 </h2>
-                <p className="text-slate-300 mb-10 text-lg">
+                <p className="text-slate-200 mb-10 text-xl">
                   Connect instantly with friends or colleagues.
                 </p>
 
                 <form className="space-y-6">
                   <input
-                    placeholder="24px"
+                    placeholder="Enter room name..."
                     value={roomName}
                     onChange={(e) => setRoomName(e.target.value)}
-                    className="w-full bg-slate-800/30 border-2 border-cyan-400/40 text-cyan-400 placeholder-slate-400 rounded-xl px-6 py-4 focus:outline-none focus:border-cyan-400 focus:shadow-lg focus:shadow-cyan-400/30 transition-all backdrop-blur-sm"
+                    className="w-full bg-slate-800/60 border-2 border-cyan-400/60 text-cyan-300 placeholder-slate-300 rounded-xl px-6 py-5 focus:outline-none focus:border-cyan-400 focus:shadow-lg focus:shadow-cyan-400/50 transition-all backdrop-blur-sm text-lg font-semibold"
                   />
 
                   {roomName.trim() ? (
                     <Link href={`/room/${roomName}`}>
-                      <Button className="w-full bg-gradient-to-r from-cyan-400 to-cyan-300 text-slate-900 hover:shadow-xl hover:shadow-cyan-400/50 rounded-xl py-4 font-bold text-lg transition-all duration-300">
-                        Enter Room
+                      <Button className="w-full bg-gradient-to-r from-cyan-400 to-cyan-300 text-slate-900 hover:shadow-2xl hover:shadow-cyan-400/70 rounded-xl py-5 font-bold text-xl transition-all duration-300 transform hover:scale-105">
+                        Enter Room →
                       </Button>
                     </Link>
                   ) : (
-                    <Button disabled className="w-full bg-slate-700/50 text-slate-500 rounded-xl py-4 font-bold text-lg cursor-not-allowed">
-                      Enter Room
+                    <Button disabled className="w-full bg-slate-700/50 text-slate-500 rounded-xl py-5 font-bold text-xl cursor-not-allowed">
+                      Enter Room →
                     </Button>
                   )}
                 </form>
