@@ -1,0 +1,15 @@
+{
+  "name": "uptime-kuma-monitor",
+  "version": "1.0.0",
+  "main": "start.js",
+  "scripts": {
+    "start": "node start.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "Uptime Kuma monitoring",
+  "dependencies": {
+    "uptime-kuma": "^2.0.0-dev.0"
+  }
+}

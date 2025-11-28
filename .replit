@@ -7,7 +7,7 @@ channel = "stable-25_05"
 packages = ["webtunnel", "vimPlugins.LanguageClient-neovim"]
 
 [workflows]
-runButton = "Start application"
+runButton = "Project"
 
 [[workflows.workflow]]
 name = "Project"
@@ -16,10 +16,14 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "Start application"
+args = "Chat App"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Uptime Kuma"
 
 [[workflows.workflow]]
-name = "Start application"
+name = "Chat App"
 author = "agent"
 
 [[workflows.workflow.tasks]]
@@ -30,9 +34,25 @@ waitForPort = 5000
 [workflows.workflow.metadata]
 outputType = "webview"
 
+[[workflows.workflow]]
+name = "Uptime Kuma"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd uptime-kuma && npm start"
+waitForPort = 3001
+
+[workflows.workflow.metadata]
+outputType = "console"
+
 [[ports]]
 localPort = 5000
 externalPort = 80
+
+[[ports]]
+localPort = 3001
+externalPort = 3001
 
 [deployment]
 deploymentTarget = "autoscale"
