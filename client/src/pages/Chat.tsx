@@ -382,60 +382,53 @@ export default function Chat() {
             </span>
           </div>
 
-          {/* Nickname Display and Edit + Profile Image */}
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2">
-              {editingNickname ? (
-                <>
-                  <Input
-                    value={newNickname}
-                    onChange={(e) => setNewNickname(e.target.value)}
-                    placeholder="New nickname"
-                    className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-400 w-40"
-                    autoFocus
-                  />
-                  <Button
-                    size="sm"
-                    onClick={handleChangeNickname}
-                    className="bg-green-600 hover:bg-green-700"
-                  >
-                    <Check className="w-4 h-4" />
-                  </Button>
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    onClick={() => {
-                      setEditingNickname(false);
-                      setNewNickname("");
-                    }}
-                    className="text-slate-300"
-                  >
-                    <X className="w-4 h-4" />
-                  </Button>
-                </>
-              ) : (
-                <>
-                  <Avatar src={profileImage} nickname={displayNickname} size="md" />
-                  <span className="text-slate-300">{displayNickname}</span>
-                  <Button
-                    size="sm"
-                    variant="ghost"
-                    onClick={() => {
-                      setEditingNickname(true);
-                      setNewNickname(displayNickname);
-                    }}
-                    className="text-slate-300 hover:text-white"
-                  >
-                    <Edit2 className="w-4 h-4" />
-                  </Button>
-                </>
-              )}
-            </div>
-            <ProfileImageUpload
-              nickname={displayNickname}
-              currentImage={profileImage}
-              onImageChange={setProfileImage}
-            />
+          {/* Nickname Display and Edit */}
+          <div className="flex items-center gap-2">
+            {editingNickname ? (
+              <>
+                <Input
+                  value={newNickname}
+                  onChange={(e) => setNewNickname(e.target.value)}
+                  placeholder="New nickname"
+                  className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-400 w-40"
+                  autoFocus
+                />
+                <Button
+                  size="sm"
+                  onClick={handleChangeNickname}
+                  className="bg-green-600 hover:bg-green-700"
+                >
+                  <Check className="w-4 h-4" />
+                </Button>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() => {
+                    setEditingNickname(false);
+                    setNewNickname("");
+                  }}
+                  className="text-slate-300"
+                >
+                  <X className="w-4 h-4" />
+                </Button>
+              </>
+            ) : (
+              <>
+                <Avatar src={profileImage} nickname={displayNickname} size="md" />
+                <span className="text-slate-300">{displayNickname}</span>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  onClick={() => {
+                    setEditingNickname(true);
+                    setNewNickname(displayNickname);
+                  }}
+                  className="text-slate-300 hover:text-white"
+                >
+                  <Edit2 className="w-4 h-4" />
+                </Button>
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -491,7 +484,12 @@ export default function Chat() {
 
           {/* Input Area */}
           <Card className="bg-slate-800 border-slate-700 p-4">
-            <form onSubmit={handleSendMessage} className="space-y-3">
+            <ProfileImageUpload
+              nickname={displayNickname}
+              currentImage={profileImage}
+              onImageChange={setProfileImage}
+            />
+            <form onSubmit={handleSendMessage} className="space-y-3 mt-3">
               <div className="flex gap-2">
                 <select
                   value={fontFamily}
