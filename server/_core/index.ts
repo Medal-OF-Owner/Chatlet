@@ -112,6 +112,7 @@ async function startServer() {
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
   // Health check endpoint (for keeping app alive on Render free tier)
   app.get("/health", (req, res) => {
+    console.log(`🏥 Health check from ${req.ip} - Server alive!`);
     res.json({ status: "ok", timestamp: new Date().toISOString() });
   });
 
