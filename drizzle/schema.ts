@@ -45,6 +45,7 @@ export const messages = pgTable("messages", {
   nickname: varchar("nickname", { length: 100 }).notNull(),
   content: text("content").notNull(),
   fontFamily: varchar("fontFamily", { length: 100 }).default("sans-serif"),
+  profileImage: text("profileImage"),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
 });
 
@@ -65,6 +66,7 @@ export const accounts = pgTable("accounts", {
   verificationToken: varchar("verificationToken", { length: 255 }),
   resetToken: varchar("resetToken", { length: 255 }),
   resetTokenExpiry: timestamp("resetTokenExpiry"),
+  profileImage: text("profileImage"),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   lastLogin: timestamp("lastLogin").defaultNow().notNull(),
 });

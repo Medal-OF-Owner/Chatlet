@@ -7,6 +7,8 @@ import { generateRandomNickname } from "@shared/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
+import { Avatar } from "@/components/Avatar";
+import { ProfileImageUpload } from "@/components/ProfileImageUpload";
 import { Send, Video, Mic, Home, Edit2, Check, X, Smile } from "lucide-react";
 
 interface Message {
@@ -16,6 +18,7 @@ interface Message {
   content: string;
   fontFamily: string | null;
   textColor?: string | null;
+  profileImage?: string | null;
   createdAt: Date;
 }
 
@@ -42,6 +45,7 @@ export default function Chat() {
   const [newNickname, setNewNickname] = useState("");
   const [usedNicknames, setUsedNicknames] = useState<Set<string>>(new Set());
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const [profileImage, setProfileImage] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const remoteVideoRefs = useRef<Map<string, HTMLVideoElement>>(new Map());
