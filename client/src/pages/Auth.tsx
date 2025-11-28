@@ -139,13 +139,19 @@ export default function Auth() {
             </Button>
           </form>
 
-          <div className="mt-6 text-center">
+          <div className="mt-6 text-center space-y-2">
             {isLogin ? (
               <>
                 <p className="text-slate-400">Don't have an account?</p>
                 <Link href="/signup">
                   <Button variant="link" className="text-blue-400 hover:text-blue-300">
                     Sign up here
+                  </Button>
+                </Link>
+                <p className="text-slate-400 pt-4">Forgot your password?</p>
+                <Link href="/forgot-password">
+                  <Button variant="link" className="text-yellow-400 hover:text-yellow-300">
+                    Reset it here
                   </Button>
                 </Link>
               </>
