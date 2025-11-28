@@ -3,7 +3,7 @@ services:
     name: chatapp
     runtime: node
     plan: free
-    buildCommand: npm install -g pnpm && pnpm install && pnpm build && pnpm exec drizzle-kit push:pg
+    buildCommand: npm install -g pnpm && pnpm install && pnpm build
     startCommand: pnpm start
     envVars:
       - key: NODE_ENV

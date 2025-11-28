@@ -1,6 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import { createServer } from "http";
+import { execSync } from "child_process";
 
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { registerOAuthRoutes } from "./oauth";
@@ -9,9 +10,23 @@ import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
 import { setupSocketIO } from "./socketio";
 
-
+// Run database migrations on startup
+async function runMigrations() {
+  try {
+    if (process.env.NODE_ENV === "production") {
+      console.log("[DB] Running migrations...");
+      execSync("pnpm exec drizzle-kit push:pg --force-cli", { stdio: "inherit" });
+      console.log("[DB] Migrations completed!");
+    }
+  } catch (err) {
+    console.error("[DB] Migration error:", err);
+    throw err;
+  }
+}
 
 async function startServer() {
+  // Run migrations first
+  await runMigrations();
   const app = express();
   const server = createServer(app);
   
