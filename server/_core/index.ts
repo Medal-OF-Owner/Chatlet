@@ -1,7 +1,9 @@
 import "dotenv/config";
 import express from "express";
 import { createServer } from "http";
-import { spawn } from "child_process";
+import { drizzle } from "drizzle-orm/node-postgres";
+import { sql } from "drizzle-orm";
+import { Pool } from "pg";
 
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { registerOAuthRoutes } from "./oauth";
@@ -17,32 +19,76 @@ async function runMigrations() {
     return;
   }
 
-  return new Promise<void>((resolve, reject) => {
-    try {
-      console.log("[DB] Running schema sync...");
-      const proc = spawn("pnpm", ["exec", "drizzle-kit", "push:pg"], {
-        stdio: "inherit",
-        env: { ...process.env },
-      });
+  try {
+    console.log("[DB] Creating tables if needed...");
+    const pool = new Pool({
+      connectionString: process.env.DATABASE_URL,
+      ssl: process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : false,
+    });
+    
+    const db = drizzle(pool);
 
-      proc.on("exit", (code) => {
-        if (code === 0) {
-          console.log("[DB] Schema sync completed!");
-          resolve();
-        } else {
-          reject(new Error(`drizzle-kit push failed with code ${code}`));
-        }
-      });
+    // Create role enum
+    await db.execute(sql`CREATE TYPE role AS ENUM ('user', 'admin') ON CONFLICT DO NOTHING`).catch(() => {});
 
-      proc.on("error", (err) => {
-        console.error("[DB] Failed to run drizzle-kit:", err);
-        reject(err);
-      });
-    } catch (err) {
-      console.error("[DB] Migration error:", err);
-      reject(err);
-    }
-  });
+    // Create tables
+    await db.execute(sql`
+      CREATE TABLE IF NOT EXISTS users (
+        id SERIAL PRIMARY KEY,
+        "openId" VARCHAR(64) NOT NULL UNIQUE,
+        name TEXT,
+        email VARCHAR(320),
+        "loginMethod" VARCHAR(64),
+        role role DEFAULT 'user' NOT NULL,
+        "createdAt" TIMESTAMP NOT NULL DEFAULT NOW(),
+        "updatedAt" TIMESTAMP NOT NULL DEFAULT NOW(),
+        "lastSignedIn" TIMESTAMP NOT NULL DEFAULT NOW()
+      )
+    `);
+
+    await db.execute(sql`
+      CREATE TABLE IF NOT EXISTS rooms (
+        id SERIAL PRIMARY KEY,
+        slug VARCHAR(100) NOT NULL UNIQUE,
+        "createdAt" TIMESTAMP NOT NULL DEFAULT NOW()
+      )
+    `);
+
+    await db.execute(sql`
+      CREATE TABLE IF NOT EXISTS messages (
+        id SERIAL PRIMARY KEY,
+        "roomId" INTEGER NOT NULL,
+        nickname VARCHAR(100) NOT NULL,
+        content TEXT NOT NULL,
+        "fontFamily" VARCHAR(100) DEFAULT 'sans-serif',
+        "createdAt" TIMESTAMP NOT NULL DEFAULT NOW()
+      )
+    `);
+
+    await db.execute(sql`
+      CREATE TABLE IF NOT EXISTS "activeNicknames" (
+        nickname VARCHAR(50) PRIMARY KEY,
+        "connectedAt" TIMESTAMP NOT NULL DEFAULT NOW()
+      )
+    `);
+
+    await db.execute(sql`
+      CREATE TABLE IF NOT EXISTS accounts (
+        id SERIAL PRIMARY KEY,
+        email VARCHAR(320) NOT NULL UNIQUE,
+        nickname VARCHAR(100) NOT NULL UNIQUE,
+        "passwordHash" VARCHAR(255) NOT NULL,
+        "createdAt" TIMESTAMP NOT NULL DEFAULT NOW(),
+        "lastLogin" TIMESTAMP NOT NULL DEFAULT NOW()
+      )
+    `);
+
+    console.log("[DB] Tables created/verified!");
+    await pool.end();
+  } catch (err) {
+    console.error("[DB] Migration error:", err);
+    throw err;
+  }
 }
 
 async function startServer() {
