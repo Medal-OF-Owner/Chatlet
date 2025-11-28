@@ -69,6 +69,7 @@ async function runMigrations() {
         nickname VARCHAR(100) NOT NULL,
         content TEXT NOT NULL,
         "fontFamily" VARCHAR(100) DEFAULT 'sans-serif',
+        "profileImage" TEXT,
         "createdAt" TIMESTAMP NOT NULL DEFAULT NOW()
       )
     `);
@@ -90,12 +91,21 @@ async function runMigrations() {
         "verificationToken" VARCHAR(255),
         "resetToken" VARCHAR(255),
         "resetTokenExpiry" TIMESTAMP,
+        "profileImage" TEXT,
         "createdAt" TIMESTAMP NOT NULL DEFAULT NOW(),
         "lastLogin" TIMESTAMP NOT NULL DEFAULT NOW()
       )
     `);
 
     // Add missing columns if they don't exist
+    await db.execute(sql`
+      ALTER TABLE messages
+      ADD COLUMN IF NOT EXISTS "profileImage" TEXT
+    `);
+    await db.execute(sql`
+      ALTER TABLE accounts
+      ADD COLUMN IF NOT EXISTS "profileImage" TEXT
+    `);
     await db.execute(sql`
       ALTER TABLE accounts
       ADD COLUMN IF NOT EXISTS "emailVerified" TIMESTAMP

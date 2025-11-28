@@ -1,0 +1,54 @@
+2025-11-28T22:25:46.119656037Z ==> ///////////////////////////////////////////////////////////
+2025-11-28T22:25:46.156469814Z ==> 
+2025-11-28T22:25:46.1899559Z ==> Available at your primary URL https://chatlet-i19c.onrender.com
+2025-11-28T22:25:46.222961237Z ==> 
+2025-11-28T22:25:46.254997775Z ==> ///////////////////////////////////////////////////////////
+2025-11-28T22:26:52.64871002Z [Auth] Missing session cookie
+2025-11-28T22:26:53.006435118Z User connected: 3Gu2YD8dodQ55-5tAAAB
+2025-11-28T22:26:53.161743341Z file:///app/node_modules/.pnpm/drizzle-orm@0.44.7_knex@2.5.1_mysql2@3.15.3_pg@8.16.3__mysql2@3.15.3_pg@8.16.3/node_modules/drizzle-orm/pg-core/session.js:41
+2025-11-28T22:26:53.161765372Z         throw new DrizzleQueryError(queryString, params, e);
+2025-11-28T22:26:53.161770572Z               ^
+2025-11-28T22:26:53.161774532Z 
+2025-11-28T22:26:53.161779382Z DrizzleQueryError: Failed query: select "id", "roomId", "nickname", "content", "fontFamily", "profileImage", "createdAt" from "messages" where "messages"."roomId" = $1 order by "messages"."createdAt" desc limit $2
+2025-11-28T22:26:53.161783563Z params: 14,50
+2025-11-28T22:26:53.161788352Z     at NodePgPreparedQuery.queryWithCache (file:///app/node_modules/.pnpm/drizzle-orm@0.44.7_knex@2.5.1_mysql2@3.15.3_pg@8.16.3__mysql2@3.15.3_pg@8.16.3/node_modules/drizzle-orm/pg-core/session.js:41:15)
+2025-11-28T22:26:53.161793353Z     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-11-28T22:26:53.161798083Z     at async file:///app/node_modules/.pnpm/drizzle-orm@0.44.7_knex@2.5.1_mysql2@3.15.3_pg@8.16.3__mysql2@3.15.3_pg@8.16.3/node_modules/drizzle-orm/node-postgres/session.js:117:22
+2025-11-28T22:26:53.161802453Z     at async getMessages (file:///app/dist/index.js:238:10)
+2025-11-28T22:26:53.161807063Z     at async Socket.<anonymous> (file:///app/dist/index.js:1012:25) {
+2025-11-28T22:26:53.161811163Z   query: 'select "id", "roomId", "nickname", "content", "fontFamily", "profileImage", "createdAt" from "messages" where "messages"."roomId" = $1 order by "messages"."createdAt" desc limit $2',
+2025-11-28T22:26:53.161815673Z   params: [ 14, 50 ],
+2025-11-28T22:26:53.161820104Z   cause: error: column "profileImage" does not exist
+2025-11-28T22:26:53.161828344Z       at /app/node_modules/.pnpm/pg-pool@3.10.1_pg@8.16.3/node_modules/pg-pool/index.js:45:11
+2025-11-28T22:26:53.161833264Z       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-11-28T22:26:53.161837514Z       at async file:///app/node_modules/.pnpm/drizzle-orm@0.44.7_knex@2.5.1_mysql2@3.15.3_pg@8.16.3__mysql2@3.15.3_pg@8.16.3/node_modules/drizzle-orm/node-postgres/session.js:124:18
+2025-11-28T22:26:53.161842364Z       at async NodePgPreparedQuery.queryWithCache (file:///app/node_modules/.pnpm/drizzle-orm@0.44.7_knex@2.5.1_mysql2@3.15.3_pg@8.16.3__mysql2@3.15.3_pg@8.16.3/node_modules/drizzle-orm/pg-core/session.js:39:16)
+2025-11-28T22:26:53.161846744Z       at async file:///app/node_modules/.pnpm/drizzle-orm@0.44.7_knex@2.5.1_mysql2@3.15.3_pg@8.16.3__mysql2@3.15.3_pg@8.16.3/node_modules/drizzle-orm/node-postgres/session.js:117:22
+2025-11-28T22:26:53.161850824Z       at async getMessages (file:///app/dist/index.js:238:10)
+2025-11-28T22:26:53.161855144Z       at async Socket.<anonymous> (file:///app/dist/index.js:1012:25) {
+2025-11-28T22:26:53.161859585Z     length: 112,
+2025-11-28T22:26:53.161863694Z     severity: 'ERROR',
+2025-11-28T22:26:53.161867685Z     code: '42703',
+2025-11-28T22:26:53.161883645Z     detail: undefined,
+2025-11-28T22:26:53.161886615Z     hint: undefined,
+2025-11-28T22:26:53.161889315Z     position: '61',
+2025-11-28T22:26:53.161892425Z     internalPosition: undefined,
+2025-11-28T22:26:53.161895155Z     internalQuery: undefined,
+2025-11-28T22:26:53.161897606Z     where: undefined,
+2025-11-28T22:26:53.161900306Z     schema: undefined,
+2025-11-28T22:26:53.161902866Z     table: undefined,
+2025-11-28T22:26:53.161905416Z     column: undefined,
+2025-11-28T22:26:53.161908266Z     dataType: undefined,
+2025-11-28T22:26:53.161911776Z     constraint: undefined,
+2025-11-28T22:26:53.161914546Z     file: 'parse_relation.c',
+2025-11-28T22:26:53.161917376Z     line: '3822',
+2025-11-28T22:26:53.161920906Z     routine: 'errorMissingColumn'
+2025-11-28T22:26:53.161923756Z   }
+2025-11-28T22:26:53.161926506Z }
+2025-11-28T22:26:53.161928966Z 
+2025-11-28T22:26:53.161931376Z Node.js v20.19.6
+2025-11-28T22:26:53.233419646Z  ELIFECYCLE  Command failed with exit code 1.
+2025-11-28T22:27:04.722802611Z 
+2025-11-28T22:27:04.722837702Z > chatapp@1.0.0 start /app
+2025-11-28T22:27:04.722842192Z > NODE_ENV=production node dist/index.js
+2025-11-28T22:27:04.722844362Z 
