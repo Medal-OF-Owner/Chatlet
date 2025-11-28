@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useLocation } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
@@ -7,11 +7,15 @@ export default function VerifyEmail() {
   const [, navigate] = useLocation();
   const [status, setStatus] = useState<"loading" | "success" | "error">("loading");
   const [message, setMessage] = useState("");
+  const hasVerified = useRef(false);
 
   const verifyMutation = trpc.auth.verifyEmail.useMutation();
 
   useEffect(() => {
     const verify = async () => {
+      if (hasVerified.current) return;
+      hasVerified.current = true;
+
       const params = new URLSearchParams(window.location.search);
       const token = params.get("token");
 
@@ -41,7 +45,7 @@ export default function VerifyEmail() {
     };
 
     verify();
-  }, [navigate, verifyMutation]);
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 flex items-center justify-center p-4">
