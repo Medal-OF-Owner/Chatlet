@@ -2,134 +2,125 @@ import { useState } from "react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Card } from "@/components/ui/card";
-import { MessageCircle, Plus, LogIn, UserPlus } from "lucide-react";
+import { MessageSquare, CheckCircle2, Video, Lock, Eye } from "lucide-react";
 
 export default function Home() {
   const [roomName, setRoomName] = useState("");
 
-  const handleJoin = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (roomName.trim()) {
-      // Will navigate via Link
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800">
-      {/* Header */}
-      <div className="bg-slate-800 border-b border-slate-700 p-6">
-        <div className="max-w-4xl mx-auto">
-          <div className="flex items-center justify-between mb-2">
-            <div className="flex items-center gap-3">
-              <MessageCircle className="w-8 h-8 text-blue-500" />
-              <h1 className="text-4xl font-bold text-white">Chat App</h1>
-            </div>
-            <div className="flex gap-2">
-              <Link href="/login">
-                <Button className="bg-blue-600 hover:bg-blue-700 gap-2">
-                  <LogIn className="w-4 h-4" />
-                  Login
-                </Button>
-              </Link>
-              <Link href="/signup">
-                <Button className="bg-green-600 hover:bg-green-700 gap-2">
-                  <UserPlus className="w-4 h-4" />
-                  Sign Up
-                </Button>
-              </Link>
-            </div>
-          </div>
-          <p className="text-slate-400">Real-time chat with camera and microphone</p>
-        </div>
+    <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950">
+      {/* Animated background gradient */}
+      <div className="absolute inset-0">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-pink-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 right-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-500"></div>
       </div>
 
-      {/* Main Content */}
-      <div className="max-w-4xl mx-auto p-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Join Room Section */}
-          <Card className="bg-slate-800 border-slate-700 p-8">
-            <h2 className="text-2xl font-bold text-white mb-6">Join a Room</h2>
-            <form onSubmit={handleJoin} className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-slate-300 mb-2">
-                  Room Name
-                </label>
-                <Input
-                  placeholder="e.g., manu, manuai, gaming"
-                  value={roomName}
-                  onChange={(e) => setRoomName(e.target.value)}
-                  className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-400"
-                />
-                <p className="text-xs text-slate-400 mt-2">
-                  URL will be: /room/{roomName || "roomname"}
-                </p>
-              </div>
-              {roomName.trim() ? (
-                <Link href={`/room/${roomName}`}>
-                  <Button className="w-full bg-blue-600 hover:bg-blue-700">
-                    <Plus className="w-4 h-4 mr-2" />
-                    Enter Room
-                  </Button>
-                </Link>
-              ) : (
-                <Button disabled className="w-full">
-                  <Plus className="w-4 h-4 mr-2" />
-                  Enter Room
-                </Button>
-              )}
-            </form>
-          </Card>
+      {/* Starfield effect */}
+      <div className="absolute inset-0">
+        {[...Array(40)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 bg-white rounded-full opacity-30 animate-pulse"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 3}s`,
+            }}
+          ></div>
+        ))}
+      </div>
 
-          {/* Features Section */}
-          <Card className="bg-slate-800 border-slate-700 p-8">
-            <h2 className="text-2xl font-bold text-white mb-6">Features</h2>
-            <ul className="space-y-3 text-slate-300">
-              <li className="flex items-start gap-2">
-                <span className="text-blue-400 font-bold">✓</span>
-                <span>Real-time messaging</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-blue-400 font-bold">✓</span>
-                <span>Custom chat rooms</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-blue-400 font-bold">✓</span>
-                <span>Camera & Microphone</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-blue-400 font-bold">✓</span>
-                <span>Custom fonts</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-blue-400 font-bold">✓</span>
-                <span>No account required</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-blue-400 font-bold">✓</span>
-                <span>Completely anonymous</span>
-              </li>
-            </ul>
-          </Card>
+      {/* Content */}
+      <div className="relative z-10">
+        {/* Header */}
+        <div className="flex items-center justify-between p-6 max-w-7xl mx-auto">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-cyan-400 rounded-lg flex items-center justify-center transform -rotate-45">
+              <div className="transform rotate-45 text-white font-bold text-lg">S</div>
+            </div>
+          </div>
+          <div className="flex gap-4">
+            <Link href="/login">
+              <Button className="border-2 border-cyan-400 bg-transparent text-cyan-400 hover:bg-cyan-400/10 rounded-lg px-6">
+                Login
+              </Button>
+            </Link>
+            <Link href="/signup">
+              <Button className="bg-cyan-400 text-slate-900 hover:bg-cyan-300 rounded-lg px-6 font-semibold">
+                Sign Up
+              </Button>
+            </Link>
+          </div>
         </div>
 
-        {/* Popular Rooms */}
-        <div className="mt-12">
-          <h2 className="text-2xl font-bold text-white mb-6">Popular Rooms</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {["general", "gaming", "music"].map((room) => (
-              <Link key={room} href={`/room/${room}`}>
-                <Card className="bg-slate-800 border-slate-700 p-6 hover:border-blue-500 cursor-pointer transition">
-                  <h3 className="text-lg font-semibold text-white mb-2">
-                    /{room}
-                  </h3>
-                  <p className="text-slate-400 text-sm">
-                    Join this room to chat
-                  </p>
-                </Card>
-              </Link>
-            ))}
+        {/* Main Content */}
+        <div className="max-w-6xl mx-auto px-6 py-20 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          {/* Left Section - Join Room */}
+          <div className="relative">
+            <div className="bg-gradient-to-br from-purple-900/40 to-slate-900/40 backdrop-blur-md border-2 border-cyan-400/50 rounded-3xl p-8 shadow-2xl hover:shadow-cyan-400/20 transition-all duration-300">
+              <h2 className="text-4xl font-bold text-cyan-400 mb-3">Join a Room</h2>
+              <p className="text-slate-300 mb-8">Connect instantly with friends or colleagues.</p>
+
+              <form className="space-y-6">
+                <div>
+                  <input
+                    placeholder="24px"
+                    value={roomName}
+                    onChange={(e) => setRoomName(e.target.value)}
+                    className="w-full bg-slate-800/50 border-2 border-cyan-400/30 text-cyan-400 placeholder-slate-500 rounded-lg px-4 py-3 focus:outline-none focus:border-cyan-400 transition-colors"
+                  />
+                </div>
+
+                {roomName.trim() ? (
+                  <Link href={`/room/${roomName}`}>
+                    <Button className="w-full bg-cyan-400 text-slate-900 hover:bg-cyan-300 rounded-lg py-3 font-semibold text-lg">
+                      Enter Room
+                    </Button>
+                  </Link>
+                ) : (
+                  <Button disabled className="w-full bg-slate-700 text-slate-400 rounded-lg py-3 font-semibold text-lg cursor-not-allowed">
+                    Enter Room
+                  </Button>
+                )}
+              </form>
+            </div>
           </div>
+
+          {/* Right Section - Features */}
+          <div className="relative">
+            <div className="bg-gradient-to-br from-slate-900/40 to-purple-900/40 backdrop-blur-md border-2 border-cyan-400/50 rounded-3xl p-8 shadow-2xl hover:shadow-cyan-400/20 transition-all duration-300">
+              <h2 className="text-4xl font-bold text-cyan-400 mb-8">Features</h2>
+
+              <div className="space-y-5">
+                <div className="flex items-center gap-4">
+                  <MessageSquare className="w-5 h-5 text-cyan-400 flex-shrink-0" />
+                  <span className="text-slate-300">Real-time messaging</span>
+                </div>
+                <div className="flex items-center gap-4">
+                  <Video className="w-5 h-5 text-cyan-400 flex-shrink-0" />
+                  <span className="text-slate-300">Video & audio calls</span>
+                </div>
+                <div className="flex items-center gap-4">
+                  <Lock className="w-5 h-5 text-cyan-400 flex-shrink-0" />
+                  <span className="text-slate-300">Custom room creation</span>
+                </div>
+                <div className="flex items-center gap-4">
+                  <Eye className="w-5 h-5 text-cyan-400 flex-shrink-0" />
+                  <span className="text-slate-300">No account required</span>
+                </div>
+                <div className="flex items-center gap-4">
+                  <CheckCircle2 className="w-5 h-5 text-cyan-400 flex-shrink-0" />
+                  <span className="text-slate-300">Completely anonymous</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="absolute bottom-6 right-6 text-slate-500 text-sm">
+          Owner - Mark Landers 2025
         </div>
       </div>
     </div>
