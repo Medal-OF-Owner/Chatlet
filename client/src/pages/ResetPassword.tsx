@@ -63,10 +63,19 @@ export default function ResetPassword() {
 
   if (success) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 flex items-center justify-center p-4">
-        <div className="w-full max-w-md bg-slate-800 rounded-lg shadow-xl p-8 border border-slate-700 text-center">
-          <h1 className="text-2xl font-bold text-white mb-4">Succès ✅</h1>
-          <p className="text-slate-300 mb-6">
+      <div 
+        className="min-h-screen relative overflow-hidden flex items-center justify-center p-4"
+        style={{
+          backgroundImage: 'url(/space-bg.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed'
+        }}
+      >
+        <div className="absolute inset-0 bg-black/40 pointer-events-none"></div>
+        <div className="relative z-10 w-full max-w-md bg-gradient-to-br from-purple-900/50 via-slate-900/70 to-slate-900/50 backdrop-blur-xl rounded-3xl p-8 border-2 border-cyan-400/50 shadow-2xl text-center" style={{ boxShadow: '0 0 30px rgba(0, 217, 255, 0.3), 0 0 60px rgba(255, 0, 255, 0.2)' }}>
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent mb-4">Succès ✅</h1>
+          <p className="text-slate-200 mb-6">
             Ton mot de passe a été réinitialisé avec succès!
           </p>
           <p className="text-slate-400 text-sm">Redirection vers le login...</p>
@@ -76,16 +85,25 @@ export default function ResetPassword() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 flex items-center justify-center p-4">
-      <div className="w-full max-w-md bg-slate-800 rounded-lg shadow-xl p-8 border border-slate-700">
-        <h1 className="text-2xl font-bold text-white mb-2">Réinitialiser le mot de passe</h1>
-        <p className="text-slate-400 mb-6">
+    <div 
+      className="min-h-screen relative overflow-hidden flex items-center justify-center p-4"
+      style={{
+        backgroundImage: 'url(/space-bg.jpg)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed'
+      }}
+    >
+      <div className="absolute inset-0 bg-black/40 pointer-events-none"></div>
+      <div className="relative z-10 w-full max-w-md bg-gradient-to-br from-purple-900/50 via-slate-900/70 to-slate-900/50 backdrop-blur-xl rounded-3xl p-8 border-2 border-cyan-400/50 shadow-2xl" style={{ boxShadow: '0 0 30px rgba(0, 217, 255, 0.3), 0 0 60px rgba(255, 0, 255, 0.2)' }}>
+        <h1 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent mb-2">Réinitialiser le mot de passe</h1>
+        <p className="text-slate-300 mb-6">
           Entre ton nouveau mot de passe ci-dessous.
         </p>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-2">
+            <label className="block text-sm font-semibold text-cyan-300 mb-2">
               Nouveau mot de passe
             </label>
             <Input
@@ -94,12 +112,12 @@ export default function ResetPassword() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               disabled={resetMutation.isPending}
-              className="w-full"
+              className="w-full bg-slate-800/60 border-2 border-cyan-400/60 text-cyan-300 placeholder-slate-400 rounded-xl px-4 py-3 focus:outline-none focus:border-cyan-400 focus:shadow-lg focus:shadow-cyan-400/30 transition-all"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-2">
+            <label className="block text-sm font-semibold text-cyan-300 mb-2">
               Confirmer le mot de passe
             </label>
             <Input
@@ -108,14 +126,14 @@ export default function ResetPassword() {
               value={passwordConfirm}
               onChange={(e) => setPasswordConfirm(e.target.value)}
               disabled={resetMutation.isPending}
-              className="w-full"
+              className="w-full bg-slate-800/60 border-2 border-cyan-400/60 text-cyan-300 placeholder-slate-400 rounded-xl px-4 py-3 focus:outline-none focus:border-cyan-400 focus:shadow-lg focus:shadow-cyan-400/30 transition-all"
             />
           </div>
 
           <Button
             type="submit"
             disabled={resetMutation.isPending}
-            className="w-full"
+            className="w-full bg-gradient-to-r from-cyan-400 to-cyan-300 text-slate-900 hover:shadow-xl hover:shadow-cyan-400/50 rounded-xl py-3 font-bold"
           >
             {resetMutation.isPending ? "Réinitialisation..." : "Réinitialiser le mot de passe"}
           </Button>
