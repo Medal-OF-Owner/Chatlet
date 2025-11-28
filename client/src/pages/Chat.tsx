@@ -318,6 +318,7 @@ export default function Chat() {
       content: message.trim(),
       fontFamily,
       textColor,
+      profileImage,
     });
 
     setMessage("");
