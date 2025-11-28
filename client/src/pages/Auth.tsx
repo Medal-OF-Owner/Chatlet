@@ -39,7 +39,7 @@ export default function Auth() {
       }
       const result = await signupMutation.mutateAsync({ email, nickname, password });
       if (result.success) {
-        setSuccess("Account created! You can now login.");
+        setSuccess("Compte créé! Un email de confirmation a été envoyé.");
         setTimeout(() => setLocation("/login"), 2000);
       } else {
         setError(result.error || "Signup failed");

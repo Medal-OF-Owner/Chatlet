@@ -9,6 +9,7 @@ import Chat from "./pages/Chat";
 import Auth from "./pages/Auth";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
+import VerifyEmail from "./pages/VerifyEmail";
 
 function Router() {
   return (
@@ -18,7 +19,7 @@ function Router() {
       <Route path={"/signup"} component={Auth} />
       <Route path={"/forgot-password"} component={ForgotPassword} />
       <Route path={"/reset-password"} component={ResetPassword} />
-      <Route path={"/verify"} component={Auth} />
+      <Route path={"/verify"} component={VerifyEmail} />
       <Route path={"/room/:room"} component={Chat} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
