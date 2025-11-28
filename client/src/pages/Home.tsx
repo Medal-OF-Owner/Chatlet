@@ -7,7 +7,18 @@ export default function Home() {
   const [roomName, setRoomName] = useState("");
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-gradient-to-b from-slate-950 to-slate-900">
+    <div 
+      className="min-h-screen relative overflow-hidden"
+      style={{
+        backgroundImage: 'url(/space-bg.jpg)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed'
+      }}
+    >
+      {/* Overlay pour atténuer l'image */}
+      <div className="absolute inset-0 bg-black/40 pointer-events-none"></div>
+      
       <style>{`
         @keyframes glow {
           0%, 100% { opacity: 0.4; }
@@ -25,18 +36,6 @@ export default function Home() {
           box-shadow: 0 0 30px rgba(0, 217, 255, 0.3), 0 0 60px rgba(255, 0, 255, 0.2);
         }
       `}</style>
-
-      {/* Background blobs */}
-      <div className="absolute inset-0 pointer-events-none">
-        {/* Left magenta blob */}
-        <div className="absolute left-0 top-1/4 w-96 h-96 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full blur-3xl glow-blob" style={{ opacity: 0.15 }}></div>
-        
-        {/* Center magenta blob */}
-        <div className="absolute left-1/3 bottom-0 w-96 h-96 bg-gradient-to-t from-pink-500 via-purple-500 to-transparent rounded-full blur-3xl glow-blob" style={{ opacity: 0.12, animationDelay: '2s' }}></div>
-        
-        {/* Right cyan blob */}
-        <div className="absolute right-0 top-1/3 w-96 h-96 bg-gradient-to-l from-cyan-400 to-purple-500 rounded-full blur-3xl glow-blob" style={{ opacity: 0.12, animationDelay: '4s' }}></div>
-      </div>
 
       {/* Starfield */}
       <div className="absolute inset-0 pointer-events-none">
