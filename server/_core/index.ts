@@ -1,10 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import { createServer } from "http";
-import { migrate } from "drizzle-orm/node-postgres/migrator";
-import { drizzle } from "drizzle-orm/node-postgres";
-import { Pool } from "pg";
-import path from "path";
+import { spawn } from "child_process";
 
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { registerOAuthRoutes } from "./oauth";
@@ -20,22 +17,32 @@ async function runMigrations() {
     return;
   }
 
-  try {
-    console.log("[DB] Running migrations...");
-    const pool = new Pool({
-      connectionString: process.env.DATABASE_URL,
-      ssl: process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : false,
-    });
-    
-    const db = drizzle(pool);
-    const migrationsFolder = path.join(process.cwd(), "drizzle");
-    await migrate(db, { migrationsFolder });
-    console.log("[DB] Migrations completed!");
-    await pool.end();
-  } catch (err) {
-    console.error("[DB] Migration error:", err);
-    throw err;
-  }
+  return new Promise<void>((resolve, reject) => {
+    try {
+      console.log("[DB] Running schema sync...");
+      const proc = spawn("pnpm", ["exec", "drizzle-kit", "push:pg"], {
+        stdio: "inherit",
+        env: { ...process.env },
+      });
+
+      proc.on("exit", (code) => {
+        if (code === 0) {
+          console.log("[DB] Schema sync completed!");
+          resolve();
+        } else {
+          reject(new Error(`drizzle-kit push failed with code ${code}`));
+        }
+      });
+
+      proc.on("error", (err) => {
+        console.error("[DB] Failed to run drizzle-kit:", err);
+        reject(err);
+      });
+    } catch (err) {
+      console.error("[DB] Migration error:", err);
+      reject(err);
+    }
+  });
 }
 
 async function startServer() {
