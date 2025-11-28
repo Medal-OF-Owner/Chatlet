@@ -20,7 +20,7 @@ export default function VerifyEmail() {
       }
 
       try {
-        const result = await trpc.auth.verifyEmail.mutate({ token });
+        const result = await trpc.auth.verifyEmail.mutateAsync({ token });
         if (result.success) {
           setStatus("success");
           setMessage("Email vérifié avec succès!");
