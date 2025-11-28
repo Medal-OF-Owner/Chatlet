@@ -58,9 +58,8 @@ export function setupSocketIO(httpServer: HTTPServer) {
         timestamp: new Date(),
       });
 
-      // Send message history
-      const messages = await getMessages(roomId, 50);
-      socket.emit("message_history", messages);
+      // Don't send message history - fresh start for each session
+      socket.emit("message_history", []);
 
       console.log(`✅ ${nickname} joined room ${roomId}`);
     });
