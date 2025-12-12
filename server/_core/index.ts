@@ -17,14 +17,14 @@ async function runMigrations() {
   // Wait for DATABASE_URL to be available (Render may inject it with delay)
   let dbUrl = process.env.DATABASE_URL;
   let attempts = 0;
-  
+
   while (!dbUrl && attempts < 10) {
     attempts++;
     console.log(`[DB] DATABASE_URL not set (attempt ${attempts}/10), waiting...`);
     await new Promise(resolve => setTimeout(resolve, 1000));
     dbUrl = process.env.DATABASE_URL;
   }
-  
+
   if (!dbUrl) {
     console.error("[DB] DATABASE_URL not available after retries, skipping migrations");
     return;
@@ -36,7 +36,7 @@ async function runMigrations() {
       connectionString: dbUrl,
       ssl: process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : false,
     });
-    
+
     const db = drizzle(pool);
 
     // Create tables
@@ -123,6 +123,10 @@ async function runMigrations() {
       ALTER TABLE accounts
       ADD COLUMN IF NOT EXISTS "resetTokenExpiry" TIMESTAMP
     `);
+    await db.execute(sql`
+      ALTER TABLE accounts
+      ADD COLUMN IF NOT EXISTS "normalizedNickname" VARCHAR(100)
+    `);
 
     console.log("[DB] Tables created/verified!");
     await pool.end();
@@ -137,7 +141,7 @@ async function startServer() {
   await runMigrations();
   const app = express();
   const server = createServer(app);
-  
+
   // Setup Socket.IO
   setupSocketIO(server);
   // Configure body parser with larger size limit for file uploads
