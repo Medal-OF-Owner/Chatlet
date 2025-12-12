@@ -6,6 +6,7 @@ import { ENV } from './_core/env';
 import * as bcrypt from "bcryptjs";
 import { sendVerificationEmail, sendPasswordResetEmail } from "./email";
 import { nanoid } from "nanoid";
+import { normalizeNickname } from "../shared/utils";
 
 let _db: ReturnType<typeof drizzle> | null = null;
 
