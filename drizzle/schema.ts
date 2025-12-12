@@ -61,6 +61,7 @@ export const accounts = pgTable("accounts", {
   id: serial("id").primaryKey(),
   email: varchar("email", { length: 320 }).notNull().unique(),
   nickname: varchar("nickname", { length: 100 }).notNull().unique(),
+  normalizedNickname: varchar("normalizedNickname", { length: 100 }).notNull().unique(),
   passwordHash: varchar("passwordHash", { length: 255 }).notNull(),
   emailVerified: timestamp("emailVerified"),
   verificationToken: varchar("verificationToken", { length: 255 }),

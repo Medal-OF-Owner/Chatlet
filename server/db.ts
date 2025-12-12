@@ -168,11 +168,12 @@ export async function createAccount(email: string, nickname: string, password: s
 
     const passwordHash = await bcrypt.hash(password, 10);
     const verificationToken = nanoid(32);
-    await db.insert(accounts).values({ email, nickname, passwordHash, verificationToken });
-    
+    const normalizedNickname = normalizeNickname(nickname);
+    await db.insert(accounts).values({ email, nickname, passwordHash, verificationToken, normalizedNickname });
+
     // Send verification email
     await sendVerificationEmail(email, verificationToken);
-    
+
     return { success: true };
   } catch (error) {
     console.error("[Database] Failed to create account:", error);
@@ -212,10 +213,10 @@ export async function requestPasswordReset(email: string): Promise<{ success: bo
     const resetToken = nanoid(32);
     const resetTokenExpiry = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
     await db.update(accounts).set({ resetToken, resetTokenExpiry }).where(eq(accounts.id, account[0].id));
-    
+
     // Send reset email
     await sendPasswordResetEmail(email, resetToken);
-    
+
     return { success: true };
   } catch (error) {
     console.error("[Database] Failed to request password reset:", error);
@@ -239,7 +240,7 @@ export async function resetPassword(token: string, newPassword: string): Promise
 
     const passwordHash = await bcrypt.hash(newPassword, 10);
     await db.update(accounts).set({ passwordHash, resetToken: null, resetTokenExpiry: null }).where(eq(accounts.id, account[0].id));
-    
+
     return { success: true };
   } catch (error) {
     console.error("[Database] Failed to reset password:", error);
