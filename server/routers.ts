@@ -5,6 +5,7 @@ import { publicProcedure, router } from "./_core/trpc";
 import { z } from "zod";
 import { getOrCreateRoom, getMessages, addMessage, createAccount, login, cleanupExpiredAccounts, verifyEmail, requestPasswordReset, resetPassword } from "./db";
 import { normalizeNickname } from "../shared/utils";
+import { getDb } from "./db";
 
 export const appRouter = router({
   system: systemRouter,
@@ -84,17 +85,21 @@ export const appRouter = router({
       }),
   }),
 
-  guest: router
-    .route("checkNicknameAvailable")
-    .input(z.object({ nickname: z.string() }))
-    .output(z.object({ available: z.boolean() }))
-    .query(async ({ input, ctx }) => {
-      const norm = normalizeNickname(input.nickname);
-      const existing = await ctx.db.query.accounts.findFirst({
-        where: (u, { eq }) => eq(u.normalizedNickname, norm),
-      });
-      return { available: !existing };
-    }),
+  guest: router({
+    checkNicknameAvailable: publicProcedure
+      .input(z.object({ nickname: z.string() }))
+      .query(async ({ input }) => {
+        const db = await getDb();
+        if (!db) return { available: true };
+        
+        const norm = normalizeNickname(input.nickname);
+        const { accounts } = await import("../drizzle/schema");
+        const { eq } = await import("drizzle-orm");
+        
+        const existing = await db.select().from(accounts).where(eq(accounts.normalizedNickname, norm)).limit(1);
+        return { available: existing.length === 0 };
+      }),
+  }),
 });
 
 export type AppRouter = typeof appRouter;
