@@ -4,6 +4,7 @@ import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router } from "./_core/trpc";
 import { z } from "zod";
 import { getOrCreateRoom, getMessages, addMessage, createAccount, login, cleanupExpiredAccounts, verifyEmail, requestPasswordReset, resetPassword } from "./db";
+import { normalizeNickname } from "../shared/utils";
 
 export const appRouter = router({
   system: systemRouter,
@@ -63,13 +64,13 @@ export const appRouter = router({
       .mutation(async ({ input }) => {
         return await getOrCreateRoom(input.slug);
       }),
-    
+
     getMessages: publicProcedure
       .input(z.object({ roomId: z.number(), limit: z.number().default(50) }))
       .query(async ({ input }) => {
         return await getMessages(input.roomId, input.limit);
       }),
-    
+
     sendMessage: publicProcedure
       .input(z.object({
         roomId: z.number(),
@@ -82,6 +83,18 @@ export const appRouter = router({
         return await addMessage(input.roomId, input.nickname, input.content, input.fontFamily, input.profileImage);
       }),
   }),
+
+  guest: router
+    .route("checkNicknameAvailable")
+    .input(z.object({ nickname: z.string() }))
+    .output(z.object({ available: z.boolean() }))
+    .query(async ({ input, ctx }) => {
+      const norm = normalizeNickname(input.nickname);
+      const existing = await ctx.db.query.accounts.findFirst({
+        where: (u, { eq }) => eq(u.normalizedNickname, norm),
+      });
+      return { available: !existing };
+    }),
 });
 
 export type AppRouter = typeof appRouter;

@@ -1,13 +1,56 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { MessageSquare, Video, Lock, Eye, CheckCircle2 } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { MessageSquare, Video, Lock, Eye, CheckCircle2, User, Edit2, Check, X } from "lucide-react";
+import { useGuestNickname } from "@/hooks/useGuestNickname";
+import { trpc } from "@/lib/trpc";
+import { toast } from "sonner";
 
 export default function Home() {
   const [roomName, setRoomName] = useState("");
+  const { nickname, isLoading: nicknameLoading, updateNickname } = useGuestNickname();
+  const [isEditingNickname, setIsEditingNickname] = useState(false);
+  const [tempNickname, setTempNickname] = useState("");
+
+  const checkNicknameQuery = trpc.guest.checkNicknameAvailable.useQuery(
+    { nickname: tempNickname },
+    { enabled: false }
+  );
+
+  const handleEditNickname = () => {
+    setTempNickname(nickname);
+    setIsEditingNickname(true);
+  };
+
+  const handleSaveNickname = async () => {
+    if (!tempNickname.trim() || tempNickname.length < 3) {
+      toast.error("Nickname must be at least 3 characters");
+      return;
+    }
+
+    if (tempNickname === nickname) {
+      setIsEditingNickname(false);
+      return;
+    }
+
+    const result = await checkNicknameQuery.refetch();
+    if (result.data?.available) {
+      updateNickname(tempNickname);
+      setIsEditingNickname(false);
+      toast.success("Nickname updated!");
+    } else {
+      toast.error("This nickname is already taken or too similar to an existing one");
+    }
+  };
+
+  const handleCancelEdit = () => {
+    setIsEditingNickname(false);
+    setTempNickname("");
+  };
 
   return (
-    <div 
+    <div
       className="min-h-screen relative overflow-hidden"
       style={{
         backgroundImage: 'url(/space-bg.jpg)',
@@ -18,7 +61,7 @@ export default function Home() {
     >
       {/* Overlay pour atténuer l'image */}
       <div className="absolute inset-0 bg-black/40 pointer-events-none"></div>
-      
+
       <style>{`
         @keyframes glow {
           0%, 100% { opacity: 0.4; }
@@ -98,12 +141,60 @@ export default function Home() {
                 </p>
 
                 <form className="space-y-6">
-                  <input
-                    placeholder="Enter room name..."
-                    value={roomName}
-                    onChange={(e) => setRoomName(e.target.value)}
-                    className="w-full bg-slate-800/60 border-2 border-cyan-400/60 text-cyan-300 placeholder-slate-300 rounded-xl px-6 py-5 focus:outline-none focus:border-cyan-400 focus:shadow-lg focus:shadow-cyan-400/50 transition-all backdrop-blur-sm text-lg font-semibold"
-                  />
+                  {/* Guest Nickname */}
+                  {!nicknameLoading && (
+                    <div>
+                      <label className="block text-sm font-semibold text-cyan-300 mb-2">
+                        Your Nickname
+                      </label>
+                      <div className="flex items-center gap-2 bg-slate-800/60 border-2 border-cyan-400/60 rounded-xl px-4 py-3 backdrop-blur-sm">
+                        {isEditingNickname ? (
+                          <>
+                            <Input
+                              value={tempNickname}
+                              onChange={(e) => setTempNickname(e.target.value)}
+                              className="flex-1 bg-transparent border-0 text-cyan-300 text-lg font-semibold p-0 focus-visible:ring-0"
+                              placeholder="Nickname"
+                              onKeyDown={(e) => {
+                                if (e.key === 'Enter') handleSaveNickname();
+                                if (e.key === 'Escape') handleCancelEdit();
+                              }}
+                              autoFocus
+                            />
+                            <button onClick={handleSaveNickname} className="text-green-400 hover:text-green-300">
+                              <Check className="w-5 h-5" />
+                            </button>
+                            <button onClick={handleCancelEdit} className="text-red-400 hover:text-red-300">
+                              <X className="w-5 h-5" />
+                            </button>
+                          </>
+                        ) : (
+                          <>
+                            <User className="w-5 h-5 text-cyan-400" />
+                            <span className="flex-1 text-cyan-300 font-semibold text-lg">{nickname}</span>
+                            <button onClick={handleEditNickname} className="text-cyan-400 hover:text-cyan-300">
+                              <Edit2 className="w-5 h-5" />
+                            </button>
+                          </>
+                        )}
+                      </div>
+                      <p className="text-xs text-slate-400 mt-1">
+                        Click the edit icon to change your nickname
+                      </p>
+                    </div>
+                  )}
+
+                  <div>
+                    <label className="block text-sm font-semibold text-cyan-300 mb-2">
+                      Room Name
+                    </label>
+                    <input
+                      placeholder="Enter room name..."
+                      value={roomName}
+                      onChange={(e) => setRoomName(e.target.value)}
+                      className="w-full bg-slate-800/60 border-2 border-cyan-400/60 text-cyan-300 placeholder-slate-300 rounded-xl px-6 py-5 focus:outline-none focus:border-cyan-400 focus:shadow-lg focus:shadow-cyan-400/50 transition-all backdrop-blur-sm text-lg font-semibold"
+                    />
+                  </div>
 
                   {roomName.trim() ? (
                     <Link href={`/room/${roomName}`}>
