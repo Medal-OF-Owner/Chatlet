@@ -19,3 +19,7 @@ export function generateRandomNickname(): string {
   
   return `${adjective}${animal}${number}`;
 }
+
+export function normalizeNickname(nickname: string): string {
+  return nickname.replace(/[Il]/g, "l").toLowerCase();
+}
