@@ -86,6 +86,7 @@ async function runMigrations() {
         id SERIAL PRIMARY KEY,
         email VARCHAR(320) NOT NULL UNIQUE,
         nickname VARCHAR(100) NOT NULL UNIQUE,
+        "normalizedNickname" VARCHAR(100) NOT NULL UNIQUE,
         "passwordHash" VARCHAR(255) NOT NULL,
         "emailVerified" TIMESTAMP,
         "verificationToken" VARCHAR(255),
