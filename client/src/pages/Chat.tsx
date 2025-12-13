@@ -92,10 +92,7 @@ export default function Chat() {
   useEffect(() => {
     const socket = socketRef.current;
 
-    socket.on("connect", () => {
-      console.log("Connected to Socket.IO");
-      setConnected(true);
-
+    const handleJoinRoom = () => {
       if (roomId && nickname) {
         console.log("🚪 Joining room:", { roomId, nickname });
         const profileImageToSend = user ? user.profileImage : profileImage;
@@ -106,7 +103,19 @@ export default function Chat() {
           webrtcRef.current = new WebRTCManager(socket, socket.id || "", roomId);
         }
       }
+    };
+
+    socket.on("connect", () => {
+      console.log("Connected to Socket.IO");
+      setConnected(true);
+      handleJoinRoom();
     });
+
+    // If already connected (e.g., component remounted), join the room immediately
+    if (socket.connected) {
+      setConnected(true);
+      handleJoinRoom();
+    }
 
     socket.on("nickname_taken", () => {
       console.log("❌ Nickname is already taken, please choose another");
@@ -246,6 +255,8 @@ export default function Chat() {
       socket.off("nickname_changed");
       socket.off("nickname_taken");
       socket.off("disconnect");
+      // Disconnect socket when component unmounts to prevent connection issues on back/forward navigation
+      disconnectSocket();
     };
   }, [roomId, nickname, user, profileImage]);
 
