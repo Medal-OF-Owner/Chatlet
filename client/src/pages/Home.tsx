@@ -4,12 +4,15 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { MessageSquare, Video, Lock, Eye, CheckCircle2, User, Edit2, Check, X } from "lucide-react";
 import { useGuestNickname } from "@/hooks/useGuestNickname";
+import { useAuth } from "@/hooks/useAuth";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 
 export default function Home() {
   const [roomName, setRoomName] = useState("");
   const { nickname, isLoading: nicknameLoading, updateNickname } = useGuestNickname();
+  const { user, logout, isLoggingOut } = useAuth();
+  const isUserLoggedIn = !!user;
   const [isEditingNickname, setIsEditingNickname] = useState(false);
   const [tempNickname, setTempNickname] = useState("");
   const [nicknameError, setNicknameError] = useState<string | null>(null);
@@ -115,19 +118,41 @@ export default function Home() {
             </svg>
           </div>
 
-          {/* Auth Buttons */}
-          <div className="flex gap-3">
-            <Link href="/login">
-              <Button className="border-2 border-cyan-400 bg-transparent text-cyan-400 hover:bg-cyan-400/10 rounded-lg px-8 py-2 font-semibold transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-cyan-400/50">
-                Login
+          {/* Auth/User Profile */}
+          {isUserLoggedIn ? (
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2">
+                <img
+                  src={user.profileImage || "/default-avatar.png"}
+                  alt={user.nickname}
+                  className="w-10 h-10 rounded-full object-cover border-2 border-cyan-400"
+                />
+                <span className="text-cyan-300 font-semibold text-lg hidden sm:inline">
+                  {user.nickname}
+                </span>
+              </div>
+              <Button
+                onClick={logout}
+                disabled={isLoggingOut}
+                className="border-2 border-red-400 bg-transparent text-red-400 hover:bg-red-400/10 rounded-lg px-4 py-2 font-semibold transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-red-400/50"
+              >
+                Logout
               </Button>
-            </Link>
-            <Link href="/signup">
-              <Button className="bg-gradient-to-r from-cyan-400 to-cyan-300 text-slate-900 hover:shadow-lg hover:shadow-cyan-400/50 rounded-lg px-8 py-2 font-semibold transition-all duration-300">
-                Sign Up
-              </Button>
-            </Link>
-          </div>
+            </div>
+          ) : (
+            <div className="flex gap-3">
+              <Link href="/login">
+                <Button className="border-2 border-cyan-400 bg-transparent text-cyan-400 hover:bg-cyan-400/10 rounded-lg px-8 py-2 font-semibold transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-cyan-400/50">
+                  Login
+                </Button>
+              </Link>
+              <Link href="/signup">
+                <Button className="bg-gradient-to-r from-cyan-400 to-cyan-300 text-slate-900 hover:shadow-lg hover:shadow-cyan-400/50 rounded-lg px-8 py-2 font-semibold transition-all duration-300">
+                  Sign Up
+                </Button>
+              </Link>
+            </div>
+          )}
         </div>
 
         {/* Main Content */}
@@ -145,50 +170,67 @@ export default function Home() {
                 </p>
 
                 <form className="space-y-6">
-                  {/* Guest Nickname */}
-                  {!nicknameLoading && (
+                  {/* Nickname Section */}
+                  {isUserLoggedIn ? (
+                    // Logged-in User Nickname
                     <div>
                       <label className="block text-sm font-semibold text-cyan-300 mb-2">
                         Your Nickname
                       </label>
-                      {nicknameError && (
-                        <p className="text-red-400 text-sm font-semibold mb-2">{nicknameError}</p>
-                      )}
                       <div className="flex items-center gap-2 bg-slate-800/60 border-2 border-cyan-400/60 rounded-xl px-4 py-3 backdrop-blur-sm">
-                        {isEditingNickname ? (
-                          <>
-                            <Input
-                              value={tempNickname}
-                              onChange={(e) => setTempNickname(e.target.value)}
-                              className="flex-1 bg-transparent border-0 text-cyan-300 text-lg font-semibold p-0 focus-visible:ring-0"
-                              placeholder="Nickname"
-                              onKeyDown={(e) => {
-                                if (e.key === 'Enter') handleSaveNickname();
-                                if (e.key === 'Escape') handleCancelEdit();
-                              }}
-                              autoFocus
-                            />
-                            <button type="button" onClick={handleSaveNickname} className="text-green-400 hover:text-green-300">
-                              <Check className="w-5 h-5" />
-                            </button>
-                            <button type="button" onClick={handleCancelEdit} className="text-red-400 hover:text-red-300">
-                              <X className="w-5 h-5" />
-                            </button>
-                          </>
-                        ) : (
-                          <>
-                            <User className="w-5 h-5 text-cyan-400" />
-                            <span className="flex-1 text-cyan-300 font-semibold text-lg">{nickname}</span>
-                            <button type="button" onClick={handleEditNickname} className="text-cyan-400 hover:text-cyan-300">
-                              <Edit2 className="w-5 h-5" />
-                            </button>
-                          </>
-                        )}
+                        <User className="w-5 h-5 text-cyan-400" />
+                        <span className="flex-1 text-cyan-300 font-semibold text-lg">{user.nickname}</span>
                       </div>
                       <p className="text-xs text-slate-400 mt-1">
-                        Click the edit icon to change your nickname
+                        Logged in as a registered user.
                       </p>
                     </div>
+                  ) : (
+                    // Guest Nickname Logic
+                    !nicknameLoading && (
+                      <div>
+                        <label className="block text-sm font-semibold text-cyan-300 mb-2">
+                          Your Nickname
+                        </label>
+                        {nicknameError && (
+                          <p className="text-red-400 text-sm font-semibold mb-2">{nicknameError}</p>
+                        )}
+                        <div className="flex items-center gap-2 bg-slate-800/60 border-2 border-cyan-400/60 rounded-xl px-4 py-3 backdrop-blur-sm">
+                          {isEditingNickname ? (
+                            <>
+                              <Input
+                                value={tempNickname}
+                                onChange={(e) => setTempNickname(e.target.value)}
+                                className="flex-1 bg-transparent border-0 text-cyan-300 text-lg font-semibold p-0 focus-visible:ring-0"
+                                placeholder="Nickname"
+                                onKeyDown={(e) => {
+                                  if (e.key === 'Enter') handleSaveNickname();
+                                  if (e.key === 'Escape') handleCancelEdit();
+                                }}
+                                autoFocus
+                              />
+                              <button type="button" onClick={handleSaveNickname} className="text-green-400 hover:text-green-300">
+                                <Check className="w-5 h-5" />
+                              </button>
+                              <button type="button" onClick={handleCancelEdit} className="text-red-400 hover:text-red-300">
+                                <X className="w-5 h-5" />
+                              </button>
+                            </>
+                          ) : (
+                            <>
+                              <User className="w-5 h-5 text-cyan-400" />
+                              <span className="flex-1 text-cyan-300 font-semibold text-lg">{nickname}</span>
+                              <button type="button" onClick={handleEditNickname} className="text-cyan-400 hover:text-cyan-300">
+                                <Edit2 className="w-5 h-5" />
+                              </button>
+                            </>
+                          )}
+                        </div>
+                        <p className="text-xs text-slate-400 mt-1">
+                          Click the edit icon to change your nickname
+                        </p>
+                      </div>
+                    )
                   )}
 
                   <div>
