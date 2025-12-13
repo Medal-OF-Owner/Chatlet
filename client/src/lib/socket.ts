@@ -7,11 +7,13 @@ export function getSocket(): Socket {
 
     socket = io(window.location.origin, {
       path: "/socket.io/",
+      transports: ["websocket", "polling"],
       reconnection: true,
       reconnectionDelay: 1000,
       reconnectionDelayMax: 5000,
       reconnectionAttempts: 5,
-
+      timeout: 20000,
+      upgrade: true,
     });
   }
   return socket;
