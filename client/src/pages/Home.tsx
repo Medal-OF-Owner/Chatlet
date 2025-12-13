@@ -161,10 +161,10 @@ export default function Home() {
                               }}
                               autoFocus
                             />
-                            <button onClick={handleSaveNickname} className="text-green-400 hover:text-green-300">
+                            <button type="button" onClick={handleSaveNickname} className="text-green-400 hover:text-green-300">
                               <Check className="w-5 h-5" />
                             </button>
-                            <button onClick={handleCancelEdit} className="text-red-400 hover:text-red-300">
+                            <button type="button" onClick={handleCancelEdit} className="text-red-400 hover:text-red-300">
                               <X className="w-5 h-5" />
                             </button>
                           </>
@@ -172,7 +172,7 @@ export default function Home() {
                           <>
                             <User className="w-5 h-5 text-cyan-400" />
                             <span className="flex-1 text-cyan-300 font-semibold text-lg">{nickname}</span>
-                            <button onClick={handleEditNickname} className="text-cyan-400 hover:text-cyan-300">
+                            <button type="button" onClick={handleEditNickname} className="text-cyan-400 hover:text-cyan-300">
                               <Edit2 className="w-5 h-5" />
                             </button>
                           </>
