@@ -5,9 +5,11 @@ let socket: Socket | null = null;
 export function getSocket(): Socket {
   if (!socket) {
 
-    // For Render deployment, use relative path and force polling first
-    // to ensure connection works over HTTP/HTTPS proxy
-    socket = io({
+    // For Render deployment, use explicit URL in production to avoid wss issues
+    const isProduction = process.env.NODE_ENV === "production";
+    const url = isProduction ? window.location.origin : undefined; // Use window.location.origin in production
+    
+    socket = io(url, {
       path: "/socket.io/",
       transports: ["polling", "websocket"], // Polling first for better compatibility with Render's proxy
       reconnection: true,
