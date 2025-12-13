@@ -143,32 +143,53 @@ export default function Chat() {
         return [...prev, msg];
       });
     });
+	
+	    socket.on("user_joined", (data: { nickname: string; timestamp: Date; userId?: string }) => {
+	      setUsedNicknames((prev) => new Set([...Array.from(prev), data.nickname]));
+	      if (data.userId) {
+	        const userId = data.userId as string;
+	        setRemoteUsers((prev) => {
+	          const updated = new Map(Array.from(prev));
+	          updated.set(userId, { id: userId, nickname: data.nickname });
+	          return updated;
+	        });
+	
+	        // The user who joins is NOT the initiator for existing users.
+	        // Existing users (who receive this event) are the initiators for the new user.
+	        // This is correct: webrtcRef.current.createPeerConnection(userId, data.nickname, true);
+	        if (webrtcRef.current) {
+	          webrtcRef.current.createPeerConnection(userId, data.nickname, true);
+	        }
+	      }
+	
+	      setMessages((prev) => [
+	        ...prev,
+	        {
+	          nickname: "System",
+	          content: `${data.nickname} joined the room`,
+	          fontFamily: null,
+	          createdAt: new Date(data.timestamp),
+	        },
+	      ]);
+	    });
 
-    socket.on("user_joined", (data: { nickname: string; timestamp: Date; userId?: string }) => {
-      setUsedNicknames((prev) => new Set([...Array.from(prev), data.nickname]));
-      if (data.userId) {
-        const userId = data.userId as string;
-        setRemoteUsers((prev) => {
-          const updated = new Map(Array.from(prev));
-          updated.set(userId, { id: userId, nickname: data.nickname });
-          return updated;
+      socket.on("existing_users", (users: { nickname: string; userId: string }[]) => {
+        console.log("👥 Existing users received:", users);
+        users.forEach((user) => {
+          setRemoteUsers((prev) => {
+            const updated = new Map(Array.from(prev));
+            updated.set(user.userId, { id: user.userId, nickname: user.nickname });
+            return updated;
+          });
+
+          // The newly joined user (who receives this event) is NOT the initiator for existing users.
+          // The existing users have already initiated the connection (they are the initiators).
+          // The newly joined user must NOT be the initiator, so we pass 'false'.
+          if (webrtcRef.current) {
+            webrtcRef.current.createPeerConnection(user.userId, user.nickname, false);
+          }
         });
-
-        if (webrtcRef.current) {
-          webrtcRef.current.createPeerConnection(userId, data.nickname, true);
-        }
-      }
-
-      setMessages((prev) => [
-        ...prev,
-        {
-          nickname: "System",
-          content: `${data.nickname} joined the room`,
-          fontFamily: null,
-          createdAt: new Date(data.timestamp),
-        },
-      ]);
-    });
+      });
 
     socket.on("user_left", (data: { nickname: string; timestamp: Date; userId?: string }) => {
       setUsedNicknames((prev) => {
@@ -222,6 +243,7 @@ export default function Chat() {
       socket.off("message_history");
       socket.off("new_message");
       socket.off("user_joined");
+      socket.off("existing_users");
       socket.off("user_left");
       socket.off("nickname_changed");
       socket.off("nickname_taken");

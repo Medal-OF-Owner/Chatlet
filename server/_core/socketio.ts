@@ -51,12 +51,25 @@ export function setupSocketIO(httpServer: HTTPServer) {
 
       users.set(socket.id, user);
 
-      // Notify others that user joined
+      // 1. Notify all existing users in the room that a new user joined
+      //    (This includes the new user, which is fine for the system message)
       io.to(`room_${roomId}`).emit("user_joined", {
         nickname,
         userId: socket.id,
         timestamp: new Date(),
       });
+
+      // 2. Send a list of existing users to the newly joined user
+      const existingUsers = Array.from(users.values()).filter(
+        (u) => u.roomId === roomId && u.id !== socket.id
+      );
+      
+      if (existingUsers.length > 0) {
+        socket.emit("existing_users", existingUsers.map(u => ({
+          nickname: u.nickname,
+          userId: u.id,
+        })));
+      }
 
       // Don't send message history - fresh start for each session
       socket.emit("message_history", []);
