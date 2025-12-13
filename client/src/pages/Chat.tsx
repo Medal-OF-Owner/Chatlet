@@ -4,6 +4,8 @@ import { trpc } from "@/lib/trpc";
 import { getSocket, disconnectSocket } from "@/lib/socket";
 import { WebRTCManager } from "@/lib/webrtc";
 import { generateRandomNickname } from "@shared/utils";
+import { useGuestNickname } from "@/hooks/useGuestNickname";
+import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
@@ -60,30 +62,31 @@ export default function Chat() {
 
 
 
-  // Initialize room and generate random nickname (keep same pseudo across rooms)
+  const { user, isAuthLoading } = useAuth();
+  const { nickname: guestNickname, isLoading: isGuestLoading } = useGuestNickname();
+
+  // Initialize room and set nickname
   useEffect(() => {
-    if (!room) return;
+    if (!room || isAuthLoading || isGuestLoading) return;
 
     const initRoom = async () => {
       try {
         const result = await createRoomMutation.mutateAsync({ slug: room });
         setRoomId(result.id);
 
-        // Get or create nickname for session
-        let sessionNick = sessionStorage.getItem("sessionNickname");
-        if (!sessionNick) {
-          sessionNick = generateRandomNickname();
-          sessionStorage.setItem("sessionNickname", sessionNick);
+        const finalNickname = user ? user.nickname : guestNickname;
+
+        if (finalNickname) {
+          setNickname(finalNickname);
+          setDisplayNickname(finalNickname);
         }
-        setNickname(sessionNick);
-        setDisplayNickname(sessionNick);
       } catch (error) {
         console.error("Failed to create/get room:", error);
       }
     };
 
     initRoom();
-  }, [room]);
+  }, [room, isAuthLoading, isGuestLoading, user, guestNickname]);
 
   // Setup Socket.IO and WebRTC
   useEffect(() => {
@@ -95,7 +98,8 @@ export default function Chat() {
 
       if (roomId && nickname) {
         console.log("🚪 Joining room:", { roomId, nickname });
-        socket.emit("join_room", { roomId, nickname });
+        const profileImageToSend = user ? user.profileImage : profileImage;
+        socket.emit("join_room", { roomId, nickname, profileImage: profileImageToSend });
 
         // Initialize WebRTC manager
         if (!webrtcRef.current && roomId) {
@@ -243,7 +247,7 @@ export default function Chat() {
       socket.off("nickname_taken");
       socket.off("disconnect");
     };
-  }, [roomId, nickname]);
+  }, [roomId, nickname, user, profileImage]);
 
   // Handle camera and microphone
   useEffect(() => {
