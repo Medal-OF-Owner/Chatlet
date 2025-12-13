@@ -161,11 +161,11 @@ export default function Home() {
             {/* Left Card - Join Room */}
             <div className="relative group">
               <div className="absolute inset-0 bg-gradient-to-br from-pink-500/20 to-purple-500/20 rounded-3xl blur-2xl group-hover:blur-3xl transition-all opacity-0 group-hover:opacity-100"></div>
-              <div className="relative bg-gradient-to-br from-purple-900/50 via-slate-900/70 to-slate-900/50 backdrop-blur-xl rounded-3xl p-12 glow-border">
-                <h2 className="text-6xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent mb-4">
+              <div className="relative bg-gradient-to-br from-purple-900/50 via-slate-900/70 to-slate-900/50 backdrop-blur-xl rounded-3xl p-6 sm:p-12 glow-border">
+                <h2 className="text-4xl sm:text-6xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent mb-4">
                   Join a Room
                 </h2>
-                <p className="text-slate-200 mb-10 text-xl">
+                <p className="text-slate-200 mb-10 text-lg sm:text-xl">
                   Connect instantly with friends or colleagues.
                 </p>
 
@@ -263,8 +263,8 @@ export default function Home() {
             {/* Right Card - Features */}
             <div className="relative group">
               <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-purple-500/20 rounded-3xl blur-2xl group-hover:blur-3xl transition-all opacity-0 group-hover:opacity-100"></div>
-              <div className="relative bg-gradient-to-br from-slate-900/30 via-purple-900/20 to-slate-900/30 backdrop-blur-xl rounded-3xl p-12 glow-border">
-                <h2 className="text-5xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent mb-10">
+              <div className="relative bg-gradient-to-br from-slate-900/30 via-purple-900/20 to-slate-900/30 backdrop-blur-xl rounded-3xl p-6 sm:p-12 glow-border">
+                <h2 className="text-3xl sm:text-5xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent mb-10">
                   Features
                 </h2>
 
