@@ -12,7 +12,7 @@ const users: Map<string, SocketUser> = new Map();
 
 export function setupSocketIO(httpServer: HTTPServer) {
   const io = new SocketIOServer(httpServer, {
-    path: "/socket.io/", // Explicitly set path
+    path: "/socket.io/",
     cors: {
       origin: "*",
       methods: ["GET", "POST"],
@@ -58,7 +58,6 @@ export function setupSocketIO(httpServer: HTTPServer) {
       users.set(socket.id, user);
 
       // 1. Notify all existing users in the room that a new user joined
-      //    (This includes the new user, which is fine for the system message)
       io.to(`room_${roomId}`).emit("user_joined", {
         nickname,
         userId: socket.id,
@@ -83,27 +82,35 @@ export function setupSocketIO(httpServer: HTTPServer) {
       console.log(`✅ ${nickname} joined room ${roomId}`);
     });
 
-    // Send message
-    socket.on("send_message", async (data: { roomId: number; nickname: string; content: string; fontFamily?: string; profileImage?: string }) => {
-      const { roomId, nickname, content, fontFamily, profileImage } = data;
+    // Send message - ✅ MODIFIÉ POUR ACCEPTER textColor
+    socket.on("send_message", async (data: { 
+      roomId: number; 
+      nickname: string; 
+      content: string; 
+      fontFamily?: string; 
+      textColor?: string;  // ✅ AJOUTÉ
+      profileImage?: string 
+    }) => {
+      const { roomId, nickname, content, fontFamily, textColor, profileImage } = data;
       console.log(`📨 Received message from ${nickname} in room ${roomId}: ${content}`);
 
       try {
-        await addMessage(roomId, nickname, content, fontFamily, profileImage);
+        // ✅ AJOUTÉ textColor dans addMessage
+        await addMessage(roomId, nickname, content, fontFamily, profileImage, textColor);
         console.log(`✅ Message saved to DB`);
 
-        // Broadcast to all users in the room
+        // Broadcast to all users in the room - ✅ AJOUTÉ textColor
         io.to(`room_${roomId}`).emit("new_message", {
           nickname,
           content,
           fontFamily: fontFamily || "sans-serif",
+          textColor: textColor || "#ffffff",  // ✅ AJOUTÉ
           profileImage: profileImage || null,
           createdAt: new Date(),
         });
         console.log(`📤 Message broadcasted to room_${roomId}`);
       } catch (error) {
         console.error("❌ Error sending message:", error);
-        // Log the message data that failed to send
         console.error("❌ Failed message data:", data);
         socket.emit("error", "Failed to send message");
       }
