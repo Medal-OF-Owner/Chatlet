@@ -11,7 +11,7 @@ export function getSocket(): Socket {
     
     socket = io(url, {
       path: "/socket.io/",
-      transports: ["polling", "websocket"], // Polling first for better compatibility with Render's proxy
+      transports: ["polling"], // Force polling only to avoid unstable WebSocket upgrade on Render
       reconnection: true,
       reconnectionDelay: 1000,
       reconnectionDelayMax: 5000,
