@@ -10,7 +10,7 @@ export function getSocket(): Socket {
       reconnectionDelay: 1000,
       reconnectionDelayMax: 5000,
       reconnectionAttempts: 5,
-      transports: ["polling"], // Force Long-Polling for Render Hobby plan compatibility
+
     });
   }
   return socket;
