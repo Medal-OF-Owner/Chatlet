@@ -1,22 +1,9 @@
 import { pgTable, pgEnum, serial, varchar, text, timestamp, integer } from "drizzle-orm/pg-core";
 
-/**
- * Define enums before using them in tables
- */
 export const roleEnum = pgEnum("role", ["user", "admin"]);
 
-/**
- * Core user table backing auth flow.
- * Extend this file with additional tables as your product grows.
- * Columns use camelCase to match both database fields and generated types.
- */
 export const users = pgTable("users", {
-  /**
-   * Surrogate primary key. Auto-incremented numeric value managed by the database.
-   * Use this for relations between tables.
-   */
   id: serial("id").primaryKey(),
-  /** Manus OAuth identifier (openId) returned from the OAuth callback. Unique per user. */
   openId: varchar("openId", { length: 64 }).notNull().unique(),
   name: text("name"),
   email: varchar("email", { length: 320 }),
@@ -39,12 +26,14 @@ export const rooms = pgTable("rooms", {
 export type Room = typeof rooms.$inferSelect;
 export type InsertRoom = typeof rooms.$inferInsert;
 
+// ✅ MODIFIÉ : Ajout de textColor
 export const messages = pgTable("messages", {
   id: serial("id").primaryKey(),
   roomId: integer("roomId").notNull(),
   nickname: varchar("nickname", { length: 100 }).notNull(),
   content: text("content").notNull(),
   fontFamily: varchar("fontFamily", { length: 100 }).default("sans-serif"),
+  textColor: varchar("textColor", { length: 7 }).default("#ffffff"),  // ✅ AJOUTÉ
   profileImage: text("profileImage"),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
 });
