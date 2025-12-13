@@ -12,6 +12,7 @@ const users: Map<string, SocketUser> = new Map();
 
 export function setupSocketIO(httpServer: HTTPServer) {
   const io = new SocketIOServer(httpServer, {
+    path: "/socket.io/", // Explicitly set path
     cors: {
       origin: "*",
       methods: ["GET", "POST"],
