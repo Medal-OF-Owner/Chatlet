@@ -12,6 +12,7 @@ export default function Home() {
   const { nickname, isLoading: nicknameLoading, updateNickname } = useGuestNickname();
   const [isEditingNickname, setIsEditingNickname] = useState(false);
   const [tempNickname, setTempNickname] = useState("");
+  const [nicknameError, setNicknameError] = useState<string | null>(null);
 
   const checkNicknameQuery = trpc.guest.checkNicknameAvailable.useQuery(
     { nickname: tempNickname },
@@ -24,8 +25,10 @@ export default function Home() {
   };
 
   const handleSaveNickname = async () => {
+    setNicknameError(null); // Clear previous error
+
     if (!tempNickname.trim() || tempNickname.length < 3) {
-      toast.error("Nickname must be at least 3 characters");
+      setNicknameError("Nickname must be at least 3 characters");
       return;
     }
 
@@ -40,13 +43,14 @@ export default function Home() {
       setIsEditingNickname(false);
       toast.success("Nickname updated!");
     } else {
-      toast.error("This nickname is already taken or too similar to an existing one");
+      setNicknameError("This nickname is already taken or too similar to an existing one");
     }
   };
 
   const handleCancelEdit = () => {
     setIsEditingNickname(false);
     setTempNickname("");
+    setNicknameError(null); // Clear error on cancel
   };
 
   return (
@@ -147,6 +151,9 @@ export default function Home() {
                       <label className="block text-sm font-semibold text-cyan-300 mb-2">
                         Your Nickname
                       </label>
+                      {nicknameError && (
+                        <p className="text-red-400 text-sm font-semibold mb-2">{nicknameError}</p>
+                      )}
                       <div className="flex items-center gap-2 bg-slate-800/60 border-2 border-cyan-400/60 rounded-xl px-4 py-3 backdrop-blur-sm">
                         {isEditingNickname ? (
                           <>
