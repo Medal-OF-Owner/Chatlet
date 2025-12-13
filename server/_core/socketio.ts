@@ -103,6 +103,8 @@ export function setupSocketIO(httpServer: HTTPServer) {
         console.log(`📤 Message broadcasted to room_${roomId}`);
       } catch (error) {
         console.error("❌ Error sending message:", error);
+        // Log the message data that failed to send
+        console.error("❌ Failed message data:", data);
         socket.emit("error", "Failed to send message");
       }
     });
