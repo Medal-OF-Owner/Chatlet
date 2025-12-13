@@ -138,9 +138,13 @@ export async function reserveNickname(nickname: string): Promise<boolean> {
   if (!db) throw new Error("Database not available");
 
   try {
-    await db.insert(activeNicknames).values({ nickname });
-    return true;
-  } catch {
+    // Use ON CONFLICT DO NOTHING to handle cases where the nickname is already active
+    // This is more robust than relying on a try/catch block for the unique constraint violation
+    const result = await db.insert(activeNicknames).values({ nickname }).onConflictDoNothing().returning();
+    // If result is empty, it means the conflict occurred and nothing was inserted
+    return result.length > 0;
+  } catch (error) {
+    console.error("Error reserving nickname:", error);
     return false;
   }
 }
