@@ -9,9 +9,10 @@ export default function Auth() {
   const [location, setLocation] = useLocation();
   const isLogin = location === "/login";
   
-  const [email, setEmail] = useState("");
+  const [identifier, setIdentifier] = useState(""); // Utilisé pour email ou pseudo
   const [password, setPassword] = useState("");
   const [nickname, setNickname] = useState("");
+  const [email, setEmail] = useState(""); // Reste pour l'inscription
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
@@ -24,12 +25,16 @@ export default function Auth() {
     setSuccess("");
 
     if (isLogin) {
-      const result = await loginMutation.mutateAsync({ email, password });
+      const result = await loginMutation.mutateAsync({ identifier, password });
       if (result.success) {
-        setSuccess("Login successful! Your pseudo: " + result.account?.nickname);
+        const nickname = result.account?.nickname;
+        if (nickname) {
+          sessionStorage.setItem("sessionNickname", nickname);
+        }
+        setSuccess("Connexion réussie! Pseudo: " + nickname);
         setTimeout(() => setLocation("/"), 2000);
       } else {
-        setError(result.error || "Login failed");
+        setError(result.error || "Erreur de connexion");
       }
     } else {
       if (password.length < 6) {
@@ -92,13 +97,13 @@ export default function Auth() {
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div>
                   <label className="block text-sm font-semibold text-cyan-300 mb-2">
-                    Email
+                    {isLogin ? "Email ou Pseudo" : "Email"}
                   </label>
                   <Input
-                    type="email"
-                    placeholder="your@email.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    type={isLogin ? "text" : "email"}
+                    placeholder={isLogin ? "email@example.com ou pseudo" : "your@email.com"}
+                    value={isLogin ? identifier : email}
+                    onChange={(e) => isLogin ? setIdentifier(e.target.value) : setEmail(e.target.value)}
                     className="bg-slate-800/60 border-2 border-cyan-400/60 text-cyan-300 placeholder-slate-400 rounded-xl px-4 py-3 focus:outline-none focus:border-cyan-400 focus:shadow-lg focus:shadow-cyan-400/30 transition-all"
                     required
                   />
@@ -106,17 +111,17 @@ export default function Auth() {
 
                 {!isLogin && (
                   <div>
-                    <label className="block text-sm font-semibold text-cyan-300 mb-2">
-                      Nickname
-                    </label>
-                    <Input
-                      placeholder="Your unique nickname"
-                      value={nickname}
-                      onChange={(e) => setNickname(e.target.value)}
-                      className="bg-slate-800/60 border-2 border-cyan-400/60 text-cyan-300 placeholder-slate-400 rounded-xl px-4 py-3 focus:outline-none focus:border-cyan-400 focus:shadow-lg focus:shadow-cyan-400/30 transition-all"
-                      required
-                      minLength={3}
-                    />
+                  <label className="block text-sm font-semibold text-cyan-300 mb-2">
+                    Pseudo
+                  </label>
+                  <Input
+                    placeholder="Ton pseudo unique"
+                    value={nickname}
+                    onChange={(e) => setNickname(e.target.value)}
+                    className="bg-slate-800/60 border-2 border-cyan-400/60 text-cyan-300 placeholder-slate-400 rounded-xl px-4 py-3 focus:outline-none focus:border-cyan-400 focus:shadow-lg focus:shadow-cyan-400/30 transition-all"
+                    required
+                    minLength={3}
+                  />
                   </div>
                 )}
 

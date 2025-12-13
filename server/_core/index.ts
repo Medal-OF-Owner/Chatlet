@@ -8,6 +8,7 @@ import { Pool } from "pg";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { registerOAuthRoutes } from "./oauth";
 import { appRouter } from "../routers";
+
 import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
 import { setupSocketIO } from "./socketio";
@@ -155,6 +156,7 @@ async function startServer() {
 
   // OAuth callback under /api/oauth/callback
   registerOAuthRoutes(app);
+
   // tRPC API
   app.use(
     "/api/trpc",

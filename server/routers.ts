@@ -29,11 +29,11 @@ export const appRouter = router({
       }),
     login: publicProcedure
       .input(z.object({
-        email: z.string().email(),
+        identifier: z.string().min(1), // Accepte email ou pseudo
         password: z.string(),
       }))
       .mutation(async ({ input }) => {
-        return await login(input.email, input.password);
+        return await login(input.identifier, input.password);
       }),
     verifyEmail: publicProcedure
       .input(z.object({

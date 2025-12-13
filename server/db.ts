@@ -249,19 +249,33 @@ export async function resetPassword(token: string, newPassword: string): Promise
   }
 }
 
-export async function login(email: string, password: string): Promise<{ success: boolean; account?: { id: number; email: string; nickname: string }; error?: string }> {
+export async function login(identifier: string, password: string): Promise<{ success: boolean; account?: { id: number; email: string; nickname: string }; error?: string }> {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
 
   try {
-    const account = await db.select().from(accounts).where(eq(accounts.email, email)).limit(1);
+    // 1. Try to find account by email
+    let account = await db.select().from(accounts).where(eq(accounts.email, identifier)).limit(1);
+
+    // 2. If not found, try to find account by nickname
     if (account.length === 0) {
-      return { success: false, error: "Email not found" };
+      account = await db.select().from(accounts).where(eq(accounts.nickname, identifier)).limit(1);
     }
 
+    // 3. Check if account exists (unified error message)
+    if (account.length === 0) {
+      return { success: false, error: "Identifiant ou mot de passe incorrect" };
+    }
+
+    // 4. Check password (unified error message)
     const isValid = await bcrypt.compare(password, account[0].passwordHash);
     if (!isValid) {
-      return { success: false, error: "Invalid password" };
+      return { success: false, error: "Identifiant ou mot de passe incorrect" };
+    }
+
+    // 5. Check if email is verified
+    if (!account[0].emailVerified) {
+      return { success: false, error: "Veuillez vérifier votre email avant de vous connecter" };
     }
 
     // Update lastLogin
@@ -270,7 +284,7 @@ export async function login(email: string, password: string): Promise<{ success:
     return { success: true, account: { id: account[0].id, email: account[0].email, nickname: account[0].nickname } };
   } catch (error) {
     console.error("[Database] Failed to login:", error);
-    return { success: false, error: "Login failed" };
+    return { success: false, error: "Erreur de connexion" };
   }
 }
 

@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { Avatar } from "@/components/Avatar";
+
 import { ProfileImageUpload } from "@/components/ProfileImageUpload";
 import { Send, Video, Mic, Home, Edit2, Check, X, Smile } from "lucide-react";
 
@@ -35,7 +36,7 @@ export default function Chat() {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
   const [roomId, setRoomId] = useState<number | null>(null);
-  const [fontFamily, setFontFamily] = useState("sans-serif");
+  const [fontFamily, setFontFamily] = useState("Courier New");
   const [textColor, setTextColor] = useState("#ffffff");
   const [cameraOn, setCameraOn] = useState(false);
   const [micOn, setMicOn] = useState(false);
@@ -46,6 +47,7 @@ export default function Chat() {
   const [usedNicknames, setUsedNicknames] = useState<Set<string>>(new Set());
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [profileImage, setProfileImage] = useState<string | null>(null);
+
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const remoteVideoRefs = useRef<Map<string, HTMLVideoElement>>(new Map());
@@ -56,15 +58,7 @@ export default function Chat() {
 
   const createRoomMutation = trpc.chat.getOrCreateRoom.useMutation();
 
-  const colors = [
-    { value: "#ffffff", label: "Blanc" },
-    { value: "#ef4444", label: "Rouge" },
-    { value: "#3b82f6", label: "Bleu" },
-    { value: "#22c55e", label: "Vert" },
-    { value: "#eab308", label: "Jaune" },
-    { value: "#f97316", label: "Orange" },
-    { value: "#a855f7", label: "Violet" },
-  ];
+
 
   // Initialize room and generate random nickname (keep same pseudo across rooms)
   useEffect(() => {
@@ -328,13 +322,16 @@ export default function Chat() {
     const socket = socketRef.current;
     console.log("📤 Emitting to socket:", socket.connected);
 
+    // Stockage Base64 local pour éviter le besoin de S3/Forge API
+    const finalProfileImage = profileImage && profileImage.startsWith("data:") ? profileImage : null;
+
     const optimisticMessage: Message = {
       roomId,
       nickname: displayNickname.trim(),
       content: message.trim(),
       fontFamily,
       textColor,
-      profileImage,
+      profileImage: finalProfileImage,
       createdAt: new Date(),
     };
     setMessages((prev) => [...prev, optimisticMessage]);
@@ -345,7 +342,7 @@ export default function Chat() {
       content: message.trim(),
       fontFamily,
       textColor,
-      profileImage,
+      profileImage: finalProfileImage,
     });
 
     setMessage("");
@@ -533,33 +530,19 @@ export default function Chat() {
               nickname={displayNickname}
               currentImage={profileImage}
               onImageChange={setProfileImage}
+
             />
             <form onSubmit={handleSendMessage} className="space-y-3 mt-3">
               <div className="flex gap-2">
-                <select
-                  value={fontFamily}
-                  onChange={(e) => setFontFamily(e.target.value)}
-                  className="bg-slate-700 border border-slate-600 text-white rounded px-3 py-2 text-sm"
-                >
-                  <option value="sans-serif">Default</option>
-                  <option value="serif">Serif</option>
-                  <option value="monospace">Monospace</option>
-                  <option value="cursive">Cursive</option>
-                  <option value="Georgia">Georgia</option>
-                  <option value="Courier New">Courier New</option>
-                </select>
+                
 
-                <select
+                <input
+                  type="color"
                   value={textColor}
                   onChange={(e) => setTextColor(e.target.value)}
-                  className="bg-slate-700 border border-slate-600 text-white rounded px-3 py-2 text-sm"
-                >
-                  {colors.map((color) => (
-                    <option key={color.value} value={color.value}>
-                      {color.label}
-                    </option>
-                  ))}
-                </select>
+                  className="w-8 h-8 p-0 border-none cursor-pointer rounded-full overflow-hidden"
+                  title="Choisir la couleur du texte"
+                />
               </div>
 
               <div className="flex gap-2 relative">

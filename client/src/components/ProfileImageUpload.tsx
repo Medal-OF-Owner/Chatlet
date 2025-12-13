@@ -6,12 +6,14 @@ interface ProfileImageUploadProps {
   nickname: string;
   currentImage?: string | null;
   onImageChange: (base64: string | null) => void;
+
 }
 
 export function ProfileImageUpload({
   nickname,
   currentImage,
   onImageChange,
+
 }: ProfileImageUploadProps) {
   const [preview, setPreview] = useState<string | null>(currentImage || null);
   const fileInputRef = useRef<HTMLInputElement>(null);
