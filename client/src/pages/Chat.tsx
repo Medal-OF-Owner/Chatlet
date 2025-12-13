@@ -355,7 +355,7 @@ export default function Chat() {
     }
 
     if (usedNicknames.has(newNickname.trim())) {
-      alert("This nickname is already taken in this room!");
+      alert("Ce pseudo est déjà utilisé dans cette room.");
       return;
     }
 
@@ -367,6 +367,9 @@ export default function Chat() {
       oldNickname,
       newNickname: newNickname.trim(),
     });
+
+    // Mise à jour du sessionStorage pour la persistance
+    sessionStorage.setItem("sessionNickname", newNickname.trim());
 
     setNickname(newNickname.trim());
     setDisplayNickname(newNickname.trim());
