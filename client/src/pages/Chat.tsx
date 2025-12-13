@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-console.log("Chat component is rendering");
+
 import { useParams, Link } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { getSocket, disconnectSocket } from "@/lib/socket";

@@ -4,7 +4,7 @@ let socket: Socket | null = null;
 
 export function getSocket(): Socket {
   if (!socket) {
-    console.log("Attempting to connect Socket.IO to:", window.location.origin);
+
     socket = io(window.location.origin, {
       path: "/socket.io/",
       reconnection: true,
