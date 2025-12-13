@@ -78,12 +78,12 @@ export function setupSocketIO(httpServer: HTTPServer) {
     });
 
     // Send message
-    socket.on("send_message", async (data: { roomId: number; nickname: string; content: string; fontFamily?: string }) => {
-      const { roomId, nickname, content, fontFamily } = data;
+    socket.on("send_message", async (data: { roomId: number; nickname: string; content: string; fontFamily?: string; profileImage?: string }) => {
+      const { roomId, nickname, content, fontFamily, profileImage } = data;
       console.log(`📨 Received message from ${nickname} in room ${roomId}: ${content}`);
 
       try {
-        await addMessage(roomId, nickname, content, fontFamily);
+        await addMessage(roomId, nickname, content, fontFamily, profileImage);
         console.log(`✅ Message saved to DB`);
 
         // Broadcast to all users in the room
@@ -91,6 +91,7 @@ export function setupSocketIO(httpServer: HTTPServer) {
           nickname,
           content,
           fontFamily: fontFamily || "sans-serif",
+          profileImage: profileImage || null,
           createdAt: new Date(),
         });
         console.log(`📤 Message broadcasted to room_${roomId}`);

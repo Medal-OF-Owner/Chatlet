@@ -131,7 +131,7 @@ export default function Chat() {
       setUsedNicknames(nicks);
     });
 
-    socket.on("new_message", (msg: Message) => {
+    socket.on("new_message", (msg: Message & { profileImage?: string }) => {
       console.log("📩 RECEIVED new_message:", msg);
 
       setMessages((prev) => {
@@ -338,7 +338,8 @@ export default function Chat() {
     console.log("📤 Emitting to socket:", socket.connected);
 
     // Stockage Base64 local pour éviter le besoin de S3/Forge API
-    const finalProfileImage = profileImage && profileImage.startsWith("data:") ? profileImage : null;
+    const profileImageToSend = user ? user.profileImage : profileImage;
+    const finalProfileImage = profileImageToSend && profileImageToSend.startsWith("data:") ? profileImageToSend : null;
 
     const optimisticMessage: Message = {
       roomId,
