@@ -508,17 +508,7 @@ export default function Chat() {
     >
       <div className="absolute inset-0 bg-black/40 pointer-events-none"></div>
       <div className="relative z-10">
-        {/* Avatar en haut à droite */}
-        {!isAuthLoading && (
-          <div className="absolute top-4 right-4 z-50">
-            <Avatar
-              src={(user as any)?.profileImage || profileImage}
-              nickname={user?.name || displayNickname || "Guest"}
-              size="md"
-              onClick={() => setIsSidebarOpen(true)}
-            />
-          </div>
-        )}
+
       {/* Header */}
       <div className="bg-gradient-to-b from-slate-900/60 to-transparent border-b border-cyan-400/30 p-4 backdrop-blur-sm">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
@@ -535,55 +525,15 @@ export default function Chat() {
 
           {/* Nickname Display and Edit */}
           <div className="flex items-center gap-2">
-            <ProfileImageUpload
-              nickname={displayNickname}
-              currentImage={profileImage}
-              onImageChange={setProfileImage}
-            />
-            {editingNickname ? (
-              <>
-                <Input
-                  value={newNickname}
-                  onChange={(e) => setNewNickname(e.target.value)}
-                  placeholder="New nickname"
-                  className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-400 w-40"
-                  autoFocus
-                />
-                <Button
-                  size="sm"
-                  onClick={handleChangeNickname}
-                  className="bg-green-600 hover:bg-green-700"
-                >
-                  <Check className="w-4 h-4" />
-                </Button>
-                <Button
-                  size="sm"
-                  variant="outline"
-                  onClick={() => {
-                    setEditingNickname(false);
-                    setNewNickname("");
-                  }}
-                  className="text-slate-300"
-                >
-                  <X className="w-4 h-4" />
-                </Button>
-              </>
-            ) : (
-              <>
-                <Avatar src={profileImage} nickname={displayNickname} size="md" />
-                <span className="text-slate-300">{displayNickname}</span>
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  onClick={() => {
-                    setEditingNickname(true);
-                    setNewNickname(displayNickname);
-                  }}
-                  className="text-slate-300 hover:text-white"
-                >
-                  <Edit2 className="w-4 h-4" />
-                </Button>
-              </>
+            {/* Le seul avatar qui doit rester, pour ouvrir la sidebar */}
+            {!isAuthLoading && (
+              <Avatar
+                src={(user as any)?.profileImage || profileImage}
+                nickname={user?.name || displayNickname || "Guest"}
+                size="md"
+                onClick={() => setIsSidebarOpen(true)}
+                className="cursor-pointer"
+              />
             )}
           </div>
         </div>
