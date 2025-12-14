@@ -118,11 +118,26 @@ export async function getMessages(roomId: number, limit: number = 50) {
   return await db.select().from(messages).where(eq(messages.roomId, roomId)).orderBy(desc(messages.createdAt)).limit(limit);
 }
 
-export async function addMessage(roomId: number, nickname: string, content: string, fontFamily?: string, profileImage?: string | null) {
+// ✅ FONCTION CORRIGÉE AVEC textColor
+export async function addMessage(
+  roomId: number, 
+  nickname: string, 
+  content: string, 
+  fontFamily?: string, 
+  profileImage?: string | null,
+  textColor?: string  // ✅ AJOUTÉ
+) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
 
-  return await db.insert(messages).values({ roomId, nickname, content, fontFamily, profileImage });
+  return await db.insert(messages).values({ 
+    roomId, 
+    nickname, 
+    content, 
+    fontFamily, 
+    profileImage,
+    textColor  // ✅ AJOUTÉ
+  });
 }
 
 export async function checkNicknameAvailable(nickname: string): Promise<boolean> {
@@ -138,7 +153,10 @@ export async function reserveNickname(nickname: string): Promise<boolean> {
   if (!db) throw new Error("Database not available");
 
   try {
+    // Use ON CONFLICT DO NOTHING to handle cases where the nickname is already active
+    // This is more robust than relying on a try/catch block for the unique constraint violation
     const result = await db.insert(activeNicknames).values({ nickname }).onConflictDoNothing().returning();
+    // If result is empty, it means the conflict occurred and nothing was inserted
     return result.length > 0;
   } catch (error) {
     console.error("Error reserving nickname:", error);
@@ -173,6 +191,7 @@ export async function createAccount(email: string, nickname: string, password: s
     const normalizedNickname = normalizeNickname(nickname);
     await db.insert(accounts).values({ email, nickname, passwordHash, verificationToken, normalizedNickname });
 
+    // Send verification email
     await sendVerificationEmail(email, verificationToken);
 
     return { success: true };
@@ -207,13 +226,15 @@ export async function requestPasswordReset(email: string): Promise<{ success: bo
   try {
     const account = await db.select().from(accounts).where(eq(accounts.email, email)).limit(1);
     if (account.length === 0) {
+      // For security, don't reveal if email exists
       return { success: true };
     }
 
     const resetToken = nanoid(32);
-    const resetTokenExpiry = new Date(Date.now() + 60 * 60 * 1000);
+    const resetTokenExpiry = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
     await db.update(accounts).set({ resetToken, resetTokenExpiry }).where(eq(accounts.id, account[0].id));
 
+    // Send reset email
     await sendPasswordResetEmail(email, resetToken);
 
     return { success: true };
@@ -252,25 +273,31 @@ export async function login(identifier: string, password: string): Promise<{ suc
   if (!db) throw new Error("Database not available");
 
   try {
+    // 1. Try to find account by email
     let account = await db.select().from(accounts).where(eq(accounts.email, identifier)).limit(1);
 
+    // 2. If not found, try to find account by nickname
     if (account.length === 0) {
       account = await db.select().from(accounts).where(eq(accounts.nickname, identifier)).limit(1);
     }
 
+    // 3. Check if account exists (unified error message)
     if (account.length === 0) {
       return { success: false, error: "Identifiant ou mot de passe incorrect" };
     }
 
+    // 4. Check password (unified error message)
     const isValid = await bcrypt.compare(password, account[0].passwordHash);
     if (!isValid) {
       return { success: false, error: "Identifiant ou mot de passe incorrect" };
     }
 
+    // 5. Check if email is verified
     if (!account[0].emailVerified) {
       return { success: false, error: "Veuillez vérifier votre email avant de vous connecter" };
     }
 
+    // Update lastLogin
     await db.update(accounts).set({ lastLogin: new Date() }).where(eq(accounts.id, account[0].id));
 
     return { success: true, account: { id: account[0].id, email: account[0].email, nickname: account[0].nickname } };
