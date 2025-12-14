@@ -1,6 +1,8 @@
 import { useState, useRef } from "react";
 import { Upload, X } from "lucide-react";
 import { Avatar } from "./Avatar";
+import { useAuth } from "@/hooks/useAuth";
+import { trpc } from "@/lib/trpc";
 
 interface ProfileImageUploadProps {
   nickname: string;
@@ -15,6 +17,9 @@ export function ProfileImageUpload({
   onImageChange,
 
 }: ProfileImageUploadProps) {
+  const { user } = useAuth();
+  const updateProfileImageMutation = trpc.auth.updateProfileImage.useMutation();
+
   const [preview, setPreview] = useState<string | null>(currentImage || null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -32,7 +37,14 @@ export function ProfileImageUpload({
       const base64 = event.target?.result as string;
       setPreview(base64);
       onImageChange(base64);
-      localStorage.setItem("profileImage", base64); // Persistance de la photo
+
+      if (user) {
+        // Utilisateur connecté: Sauvegarde sur le serveur
+        updateProfileImageMutation.mutate({ profileImage: base64 });
+      } else {
+        // Utilisateur invité: Sauvegarde en local
+        localStorage.setItem("profileImage", base64);
+      }
     };
     reader.readAsDataURL(file);
   };
@@ -40,7 +52,15 @@ export function ProfileImageUpload({
   const handleRemove = () => {
     setPreview(null);
     onImageChange(null);
-    localStorage.removeItem("profileImage"); // Suppression de la photo du stockage
+
+    if (user) {
+      // Utilisateur connecté: Suppression sur le serveur
+      updateProfileImageMutation.mutate({ profileImage: null });
+    } else {
+      // Utilisateur invité: Suppression en local
+      localStorage.removeItem("profileImage");
+    }
+
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }

@@ -57,6 +57,26 @@ export const appRouter = router({
       .mutation(async ({ input }) => {
         return await resetPassword(input.token, input.newPassword);
       }),
+
+    updateProfileImage: publicProcedure
+      .input(z.object({
+        profileImage: z.string().nullable(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (!ctx.user) {
+          throw new Error("Unauthorized");
+        }
+        const db = await getDb();
+        if (!db) {
+          throw new Error("Database not available");
+        }
+        const { accounts } = await import("../drizzle/schema");
+        const { eq } = await import("drizzle-orm");
+
+        await db.update(accounts).set({ profileImage: input.profileImage }).where(eq(accounts.email, ctx.user.email));
+
+        return { success: true };
+      }),
   }),
 
   chat: router({
