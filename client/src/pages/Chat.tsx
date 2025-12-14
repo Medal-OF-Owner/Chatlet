@@ -583,7 +583,7 @@ export default function Chat() {
                   type="color"
                   value={textColor}
                   onChange={(e) => setTextColor(e.target.value)}
-                  className="w-8 h-8 p-0 border-none cursor-pointer rounded-full overflow-hidden"
+                  className="w-8 h-8 p-0 border-2 border-cyan-400 cursor-pointer rounded-full overflow-hidden"
                   title="Choisir la couleur du texte"
                 />
                 <Button
