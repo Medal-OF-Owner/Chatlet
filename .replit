@@ -16,18 +16,15 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "Chat App"
+args = "Start application"
 
 [[workflows.workflow]]
-name = "Chat App"
+name = "Start application"
 author = "agent"
-
-[workflows.workflow.metadata]
-outputType = "webview"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "pnpm dev"
+args = "npm run dev"
 waitForPort = 5000
 
 [[ports]]
