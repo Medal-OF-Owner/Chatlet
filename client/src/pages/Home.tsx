@@ -41,6 +41,7 @@ export default function Home() {
     const result = await checkNicknameQuery.refetch();
     if (result.data?.available) {
       updateNickname(tempNickname);
+      sessionStorage.setItem("sessionNickname", tempNickname); // Persistance du pseudo
       toast.success("Nickname updated!");
     } else {
       setNicknameError("This nickname is already taken or too similar to an existing one");

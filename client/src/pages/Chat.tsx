@@ -49,7 +49,9 @@ export default function Chat() {
   const [newNickname, setNewNickname] = useState("");
   const [usedNicknames, setUsedNicknames] = useState<Set<string>>(new Set());
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
-  const [profileImage, setProfileImage] = useState<string | null>(null);
+  const [profileImage, setProfileImage] = useState<string | null>(
+    typeof window !== 'undefined' ? localStorage.getItem("profileImage") : null
+  );
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -71,18 +73,28 @@ export default function Chat() {
   useEffect(() => {
     if (!room || isAuthLoading || isGuestLoading) return;
 
+    // Lire la photo de profil depuis localStorage au chargement
+    const storedProfileImage = localStorage.getItem("profileImage");
+    if (storedProfileImage) {
+      setProfileImage(storedProfileImage);
+    }
+
     const initRoom = async () => {
       try {
         const result = await createRoomMutation.mutateAsync({ slug: room });
         setRoomId(result.id);
 
-        // Priority: 1) Local session nickname (from login), 2) OAuth user name, 3) Guest nickname
+        // Priority: 1) Local session nickname (from sessionStorage), 2) OAuth user name, 3) Guest nickname
         const sessionNickname = sessionStorage.getItem("sessionNickname");
         const finalNickname = sessionNickname || (user?.name) || guestNickname;
 
         if (finalNickname) {
           setNickname(finalNickname);
           setDisplayNickname(finalNickname);
+          // Stocker le pseudo dans sessionStorage s'il vient d'être généré (guestNickname)
+          if (!sessionNickname && guestNickname) {
+            sessionStorage.setItem("sessionNickname", guestNickname);
+          }
         }
       } catch (error) {
         console.error("Failed to create/get room:", error);

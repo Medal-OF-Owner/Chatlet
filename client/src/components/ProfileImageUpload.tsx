@@ -32,6 +32,7 @@ export function ProfileImageUpload({
       const base64 = event.target?.result as string;
       setPreview(base64);
       onImageChange(base64);
+      localStorage.setItem("profileImage", base64); // Persistance de la photo
     };
     reader.readAsDataURL(file);
   };
@@ -39,6 +40,7 @@ export function ProfileImageUpload({
   const handleRemove = () => {
     setPreview(null);
     onImageChange(null);
+    localStorage.removeItem("profileImage"); // Suppression de la photo du stockage
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
