@@ -113,11 +113,6 @@ class SDKServer {
     return first ? first.toLowerCase() : null;
   }
 
-  /**
-   * Exchange OAuth authorization code for access token
-   * @example
-   * const tokenResponse = await sdk.exchangeCodeForToken(code, state);
-   */
   async exchangeCodeForToken(
     code: string,
     state: string
@@ -125,11 +120,6 @@ class SDKServer {
     return this.oauthService.getTokenByCode(code, state);
   }
 
-  /**
-   * Get user information using access token
-   * @example
-   * const userInfo = await sdk.getUserInfo(tokenResponse.accessToken);
-   */
   async getUserInfo(accessToken: string): Promise<GetUserInfoResponse> {
     const data = await this.oauthService.getUserInfoByToken({
       accessToken,
@@ -159,11 +149,6 @@ class SDKServer {
     return new TextEncoder().encode(secret);
   }
 
-  /**
-   * Create a session token for a Manus user openId
-   * @example
-   * const sessionToken = await sdk.createSessionToken(userInfo.openId);
-   */
   async createSessionToken(
     openId: string,
     options: { expiresInMs?: number; name?: string } = {}
@@ -262,30 +247,25 @@ class SDKServer {
     const sessionCookie = cookies.get(COOKIE_NAME);
     const session = await this.verifySession(sessionCookie);
 
-    if (!session) {
-      throw ForbiddenError("Invalid session cookie");
-    }
+    // if (!session) {
+    //   throw ForbiddenError("Invalid session cookie");
+    // }
 
-    const sessionUserId = session.openId;
+    const sessionUserId = session?.openId || "guest-user-id";
     const signedInAt = new Date();
     let user = await db.getUserByOpenId(sessionUserId);
 
     // If user not in DB, sync from OAuth server automatically
     if (!user) {
-      try {
-        const userInfo = await this.getUserInfoWithJwt(sessionCookie ?? "");
-        await db.upsertUser({
-          openId: userInfo.openId,
-          name: userInfo.name || null,
-          email: userInfo.email ?? null,
-          loginMethod: userInfo.loginMethod ?? userInfo.platform ?? null,
-          lastSignedIn: signedInAt,
-        });
-        user = await db.getUserByOpenId(userInfo.openId);
-      } catch (error) {
-        console.error("[Auth] Failed to sync user from OAuth:", error);
-        throw ForbiddenError("Failed to sync user info");
-      }
+      // Create a guest user if no user is found
+      await db.upsertUser({
+        openId: sessionUserId,
+        name: "Guest User",
+        email: "guest@example.com",
+        loginMethod: "guest",
+        lastSignedIn: signedInAt,
+      });
+      user = await db.getUserByOpenId(sessionUserId);
     }
 
     if (!user) {
