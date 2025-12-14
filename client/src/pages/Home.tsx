@@ -12,10 +12,14 @@ export default function Home() {
   const [roomName, setRoomName] = useState("");
   const { nickname, isLoading: nicknameLoading, updateNickname } = useGuestNickname();
   const { user, logout, isLoggingOut } = useAuth();
-  const isUserLoggedIn = !!user;
   const [isEditingNickname, setIsEditingNickname] = useState(false);
   const [tempNickname, setTempNickname] = useState("");
   const [nicknameError, setNicknameError] = useState<string | null>(null);
+  
+  // Check for local login session
+  const sessionNickname = typeof window !== 'undefined' ? sessionStorage.getItem("sessionNickname") : null;
+  const isUserLoggedIn = !!user || !!sessionNickname;
+  const displayNickname = sessionNickname || user?.name || nickname;
 
   const checkNicknameQuery = trpc.guest.checkNicknameAvailable.useQuery(
     { nickname: tempNickname },
@@ -122,17 +126,20 @@ export default function Home() {
           {isUserLoggedIn ? (
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2">
-                <img
-                  src={user.profileImage || "/default-avatar.png"}
-                  alt={user.nickname}
-                  className="w-10 h-10 rounded-full object-cover border-2 border-cyan-400"
-                />
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-400 to-purple-500 flex items-center justify-center border-2 border-cyan-400">
+                  <span className="text-white font-bold text-lg">
+                    {displayNickname?.charAt(0).toUpperCase()}
+                  </span>
+                </div>
                 <span className="text-cyan-300 font-semibold text-lg hidden sm:inline">
-                  {user.nickname}
+                  {displayNickname}
                 </span>
               </div>
               <Button
-                onClick={logout}
+                onClick={() => {
+                  sessionStorage.removeItem("sessionNickname");
+                  logout();
+                }}
                 disabled={isLoggingOut}
                 className="border-2 border-red-400 bg-transparent text-red-400 hover:bg-red-400/10 rounded-lg px-4 py-2 font-semibold transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-red-400/50"
               >
@@ -179,7 +186,7 @@ export default function Home() {
                       </label>
                       <div className="flex items-center gap-2 bg-slate-800/60 border-2 border-cyan-400/60 rounded-xl px-4 py-3 backdrop-blur-sm">
                         <User className="w-5 h-5 text-cyan-400" />
-                        <span className="flex-1 text-cyan-300 font-semibold text-lg">{user.nickname}</span>
+                        <span className="flex-1 text-cyan-300 font-semibold text-lg">{displayNickname}</span>
                       </div>
                       <p className="text-xs text-slate-400 mt-1">
                         Logged in as a registered user.

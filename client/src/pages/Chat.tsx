@@ -75,7 +75,9 @@ export default function Chat() {
         const result = await createRoomMutation.mutateAsync({ slug: room });
         setRoomId(result.id);
 
-        const finalNickname = user ? (user.name || guestNickname) : guestNickname;
+        // Priority: 1) Local session nickname (from login), 2) OAuth user name, 3) Guest nickname
+        const sessionNickname = sessionStorage.getItem("sessionNickname");
+        const finalNickname = sessionNickname || (user?.name) || guestNickname;
 
         if (finalNickname) {
           setNickname(finalNickname);
