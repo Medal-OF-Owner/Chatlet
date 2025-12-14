@@ -18,6 +18,16 @@ export function ProfileImageUpload({
 
 }: ProfileImageUploadProps) {
   const { user } = useAuth();
+  // Assurez-vous que le type de `user` est correct pour accéder à `user.profileImage`
+  // En supposant que useAuth retourne un objet avec une propriété `profileImage` si l'utilisateur est connecté.
+  // Pour éviter une erreur de type, nous allons vérifier si `user` est défini et a la propriété.
+  // Cependant, pour le moment, nous allons simplement nous assurer que l'objet `user` est bien celui retourné par `trpc.auth.me.useQuery`
+  // et que le type est correctement inféré.
+  // Le problème est probablement dans Chat.tsx, mais vérifions ici aussi.
+  // L'erreur dans Chat.tsx était la requête redondante.
+  // Ici, la logique semble correcte: `if (user)` vérifie si l'utilisateur est connecté.
+  // L'erreur d'exécution dans le navigateur est probablement dans Chat.tsx.
+  // Nous allons laisser ce fichier tel quel pour l'instant et nous concentrer sur Chat.tsx.
   const updateProfileImageMutation = trpc.auth.updateProfileImage.useMutation();
 
   const [preview, setPreview] = useState<string | null>(currentImage || null);

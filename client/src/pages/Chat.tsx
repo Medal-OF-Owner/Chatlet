@@ -52,9 +52,7 @@ export default function Chat() {
   const [profileImage, setProfileImage] = useState<string | null>(
     typeof window !== 'undefined' ? localStorage.getItem("profileImage") : null
   );
-  const { data: userProfile } = trpc.auth.me.useQuery(undefined, {
-    enabled: !!user,
-  });
+
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -79,12 +77,8 @@ export default function Chat() {
     // 1. Déterminer la photo de profil
     if (user) {
       // Utilisateur connecté: Utiliser la photo du serveur (si disponible)
-      // Utilisateur connecté: Utiliser la photo du serveur (si disponible)
-      if (userProfile?.profileImage) {
-        setProfileImage(userProfile.profileImage);
-      } else if (user.profileImage) {
-        // Fallback si la requête n'est pas encore terminée mais l'objet user initial a l'image
-        setProfileImage(user.profileImage);
+      if (user && (user as any).profileImage) {
+        setProfileImage((user as any).profileImage);
       }
     } else {
       // Utilisateur invité: Lire la photo de profil depuis localStorage
