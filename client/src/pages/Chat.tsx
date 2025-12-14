@@ -459,6 +459,11 @@ export default function Chat() {
 
           {/* Nickname Display and Edit */}
           <div className="flex items-center gap-2">
+            <ProfileImageUpload
+              nickname={displayNickname}
+              currentImage={profileImage}
+              onImageChange={setProfileImage}
+            />
             {editingNickname ? (
               <>
                 <Input
@@ -559,32 +564,27 @@ export default function Chat() {
 
           {/* Input Area */}
           <Card className="bg-gradient-to-br from-purple-900/40 via-slate-900/50 to-slate-900/40 backdrop-blur-md border-2 border-cyan-400/40 p-4 rounded-2xl shadow-lg" style={{ boxShadow: '0 0 20px rgba(0, 217, 255, 0.2)' }}>
-            <ProfileImageUpload
-              nickname={displayNickname}
-              currentImage={profileImage}
-              onImageChange={setProfileImage}
+            <form onSubmit={handleSendMessage} className="space-y-3">
+              <div className="flex gap-3 relative items-center">
+                {/* Avatar à gauche */}
+                <Avatar src={profileImage} nickname={displayNickname} size="md" />
 
-            />
-            <form onSubmit={handleSendMessage} className="space-y-3 mt-3">
-              <div className="flex gap-2">
-                
+                {/* Input de message agrandi */}
+                <Input
+                  placeholder="Type a message..."
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-400 flex-1 h-12 text-lg"
+                  style={{ color: textColor }}
+                />
 
+                {/* Sélecteur de couleur et boutons à droite */}
                 <input
                   type="color"
                   value={textColor}
                   onChange={(e) => setTextColor(e.target.value)}
                   className="w-8 h-8 p-0 border-none cursor-pointer rounded-full overflow-hidden"
                   title="Choisir la couleur du texte"
-                />
-              </div>
-
-              <div className="flex gap-2 relative">
-                <Input
-                  placeholder="Type a message..."
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-400 flex-1"
-                  style={{ color: textColor }}
                 />
                 <Button
                   type="button"
