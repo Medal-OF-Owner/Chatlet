@@ -75,7 +75,7 @@ export default function Chat() {
         const result = await createRoomMutation.mutateAsync({ slug: room });
         setRoomId(result.id);
 
-        const finalNickname = user ? user.nickname : guestNickname;
+        const finalNickname = user ? (user.name || guestNickname) : guestNickname;
 
         if (finalNickname) {
           setNickname(finalNickname);
@@ -98,7 +98,7 @@ export default function Chat() {
     const handleJoinRoom = () => {
       if (roomId && nickname) {
         console.log("🚪 Joining room:", { roomId, nickname });
-        const profileImageToSend = user ? user.profileImage : profileImage;
+        const profileImageToSend = profileImage;
         socket.emit("join_room", { roomId, nickname, profileImage: profileImageToSend });
 
         // Initialize WebRTC manager
@@ -261,9 +261,13 @@ export default function Chat() {
     };
   }, [roomId, nickname, user, profileImage]);
 
-  // Disconnect socket only when component fully unmounts
+  // Cleanup WebRTC and socket only when component fully unmounts
   useEffect(() => {
     return () => {
+      if (webrtcRef.current) {
+        webrtcRef.current.destroy();
+        webrtcRef.current = null;
+      }
       disconnectSocket();
     };
   }, []);
@@ -346,7 +350,7 @@ export default function Chat() {
     console.log("📤 Emitting to socket:", socket.connected);
 
     // Stockage Base64 local pour éviter le besoin de S3/Forge API
-    const profileImageToSend = user ? user.profileImage : profileImage;
+    const profileImageToSend = profileImage;
     const finalProfileImage = profileImageToSend && profileImageToSend.startsWith("data:") ? profileImageToSend : null;
 
     const optimisticMessage: Message = {
