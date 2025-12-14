@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { MessageSquare, Video, Lock, Eye, CheckCircle2, User, Edit2, Check, X } from "lucide-react";
+import { MessageSquare, Video, Lock, Eye, CheckCircle2, User } from "lucide-react";
 import { useGuestNickname } from "@/hooks/useGuestNickname";
 import { useAuth } from "@/hooks/useAuth";
 import { trpc } from "@/lib/trpc";
@@ -12,7 +12,7 @@ export default function Home() {
   const [roomName, setRoomName] = useState("");
   const { nickname, isLoading: nicknameLoading, updateNickname } = useGuestNickname();
   const { user, logout, isLoggingOut } = useAuth();
-  const [isEditingNickname, setIsEditingNickname] = useState(false);
+
   const [tempNickname, setTempNickname] = useState("");
   const [nicknameError, setNicknameError] = useState<string | null>(null);
   
@@ -26,11 +26,6 @@ export default function Home() {
     { enabled: false }
   );
 
-  const handleEditNickname = () => {
-    setTempNickname(nickname);
-    setIsEditingNickname(true);
-  };
-
   const handleSaveNickname = async () => {
     setNicknameError(null); // Clear previous error
 
@@ -40,25 +35,19 @@ export default function Home() {
     }
 
     if (tempNickname === nickname) {
-      setIsEditingNickname(false);
       return;
     }
 
     const result = await checkNicknameQuery.refetch();
     if (result.data?.available) {
       updateNickname(tempNickname);
-      setIsEditingNickname(false);
       toast.success("Nickname updated!");
     } else {
       setNicknameError("This nickname is already taken or too similar to an existing one");
     }
   };
 
-  const handleCancelEdit = () => {
-    setIsEditingNickname(false);
-    setTempNickname("");
-    setNicknameError(null); // Clear error on cancel
-  };
+
 
   return (
     <div
@@ -203,38 +192,19 @@ export default function Home() {
                           <p className="text-red-400 text-sm font-semibold mb-2">{nicknameError}</p>
                         )}
                         <div className="flex items-center gap-2 bg-slate-800/60 border-2 border-cyan-400/60 rounded-xl px-4 py-3 backdrop-blur-sm">
-                          {isEditingNickname ? (
-                            <>
-                              <Input
-                                value={tempNickname}
-                                onChange={(e) => setTempNickname(e.target.value)}
-                                className="flex-1 bg-transparent border-0 text-cyan-300 text-lg font-semibold p-0 focus-visible:ring-0"
-                                placeholder="Nickname"
-                                onKeyDown={(e) => {
-                                  if (e.key === 'Enter') handleSaveNickname();
-                                  if (e.key === 'Escape') handleCancelEdit();
-                                }}
-                                autoFocus
-                              />
-                              <button type="button" onClick={handleSaveNickname} className="text-green-400 hover:text-green-300">
-                                <Check className="w-5 h-5" />
-                              </button>
-                              <button type="button" onClick={handleCancelEdit} className="text-red-400 hover:text-red-300">
-                                <X className="w-5 h-5" />
-                              </button>
-                            </>
-                          ) : (
-                            <>
-                              <User className="w-5 h-5 text-cyan-400" />
-                              <span className="flex-1 text-cyan-300 font-semibold text-lg">{nickname}</span>
-                              <button type="button" onClick={handleEditNickname} className="text-cyan-400 hover:text-cyan-300">
-                                <Edit2 className="w-5 h-5" />
-                              </button>
-                            </>
-                          )}
+                          <User className="w-5 h-5 text-cyan-400" />
+                          <Input
+                            value={tempNickname || nickname}
+                            onChange={(e) => setTempNickname(e.target.value)}
+                            className="flex-1 bg-transparent border-0 text-cyan-300 text-lg font-semibold p-0 focus-visible:ring-0"
+                            placeholder="Nickname"
+                            onKeyDown={(e) => {
+                              if (e.key === 'Enter') handleSaveNickname();
+                            }}
+                          />
                         </div>
                         <p className="text-xs text-slate-400 mt-1">
-                          Click the edit icon to change your nickname
+                          Press Enter to save your nickname
                         </p>
                       </div>
                     )
@@ -308,7 +278,7 @@ export default function Home() {
             <svg className="w-6 h-6 text-cyan-400" fill="currentColor" viewBox="0 0 20 20">
               <path d="M10 0L12.5 7.5L20 10L12.5 12.5L10 20L7.5 12.5L0 10L7.5 7.5L10 0Z"/>
             </svg>
-            <span>Owner - Mark Landers 2025</span>
+            <span>OG -2025</span>
           </div>
         </div>
       </div>
