@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+
 import { useParams, Link } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { getSocket, disconnectSocket } from "@/lib/socket";
@@ -10,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { Avatar } from "@/components/Avatar";
+
 import { ProfileImageUpload } from "@/components/ProfileImageUpload";
 import { Send, Video, Mic, Home, Edit2, Check, X, Smile } from "lucide-react";
 
@@ -19,6 +21,7 @@ interface Message {
   nickname: string;
   content: string;
   fontFamily: string | null;
+  textColor?: string | null;
   profileImage?: string | null;
   createdAt: Date;
 }
@@ -37,6 +40,7 @@ export default function Chat() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [roomId, setRoomId] = useState<number | null>(null);
   const [fontFamily, setFontFamily] = useState("Courier New");
+  const [textColor, setTextColor] = useState("#ffffff");
   const [cameraOn, setCameraOn] = useState(false);
   const [micOn, setMicOn] = useState(false);
   const [remoteUsers, setRemoteUsers] = useState<Map<string, RemoteUser>>(new Map());
@@ -57,9 +61,12 @@ export default function Chat() {
 
   const createRoomMutation = trpc.chat.getOrCreateRoom.useMutation();
 
+
+
   const { user, isAuthLoading } = useAuth();
   const { nickname: guestNickname, isLoading: isGuestLoading } = useGuestNickname();
 
+  // Initialize room and set nickname
   useEffect(() => {
     if (!room || isAuthLoading || isGuestLoading) return;
 
@@ -82,6 +89,7 @@ export default function Chat() {
     initRoom();
   }, [room, isAuthLoading, isGuestLoading, user, guestNickname]);
 
+  // Setup Socket.IO and WebRTC
   useEffect(() => {
     const socket = socketRef.current;
 
@@ -91,6 +99,7 @@ export default function Chat() {
         const profileImageToSend = user ? user.profileImage : profileImage;
         socket.emit("join_room", { roomId, nickname, profileImage: profileImageToSend });
 
+        // Initialize WebRTC manager
         if (!webrtcRef.current && roomId) {
           webrtcRef.current = new WebRTCManager(socket, socket.id || "", roomId);
         }
@@ -103,6 +112,7 @@ export default function Chat() {
       handleJoinRoom();
     });
 
+    // If already connected (e.g., component remounted), join the room immediately
     if (socket.connected) {
       setConnected(true);
       handleJoinRoom();
@@ -142,46 +152,52 @@ export default function Chat() {
       });
     });
 	
-    socket.on("user_joined", (data: { nickname: string; timestamp: Date; userId?: string }) => {
-      setUsedNicknames((prev) => new Set([...Array.from(prev), data.nickname]));
-      if (data.userId) {
-        const userId = data.userId as string;
-        setRemoteUsers((prev) => {
-          const updated = new Map(Array.from(prev));
-          updated.set(userId, { id: userId, nickname: data.nickname });
-          return updated;
+	    socket.on("user_joined", (data: { nickname: string; timestamp: Date; userId?: string }) => {
+	      setUsedNicknames((prev) => new Set([...Array.from(prev), data.nickname]));
+	      if (data.userId) {
+	        const userId = data.userId as string;
+	        setRemoteUsers((prev) => {
+	          const updated = new Map(Array.from(prev));
+	          updated.set(userId, { id: userId, nickname: data.nickname });
+	          return updated;
+	        });
+	
+	        // The user who joins is NOT the initiator for existing users.
+	        // Existing users (who receive this event) are the initiators for the new user.
+	        // This is correct: webrtcRef.current.createPeerConnection(userId, data.nickname, true);
+	        if (webrtcRef.current) {
+	          webrtcRef.current.createPeerConnection(userId, data.nickname, true);
+	        }
+	      }
+	
+	      setMessages((prev) => [
+	        ...prev,
+	        {
+	          nickname: "System",
+	          content: `${data.nickname} joined the room`,
+	          fontFamily: null,
+	          createdAt: new Date(data.timestamp),
+	        },
+	      ]);
+	    });
+
+      socket.on("existing_users", (users: { nickname: string; userId: string }[]) => {
+        console.log("👥 Existing users received:", users);
+        users.forEach((user) => {
+          setRemoteUsers((prev) => {
+            const updated = new Map(Array.from(prev));
+            updated.set(user.userId, { id: user.userId, nickname: user.nickname });
+            return updated;
+          });
+
+          // The newly joined user (who receives this event) is NOT the initiator for existing users.
+          // The existing users have already initiated the connection (they are the initiators).
+          // The newly joined user must NOT be the initiator, so we pass 'false'.
+          if (webrtcRef.current) {
+            webrtcRef.current.createPeerConnection(user.userId, user.nickname, false);
+          }
         });
-
-        if (webrtcRef.current) {
-          webrtcRef.current.createPeerConnection(userId, data.nickname, true);
-        }
-      }
-
-      setMessages((prev) => [
-        ...prev,
-        {
-          nickname: "System",
-          content: `${data.nickname} joined the room`,
-          fontFamily: null,
-          createdAt: new Date(data.timestamp),
-        },
-      ]);
-    });
-
-    socket.on("existing_users", (users: { nickname: string; userId: string }[]) => {
-      console.log("👥 Existing users received:", users);
-      users.forEach((user) => {
-        setRemoteUsers((prev) => {
-          const updated = new Map(Array.from(prev));
-          updated.set(user.userId, { id: user.userId, nickname: user.nickname });
-          return updated;
-        });
-
-        if (webrtcRef.current) {
-          webrtcRef.current.createPeerConnection(user.userId, user.nickname, false);
-        }
       });
-    });
 
     socket.on("user_left", (data: { nickname: string; timestamp: Date; userId?: string }) => {
       setUsedNicknames((prev) => {
@@ -240,10 +256,12 @@ export default function Chat() {
       socket.off("nickname_changed");
       socket.off("nickname_taken");
       socket.off("disconnect");
+      // Disconnect socket when component unmounts to prevent connection issues on back/forward navigation
       disconnectSocket();
     };
   }, [roomId, nickname, user, profileImage]);
 
+  // Handle camera and microphone
   useEffect(() => {
     if (cameraOn || micOn) {
       navigator.mediaDevices
@@ -275,6 +293,7 @@ export default function Chat() {
     }
   }, [cameraOn, micOn]);
 
+  // Monitor WebRTC streams
   useEffect(() => {
     if (!webrtcRef.current) return;
 
@@ -301,6 +320,7 @@ export default function Chat() {
     return () => clearInterval(interval);
   }, []);
 
+  // Auto-scroll to bottom
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
@@ -318,6 +338,7 @@ export default function Chat() {
     const socket = socketRef.current;
     console.log("📤 Emitting to socket:", socket.connected);
 
+    // Stockage Base64 local pour éviter le besoin de S3/Forge API
     const profileImageToSend = user ? user.profileImage : profileImage;
     const finalProfileImage = profileImageToSend && profileImageToSend.startsWith("data:") ? profileImageToSend : null;
 
@@ -326,6 +347,7 @@ export default function Chat() {
       nickname: displayNickname.trim(),
       content: message.trim(),
       fontFamily,
+      textColor,
       profileImage: finalProfileImage,
       createdAt: new Date(),
     };
@@ -336,6 +358,7 @@ export default function Chat() {
       nickname: displayNickname.trim(),
       content: message.trim(),
       fontFamily,
+      textColor,
       profileImage: finalProfileImage,
     });
 
@@ -362,6 +385,7 @@ export default function Chat() {
       newNickname: newNickname.trim(),
     });
 
+    // Mise à jour du sessionStorage pour la persistance
     sessionStorage.setItem("sessionNickname", newNickname.trim());
 
     setNickname(newNickname.trim());
@@ -406,6 +430,7 @@ export default function Chat() {
     >
       <div className="absolute inset-0 bg-black/40 pointer-events-none"></div>
       <div className="relative z-10">
+      {/* Header */}
       <div className="bg-gradient-to-b from-slate-900/60 to-transparent border-b border-cyan-400/30 p-4 backdrop-blur-sm">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-4">
@@ -419,6 +444,7 @@ export default function Chat() {
             </span>
           </div>
 
+          {/* Nickname Display and Edit */}
           <div className="flex items-center gap-2">
             {editingNickname ? (
               <>
@@ -470,7 +496,9 @@ export default function Chat() {
       </div>
 
       <div className="max-w-6xl mx-auto p-4 grid grid-cols-1 lg:grid-cols-3 gap-4 h-[calc(100vh-80px)]">
+        {/* Chat Area */}
         <div className="lg:col-span-2 flex flex-col gap-4">
+          {/* Messages */}
           <Card className="flex-1 bg-gradient-to-br from-purple-900/40 via-slate-900/50 to-slate-900/40 backdrop-blur-md border-2 border-cyan-400/40 p-4 overflow-y-auto rounded-2xl shadow-lg" style={{ boxShadow: '0 0 20px rgba(0, 217, 255, 0.2)' }}>
             <div className="space-y-4">
               {!messages || messages.length === 0 ? (
@@ -500,7 +528,13 @@ export default function Chat() {
                         </span>
                       </div>
                     )}
-                    <p className="text-white" style={{ fontFamily: msg.fontFamily || "sans-serif" }}>
+                    <p
+                      className="text-white"
+                      style={{ 
+                        fontFamily: msg.fontFamily || "sans-serif",
+                        color: msg.textColor || "#ffffff"
+                      }}
+                    >
                       {msg.content}
                     </p>
                   </div>
@@ -510,19 +544,34 @@ export default function Chat() {
             </div>
           </Card>
 
+          {/* Input Area */}
           <Card className="bg-gradient-to-br from-purple-900/40 via-slate-900/50 to-slate-900/40 backdrop-blur-md border-2 border-cyan-400/40 p-4 rounded-2xl shadow-lg" style={{ boxShadow: '0 0 20px rgba(0, 217, 255, 0.2)' }}>
             <ProfileImageUpload
               nickname={displayNickname}
               currentImage={profileImage}
               onImageChange={setProfileImage}
+
             />
             <form onSubmit={handleSendMessage} className="space-y-3 mt-3">
+              <div className="flex gap-2">
+                
+
+                <input
+                  type="color"
+                  value={textColor}
+                  onChange={(e) => setTextColor(e.target.value)}
+                  className="w-8 h-8 p-0 border-none cursor-pointer rounded-full overflow-hidden"
+                  title="Choisir la couleur du texte"
+                />
+              </div>
+
               <div className="flex gap-2 relative">
                 <Input
                   placeholder="Type a message..."
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-400 flex-1"
+                  style={{ color: textColor }}
                 />
                 <Button
                   type="button"
@@ -558,7 +607,9 @@ export default function Chat() {
           </Card>
         </div>
 
+        {/* Media Controls and Videos */}
         <div className="flex flex-col gap-4">
+          {/* Media Controls */}
           <Card className="bg-slate-800 border-slate-700 p-4">
             <h3 className="text-white font-semibold mb-4">Media</h3>
             <div className="space-y-2">
@@ -581,6 +632,7 @@ export default function Chat() {
             </div>
           </Card>
 
+          {/* Your Video */}
           <Card className="bg-slate-800 border-slate-700 p-4">
             <h3 className="text-white font-semibold mb-2">Your Video</h3>
             <div className="bg-slate-900 rounded aspect-video flex items-center justify-center overflow-hidden">
@@ -598,6 +650,7 @@ export default function Chat() {
             </div>
           </Card>
 
+          {/* Remote Videos */}
           {remoteUsers.size > 0 && (
             <Card className="bg-slate-800 border-slate-700 p-4">
               <h3 className="text-white font-semibold mb-2">
