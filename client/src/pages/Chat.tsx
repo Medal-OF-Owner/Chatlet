@@ -54,6 +54,7 @@ export default function Chat() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const remoteVideoRefs = useRef<Map<string, HTMLVideoElement>>(new Map());
+  const colorInputRef = useRef<HTMLInputElement>(null);
   const socketRef = useRef(getSocket());
   const webrtcRef = useRef<WebRTCManager | null>(null);
 
@@ -580,12 +581,20 @@ export default function Chat() {
 
                 {/* Sélecteur de couleur et boutons à droite */}
                 <input
+                  ref={colorInputRef}
                   type="color"
                   value={textColor}
                   onChange={(e) => setTextColor(e.target.value)}
-                  className="w-8 h-8 p-0 border-2 border-cyan-400 cursor-pointer rounded-full overflow-hidden"
+                  className="absolute opacity-0 w-0 h-0 p-0 border-none" // Masquer l'input natif
                   title="Choisir la couleur du texte"
                 />
+                <Button
+                  type="button"
+                  onClick={() => colorInputRef.current?.click()}
+                  className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 text-slate-900 font-semibold hover:shadow-lg hover:shadow-cyan-400/50 transition-all"
+                >
+                  Color
+                </Button>
                 <Button
                   type="button"
                   onClick={() => setShowEmojiPicker(!showEmojiPicker)}
