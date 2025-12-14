@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import { Upload, X } from "lucide-react";
 import { Avatar } from "./Avatar";
 import { useAuth } from "@/hooks/useAuth";
@@ -28,7 +29,15 @@ export function ProfileImageUpload({
   // Ici, la logique semble correcte: `if (user)` vérifie si l'utilisateur est connecté.
   // L'erreur d'exécution dans le navigateur est probablement dans Chat.tsx.
   // Nous allons laisser ce fichier tel quel pour l'instant et nous concentrer sur Chat.tsx.
-  const updateProfileImageMutation = trpc.auth.updateProfileImage.useMutation();
+  const queryClient = useQueryClient();
+  const updateProfileImageMutation = trpc.auth.updateProfileImage.useMutation({
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['auth', 'me'] });
+    },
+    onError: (error) => {
+      alert(`Erreur lors de la mise à jour de la photo de profil: ${error.message}`);
+    }
+  });
 
   const [preview, setPreview] = useState<string | null>(currentImage || null);
   const fileInputRef = useRef<HTMLInputElement>(null);

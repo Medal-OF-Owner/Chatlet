@@ -33,6 +33,7 @@ interface RemoteUser {
 }
 
 export default function Chat() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const { room } = useParams<{ room: string }>();
   const [nickname, setNickname] = useState("");
   const [displayNickname, setDisplayNickname] = useState("");
@@ -67,7 +68,7 @@ export default function Chat() {
 
 
 
-  const { user, isAuthLoading } = useAuth();
+    const { user, isAuthLoading } = useAuth();
   const { nickname: guestNickname, isLoading: isGuestLoading } = useGuestNickname();
 
   // Initialize room and set nickname
@@ -454,6 +455,48 @@ export default function Chat() {
   }
 
   return (
+    <>
+      {/* Sidebar pour les paramètres de l'utilisateur */}
+      <div
+        className={`fixed top-0 right-0 h-full w-80 bg-slate-900/90 backdrop-blur-md z-[100] transform transition-transform duration-300 ease-in-out ${
+          isSidebarOpen ? "translate-x-0" : "translate-x-full"
+        } border-l border-cyan-400/30 p-6`}
+      >
+        <button
+          onClick={() => setIsSidebarOpen(false)}
+          className="absolute top-4 right-4 text-cyan-400 hover:text-cyan-300"
+        >
+          <X size={24} />
+        </button>
+        <h2 className="text-2xl font-bold text-cyan-400 mb-6">Paramètres Utilisateur</h2>
+
+        <div className="space-y-6">
+          <div className="flex flex-col items-center">
+            <ProfileImageUpload
+              nickname={user?.name || displayNickname || "Guest"}
+              currentImage={(user as any)?.profileImage || profileImage}
+              onImageChange={setProfileImage}
+            />
+            <p className="mt-2 text-lg font-semibold text-white">
+              {user?.name || displayNickname}
+            </p>
+            {user && <p className="text-sm text-gray-400">{(user as any).email}</p>}
+          </div>
+
+          {/* Logique de déconnexion si l'utilisateur est connecté */}
+          {user && (
+            <Button
+              onClick={() => {
+                // Déconnexion (à implémenter)
+                alert("Déconnexion non implémentée");
+              }}
+              className="w-full bg-red-600 hover:bg-red-700"
+            >
+              Déconnexion
+            </Button>
+          )}
+        </div>
+      </div>
     <div 
       className="min-h-screen relative overflow-hidden"
       style={{
@@ -465,6 +508,17 @@ export default function Chat() {
     >
       <div className="absolute inset-0 bg-black/40 pointer-events-none"></div>
       <div className="relative z-10">
+        {/* Avatar en haut à droite */}
+        {!isAuthLoading && (
+          <div className="absolute top-4 right-4 z-50">
+            <Avatar
+              src={(user as any)?.profileImage || profileImage}
+              nickname={user?.name || displayNickname || "Guest"}
+              size="md"
+              onClick={() => setIsSidebarOpen(true)}
+            />
+          </div>
+        )}
       {/* Header */}
       <div className="bg-gradient-to-b from-slate-900/60 to-transparent border-b border-cyan-400/30 p-4 backdrop-blur-sm">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
@@ -732,5 +786,6 @@ export default function Chat() {
       </div>
       </div>
     </div>
+    </>
   );
 }
