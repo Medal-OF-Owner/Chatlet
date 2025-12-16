@@ -96,7 +96,7 @@ export function setupSocketIO(httpServer: HTTPServer) {
 
       try {
         // ✅ AJOUTÉ textColor dans addMessage
-        await addMessage(roomId, nickname, content, fontFamily, profileImage, textColor);
+      await addMessage(roomId, nickname, content, fontFamily, profileImage, textColor);
         console.log(`✅ Message saved to DB`);
 
         // Broadcast to all users in the room - ✅ AJOUTÉ textColor

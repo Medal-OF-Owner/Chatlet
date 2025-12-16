@@ -70,6 +70,7 @@ async function runMigrations() {
         nickname VARCHAR(100) NOT NULL,
         content TEXT NOT NULL,
         "fontFamily" VARCHAR(100) DEFAULT 'sans-serif',
+        "textColor" VARCHAR(7) DEFAULT '#ffffff',
         "profileImage" TEXT,
         "createdAt" TIMESTAMP NOT NULL DEFAULT NOW()
       )
