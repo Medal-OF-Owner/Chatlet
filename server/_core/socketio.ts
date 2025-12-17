@@ -82,7 +82,7 @@ export function setupSocketIO(httpServer: HTTPServer) {
       console.log(`✅ ${nickname} joined room ${roomId}`);
     });
 
-    // Send message - ✅ MODIFIÉ POUR ACCEPTER textColor
+    // Send message
     socket.on("send_message", async (data: { 
       roomId: number; 
       nickname: string; 
@@ -95,11 +95,10 @@ export function setupSocketIO(httpServer: HTTPServer) {
       console.log(`📨 Received message from ${nickname} in room ${roomId}: ${content}`);
 
       try {
-        // ✅ Supprimé textColor de addMessage (DB)
-      await addMessage(roomId, nickname, content, fontFamily, profileImage);
+        await addMessage(roomId, nickname, content, fontFamily, profileImage);
         console.log(`✅ Message saved to DB`);
 
-        // Broadcast to all users in the room - ✅ AJOUTÉ textColor
+        // Broadcast to all users in the room
         io.to(`room_${roomId}`).emit("new_message", {
           nickname,
           content,

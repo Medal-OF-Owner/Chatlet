@@ -118,7 +118,7 @@ export default function Home() {
               <div className="flex items-center gap-2">
                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-400 to-purple-500 flex items-center justify-center border-2 border-cyan-400">
                   <span className="text-white font-bold text-lg">
-                    {displayNickname?.charAt(0).toUpperCase()}
+                    {displayNickname?.charAt(0)?.toUpperCase() || "?"}
                   </span>
                 </div>
                 <span className="text-cyan-300 font-semibold text-lg hidden sm:inline">
@@ -174,10 +174,10 @@ export default function Home() {
                       <label className="block text-sm font-semibold text-cyan-300 mb-2">
                         Your Nickname
                       </label>
-                      <div className="flex items-center gap-2 bg-slate-800/60 border-2 border-cyan-400/60 rounded-xl px-4 py-3 backdrop-blur-sm">
-                        <User className="w-5 h-5 text-cyan-400" />
-                        <span className="flex-1 text-cyan-300 font-semibold text-lg">{displayNickname}</span>
-                      </div>
+                        <div className="flex items-center gap-2 bg-slate-800/60 border-2 border-cyan-400/60 rounded-xl px-4 py-3 backdrop-blur-sm">
+                          <User className="w-5 h-5 text-cyan-400" />
+                          <span className="flex-1 text-cyan-300 font-semibold text-lg">{displayNickname || "Guest"}</span>
+                        </div>
                       <p className="text-xs text-slate-400 mt-1">
                         Logged in as a registered user.
                       </p>
@@ -195,7 +195,7 @@ export default function Home() {
                         <div className="flex items-center gap-2 bg-slate-800/60 border-2 border-cyan-400/60 rounded-xl px-4 py-3 backdrop-blur-sm">
                           <User className="w-5 h-5 text-cyan-400" />
                           <Input
-                            value={tempNickname || nickname}
+                            value={tempNickname || nickname || ""}
                             onChange={(e) => setTempNickname(e.target.value)}
                             className="flex-1 bg-transparent border-0 text-cyan-300 text-lg font-semibold p-0 focus-visible:ring-0"
                             placeholder="Nickname"

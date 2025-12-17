@@ -26,7 +26,6 @@ export const rooms = pgTable("rooms", {
 export type Room = typeof rooms.$inferSelect;
 export type InsertRoom = typeof rooms.$inferInsert;
 
-// ✅ MODIFIÉ : Ajout de textColor
 export const messages = pgTable("messages", {
   id: serial("id").primaryKey(),
   roomId: integer("roomId").notNull(),
