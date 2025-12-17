@@ -33,7 +33,7 @@ export const messages = pgTable("messages", {
   nickname: varchar("nickname", { length: 100 }).notNull(),
   content: text("content").notNull(),
   fontFamily: varchar("fontFamily", { length: 100 }).default("sans-serif"),
-  textColor: varchar("textColor", { length: 7 }).default("#ffffff"),  // ✅ AJOUTÉ
+
   profileImage: text("profileImage"),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
 });
