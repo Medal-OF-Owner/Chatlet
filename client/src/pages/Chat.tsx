@@ -49,6 +49,7 @@ export default function Chat() {
   const [editingNickname, setEditingNickname] = useState(false);
   const [newNickname, setNewNickname] = useState("");
   const [usedNicknames, setUsedNicknames] = useState<Set<string>>(new Set());
+  const [nicknameChangeCount, setNicknameChangeCount] = useState(0); // Suivi des changements de pseudo pour les invités
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [profileImage, setProfileImage] = useState<string | null>(
     typeof window !== 'undefined' ? localStorage.getItem("profileImage") : null
@@ -402,6 +403,20 @@ export default function Chat() {
   };
 
   const handleChangeNickname = () => {
+    // Les utilisateurs enregistrés ne peuvent pas changer leur pseudo
+    if (user) {
+      alert("Vous ne pouvez pas changer votre pseudo une fois choisi.");
+      setEditingNickname(false);
+      return;
+    }
+
+    // Les utilisateurs anonymes peuvent changer leur pseudo une seule fois
+    if (nicknameChangeCount >= 1) {
+      alert("Vous avez déjà changé votre pseudo une fois. Vous ne pouvez pas le changer à nouveau.");
+      setEditingNickname(false);
+      return;
+    }
+
     if (!newNickname.trim()) {
       setEditingNickname(false);
       return;
@@ -428,6 +443,7 @@ export default function Chat() {
     setDisplayNickname(newNickname.trim());
     setNewNickname("");
     setEditingNickname(false);
+    setNicknameChangeCount(nicknameChangeCount + 1); // Incrémenter le compteur
   };
 
   const handleEmojiClick = (emoji: string) => {

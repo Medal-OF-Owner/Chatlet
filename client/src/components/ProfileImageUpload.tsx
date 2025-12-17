@@ -9,14 +9,14 @@ interface ProfileImageUploadProps {
   nickname: string;
   currentImage?: string | null;
   onImageChange: (base64: string | null) => void;
-
+  isGuest?: boolean; // Indique si l'utilisateur est un invité
 }
 
 export function ProfileImageUpload({
   nickname,
   currentImage,
   onImageChange,
-
+  isGuest = false,
 }: ProfileImageUploadProps) {
   const { user } = useAuth();
   // Assurez-vous que le type de `user` est correct pour accéder à `user.profileImage`
@@ -43,6 +43,12 @@ export function ProfileImageUpload({
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Les utilisateurs anonymes ne peuvent pas changer leur photo de profil
+    if (isGuest) {
+      alert("Les utilisateurs anonymes ne peuvent pas changer leur photo de profil.");
+      return;
+    }
+
     const file = e.target.files?.[0];
     if (!file) return;
 
@@ -69,6 +75,12 @@ export function ProfileImageUpload({
   };
 
   const handleRemove = () => {
+    // Les utilisateurs anonymes ne peuvent pas changer leur photo de profil
+    if (isGuest) {
+      alert("Les utilisateurs anonymes ne peuvent pas changer leur photo de profil.");
+      return;
+    }
+
     setPreview(null);
     onImageChange(null);
 
@@ -91,16 +103,18 @@ export function ProfileImageUpload({
       <div className="flex gap-2">
         <button
           onClick={() => fileInputRef.current?.click()}
-          className="p-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition"
-          title="Upload photo"
+          disabled={isGuest}
+          className={`p-2 ${isGuest ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'} text-white rounded-lg transition`}
+          title={isGuest ? "Les utilisateurs anonymes ne peuvent pas changer leur photo" : "Upload photo"}
         >
           <Upload size={16} />
         </button>
         {preview && (
           <button
             onClick={handleRemove}
-            className="p-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition"
-            title="Remove photo"
+            disabled={isGuest}
+            className={`p-2 ${isGuest ? 'bg-gray-400 cursor-not-allowed' : 'bg-red-600 hover:bg-red-700'} text-white rounded-lg transition`}
+            title={isGuest ? "Les utilisateurs anonymes ne peuvent pas changer leur photo" : "Remove photo"}
           >
             <X size={16} />
           </button>
