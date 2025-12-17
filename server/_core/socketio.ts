@@ -88,15 +88,15 @@ export function setupSocketIO(httpServer: HTTPServer) {
       nickname: string; 
       content: string; 
       fontFamily?: string; 
-      textColor?: string;  // ✅ AJOUTÉ
+      textColor?: string;
       profileImage?: string 
     }) => {
       const { roomId, nickname, content, fontFamily, textColor, profileImage } = data;
       console.log(`📨 Received message from ${nickname} in room ${roomId}: ${content}`);
 
       try {
-        // ✅ AJOUTÉ textColor dans addMessage
-      await addMessage(roomId, nickname, content, fontFamily, profileImage, textColor);
+        // ✅ Supprimé textColor de addMessage (DB)
+      await addMessage(roomId, nickname, content, fontFamily, profileImage);
         console.log(`✅ Message saved to DB`);
 
         // Broadcast to all users in the room - ✅ AJOUTÉ textColor
@@ -104,7 +104,7 @@ export function setupSocketIO(httpServer: HTTPServer) {
           nickname,
           content,
           fontFamily: fontFamily || "sans-serif",
-          textColor: textColor || "#ffffff",  // ✅ AJOUTÉ
+          textColor: textColor || "#ffffff",
           profileImage: profileImage || null,
           createdAt: new Date(),
         });
