@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { MessageSquare, Video, Lock, Eye, CheckCircle2, User } from "lucide-react";
+import { MessageSquare, Video, Lock, Eye, CheckCircle2, User, Check, X } from "lucide-react";
 import { useGuestNickname } from "@/hooks/useGuestNickname";
 import { useAuth } from "@/hooks/useAuth";
 import { trpc } from "@/lib/trpc";
@@ -13,7 +13,14 @@ export default function Home() {
   const { nickname, isLoading: nicknameLoading, updateNickname } = useGuestNickname();
   const { user, logout, isLoggingOut } = useAuth();
 
-  const [tempNickname, setTempNickname] = useState("");
+  const [tempNickname, setTempNickname] = useState(nickname || "");
+  
+  // Sync tempNickname with nickname when it changes (e.g., on initial load or after save)
+  useEffect(() => {
+    if (nickname && tempNickname === "") {
+      setTempNickname(nickname);
+    }
+  }, [nickname]);
   const [nicknameError, setNicknameError] = useState<string | null>(null);
   
   // Check for local login session
@@ -194,19 +201,40 @@ export default function Home() {
                         )}
                         <div className="flex items-center gap-2 bg-slate-800/60 border-2 border-cyan-400/60 rounded-xl px-4 py-3 backdrop-blur-sm">
                           <User className="w-5 h-5 text-cyan-400" />
-                          <Input
-                            value={tempNickname || nickname || ""}
+<Input
+                            value={tempNickname}
                             onChange={(e) => setTempNickname(e.target.value)}
                             className="flex-1 bg-transparent border-0 text-cyan-300 text-lg font-semibold p-0 focus-visible:ring-0"
                             placeholder="Nickname"
                             onKeyDown={(e) => {
-                              if (e.key === 'Enter') handleSaveNickname();
+                              if (e.key === 'Enter') {
+                                e.preventDefault();
+                                handleSaveNickname();
+                              }
                             }}
                           />
+                          {tempNickname && (
+                            <div className="flex items-center gap-2">
+                              <Button
+                                type="button"
+                                onClick={handleSaveNickname}
+                                className="h-7 w-7 p-0 bg-green-500/80 hover:bg-green-500 text-white rounded-full transition-all"
+                                title="Save Nickname"
+                              >
+                                <Check className="h-4 w-4" />
+                              </Button>
+                              <Button
+                                type="button"
+                                onClick={() => setTempNickname("")}
+                                className="h-7 w-7 p-0 bg-red-500/80 hover:bg-red-500 text-white rounded-full transition-all"
+                                title="Clear Nickname"
+                              >
+                                <X className="h-4 w-4" />
+                              </Button>
+                            </div>
+                          )}
                         </div>
-                        <p className="text-xs text-slate-400 mt-1">
-                          Press Enter to save your nickname
-                        </p>
+                        
                       </div>
                     )
                   )}

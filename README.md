@@ -16,7 +16,7 @@ Un site de chat en temps réel avec support des salons personnalisés, caméra/m
 
 - **Frontend**: React 19 + Tailwind CSS 4 + Socket.IO Client
 - **Backend**: Node.js + Express + tRPC + Socket.IO
-- **Base de données**: MySQL/TiDB
+- **Base de données**: PostgreSQL
 - **Déploiement**: Render
 
 ## Installation locale
