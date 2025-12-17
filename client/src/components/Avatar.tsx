@@ -4,9 +4,11 @@ interface AvatarProps {
   src?: string | null;
   nickname: string;
   size?: "sm" | "md" | "lg";
+  onClick?: () => void;
+  className?: string;
 }
 
-export function Avatar({ src, nickname, size = "md" }: AvatarProps) {
+export function Avatar({ src, nickname, size = "md", onClick, className = "" }: AvatarProps) {
   const sizes = {
     sm: "w-8 h-8 text-xs",
     md: "w-10 h-10 text-sm",
@@ -39,7 +41,10 @@ export function Avatar({ src, nickname, size = "md" }: AvatarProps) {
 
   if (src) {
     return (
-      <div className={`${sizes[size]} rounded-full overflow-hidden flex-shrink-0`}>
+      <div 
+        className={`${sizes[size]} rounded-full overflow-hidden flex-shrink-0 ${className}`}
+        onClick={onClick}
+      >
         <img
           src={src}
           alt={nickname}
@@ -51,7 +56,8 @@ export function Avatar({ src, nickname, size = "md" }: AvatarProps) {
 
   return (
     <div
-      className={`${sizes[size]} ${getColorFromNickname(nickname)} rounded-full flex items-center justify-center text-white font-bold flex-shrink-0`}
+      className={`${sizes[size]} ${getColorFromNickname(nickname)} rounded-full flex items-center justify-center text-white font-bold flex-shrink-0 ${className}`}
+      onClick={onClick}
     >
       {getInitials(nickname)}
     </div>

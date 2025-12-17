@@ -2,7 +2,9 @@ import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { MessageSquare, Video, Lock, Eye, CheckCircle2, User, Check, X } from "lucide-react";
+import { MessageSquare, Video, Lock, Eye, CheckCircle2, User, Check, X, Upload } from "lucide-react";
+import { Avatar } from "@/components/Avatar";
+import { ProfileImageUpload } from "@/components/ProfileImageUpload";
 import { useGuestNickname } from "@/hooks/useGuestNickname";
 import { useAuth } from "@/hooks/useAuth";
 import { trpc } from "@/lib/trpc";
@@ -12,6 +14,9 @@ export default function Home() {
   const [roomName, setRoomName] = useState("");
   const { nickname, isLoading: nicknameLoading, updateNickname } = useGuestNickname();
   const { user, logout, isLoggingOut } = useAuth();
+  const [profileImage, setProfileImage] = useState<string | null>(
+    typeof window !== 'undefined' ? localStorage.getItem("profileImage") : null
+  );
 
   const [tempNickname, setTempNickname] = useState(nickname || "");
   
@@ -122,16 +127,14 @@ export default function Home() {
           {/* Auth/User Profile */}
           {isUserLoggedIn ? (
             <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-400 to-purple-500 flex items-center justify-center border-2 border-cyan-400">
-                  <span className="text-white font-bold text-lg">
-                    {displayNickname?.charAt(0)?.toUpperCase() || "?"}
-                  </span>
-                </div>
-                <span className="text-cyan-300 font-semibold text-lg hidden sm:inline">
-                  {displayNickname}
-                </span>
-              </div>
+              <ProfileImageUpload
+                nickname={user?.name || displayNickname || "Guest"}
+                currentImage={(user as any)?.profileImage || profileImage}
+                onImageChange={setProfileImage}
+              />
+              <span className="text-cyan-300 font-semibold text-lg hidden sm:inline">
+                {displayNickname}
+              </span>
               <Button
                 onClick={() => {
                   sessionStorage.removeItem("sessionNickname");
