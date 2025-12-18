@@ -193,9 +193,8 @@ export default function Chat() {
                 // The user who joins is NOT the initiator for existing users.
                 // Existing users (who receive this event) are the initiators for the new user.
                 // This is correct: webrtcRef.current.createPeerConnection(userId, data.nickname, true);
-                if (webrtcRef.current) {
-                  webrtcRef.current.createPeerConnection(userId, data.nickname, true);
-                }
+                // Initiation WebRTC retirée pour éviter la double initiation.
+                // La connexion sera initiée lorsque l'utilisateur active sa caméra/micro.
               }
         
               setMessages((prev) => [
@@ -221,9 +220,8 @@ export default function Chat() {
           // The newly joined user (who receives this event) is NOT the initiator for existing users.
           // The existing users have already initiated the connection (they are the initiators).
           // The newly joined user must NOT be the initiator, so we pass 'false'.
-          if (webrtcRef.current) {
-            webrtcRef.current.createPeerConnection(user.userId, user.nickname, false);
-          }
+          // Initiation WebRTC retirée pour éviter la double initiation.
+          // La connexion sera initiée lorsque l'utilisateur active sa caméra/micro.
         });
       });
 
