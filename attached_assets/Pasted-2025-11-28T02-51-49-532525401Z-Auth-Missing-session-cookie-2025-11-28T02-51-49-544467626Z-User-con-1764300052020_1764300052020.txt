@@ -1,0 +1,50 @@
+2025-11-28T02:51:49.532525401Z [Auth] Missing session cookie
+2025-11-28T02:51:49.544467626Z User connected: -5RCeGtXS9eo0t8kAAAH
+2025-11-28T02:51:52.890959773Z 📨 Received message from JollyFox820 in room 3: tyh
+2025-11-28T02:51:52.893661885Z ✅ Message saved to DB
+2025-11-28T02:51:52.89390048Z 📤 Message broadcasted to room_3
+2025-11-28T02:52:01.064545168Z 📨 Received message from BoldBear821 in room 3: tyh
+2025-11-28T02:52:01.079145873Z ✅ Message saved to DB
+2025-11-28T02:52:01.079358098Z 📤 Message broadcasted to room_3
+2025-11-28T02:52:09.999978687Z 👋 BoldBear821 left room 3
+2025-11-28T02:52:10.209092286Z [Auth] Missing session cookie
+2025-11-28T02:52:10.281550822Z User connected: _zLJVUsQK5KX7efxAAAJ
+2025-11-28T02:52:10.381186494Z ✅ DaringMeerkat1 joined room 3
+2025-11-28T02:52:12.888768032Z 📨 Received message from DaringMeerkat1 in room 3: yth
+2025-11-28T02:52:12.89176093Z ✅ Message saved to DB
+2025-11-28T02:52:12.891959855Z 📤 Message broadcasted to room_3
+2025-11-28T02:52:24.511388276Z 👋 DaringMeerkat1 left room 3
+2025-11-28T02:52:24.682984483Z [Auth] Missing session cookie
+2025-11-28T02:52:24.749512333Z User connected: ccSPEv5jOC1fKQLXAAAL
+2025-11-28T02:52:24.850809253Z ✅ HonestDeer542 joined room 3
+2025-11-28T02:52:35.564886879Z 👋 HonestDeer542 left room 3
+2025-11-28T02:52:38.558539459Z [Auth] Missing session cookie
+2025-11-28T02:52:38.605483559Z User connected: 1D4P4Tv61M7r58v9AAAN
+2025-11-28T02:52:38.715809427Z ✅ WittyLemur117 joined room 3
+2025-11-28T02:52:42.842328113Z 📨 Received message from WittyLemur117 in room 3: tyh
+2025-11-28T02:52:42.8461354Z ✅ Message saved to DB
+2025-11-28T02:52:42.846354675Z 📤 Message broadcasted to room_3
+2025-11-28T02:52:47.034331685Z 📨 Received message from JollyFox820 in room 3: tyh
+2025-11-28T02:52:47.036938535Z ✅ Message saved to DB
+2025-11-28T02:52:47.037255153Z 📤 Message broadcasted to room_3
+2025-11-28T02:52:55.165690692Z [Auth] Missing session cookie
+2025-11-28T02:52:55.239026899Z User connected: LuvrIe3xK5DzmbmNAAAP
+2025-11-28T02:52:55.359183793Z ✅ JollyShark457 joined room 3
+2025-11-28T02:52:59.025430845Z 📨 Received message from JollyShark457 in room 3: ythyth
+2025-11-28T02:52:59.028510016Z ✅ Message saved to DB
+2025-11-28T02:52:59.028795193Z 📤 Message broadcasted to room_3
+2025-11-28T02:53:03.18605008Z 📨 Received message from WittyLemur117 in room 3: rthth
+2025-11-28T02:53:03.188782553Z ✅ Message saved to DB
+2025-11-28T02:53:03.189084869Z 📤 Message broadcasted to room_3
+2025-11-28T02:53:05.251382183Z 👋 JollyShark457 left room 3
+2025-11-28T02:53:05.615318143Z [Auth] Missing session cookie
+2025-11-28T02:53:05.672954559Z User connected: dS2yjc9lmI0s1GrXAAAR
+2025-11-28T02:53:05.773831959Z ✅ LivelyOcelot331 joined room 3
+2025-11-28T02:53:07.634112956Z 📨 Received message from LivelyOcelot331 in room 3: thth
+2025-11-28T02:53:07.638687011Z ✅ Message saved to DB
+2025-11-28T02:53:07.638977838Z 📤 Message broadcasted to room_3
+2025-11-28T02:53:10.193342219Z 📨 Received message from WittyLemur117 in room 3: htrh
+2025-11-28T02:53:10.19597074Z ✅ Message saved to DB
+2025-11-28T02:53:10.196209575Z 📤 Message broadcasted to room_3
+2025-11-28T02:54:41.644743536Z 👋 WittyLemur117 left room 3
+2025-11-28T02:58:02.374572133Z 👋 LivelyOcelot331 left room 3

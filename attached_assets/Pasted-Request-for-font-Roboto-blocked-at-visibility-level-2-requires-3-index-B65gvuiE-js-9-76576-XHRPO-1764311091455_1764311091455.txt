@@ -1,0 +1,209 @@
+Request for font "Roboto" blocked at visibility level 2 (requires 3)
+index-B65gvuiE.js:9:76576
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+[HTTP/3 200  1221ms]
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+[HTTP/3 200  1120ms]
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+[HTTP/3 200  1331ms]
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail?batch=1
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail?batch=1
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail?batch=1
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail?batch=1
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail?batch=1
+
+Erreur d’analyse de la valeur pour « -webkit-text-size-adjust ».  Déclaration abandonnée. verify:1:8187
+Propriété « -moz-column-gap » inconnue.  Déclaration abandonnée. verify:1:14940
+Jeu de règles ignoré suite à un mauvais sélecteur. verify:1:29117
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+[HTTP/3 200  1220ms]
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+[HTTP/3 200  4215ms]
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+[HTTP/3 200  4111ms]
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+[HTTP/3 200  3927ms]
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+[HTTP/3 200  4006ms]
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+[HTTP/3 200  4105ms]
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+[HTTP/3 200  4003ms]
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail?batch=1
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail?batch=1
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail?batch=1
+
+Erreur d’analyse de la valeur pour « -webkit-text-size-adjust ».  Déclaration abandonnée. index-ZQCXB9Gp.css:1:4989
+Propriété « field-sizing » inconnue.  Déclaration abandonnée. index-ZQCXB9Gp.css:1:12747
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+[HTTP/3 200  3992ms]
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail?batch=1
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+[HTTP/3 200  1149ms]
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+[HTTP/3 200  1595ms]
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail?batch=1
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+[HTTP/3 200  1739ms]
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail?batch=1
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+[HTTP/3 200  1680ms]
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+[HTTP/3 200  1821ms]
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail,auth.verifyEmail?batch=1
+
