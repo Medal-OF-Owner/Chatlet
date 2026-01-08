@@ -296,6 +296,12 @@ export default function Chat() {
     };
   }, []);
 
+  // Reference to track current remoteUsers for WebRTC
+  const remoteUsersRef = useRef<Map<string, RemoteUser>>(new Map());
+  useEffect(() => {
+    remoteUsersRef.current = remoteUsers;
+  }, [remoteUsers]);
+
   // Handle camera and microphone
   useEffect(() => {
     if (cameraOn || micOn) {
@@ -308,8 +314,8 @@ export default function Chat() {
 
           if (webrtcRef.current) {
             webrtcRef.current.setLocalStream(stream);
-            // Initier les connexions avec tous les utilisateurs distants
-            const users = Array.from(remoteUsers.values()).map(u => ({ id: u.id, nickname: u.nickname }));
+            // Initiate connections with all current remote users
+            const users = Array.from(remoteUsersRef.current.values()).map(u => ({ id: u.id, nickname: u.nickname }));
             webrtcRef.current.initiateConnectionsWithUsers(users);
           }
         })
@@ -329,7 +335,15 @@ export default function Chat() {
         webrtcRef.current.clearLocalStream();
       }
     }
-  }, [cameraOn, micOn, remoteUsers]);
+  }, [cameraOn, micOn]);
+
+  // Initiate WebRTC connections when new remote users join
+  useEffect(() => {
+    if (webrtcRef.current && (cameraOn || micOn)) {
+      const users = Array.from(remoteUsers.values()).map(u => ({ id: u.id, nickname: u.nickname }));
+      webrtcRef.current.initiateConnectionsWithUsers(users);
+    }
+  }, [remoteUsers]);
 
   // Monitor WebRTC streams - poll plus fréquemment et forcer le re-render
   useEffect(() => {

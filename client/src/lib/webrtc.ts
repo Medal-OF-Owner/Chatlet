@@ -58,7 +58,7 @@ export class WebRTCManager {
     peerId: string,
     peerNickname: string,
     initiator: boolean
-  ): any {
+  ): PeerConnection {
     // Détruire l'ancienne connexion si elle existe
     const existingConnection = this.peers.get(peerId);
     if (existingConnection) {
@@ -144,7 +144,7 @@ export class WebRTCManager {
     };
 
     this.peers.set(peerId, connection);
-    return peer;
+    return connection;
   }
 
   getPeerConnection(peerId: string): PeerConnection | undefined {
@@ -160,11 +160,7 @@ export class WebRTCManager {
 
     if (!connection) {
       // Create peer connection if it doesn't exist
-      connection = {
-        peerId: data.from,
-        peerNickname: data.from,
-        peer: this.createPeerConnection(data.from, data.from, false),
-      };
+      connection = this.createPeerConnection(data.from, data.from, false);
     }
 
     connection.peer.signal(data.offer);
@@ -184,12 +180,17 @@ export class WebRTCManager {
     }
   }
 
-  private handleUserLeft(data: { nickname: string }) {
-    // Find and remove peer by nickname
-    for (const [peerId, connection] of Array.from(this.peers.entries())) {
-      if (connection.peerNickname === data.nickname) {
-        this.removePeerConnection(peerId);
-        break;
+  private handleUserLeft(data: { nickname: string; userId?: string }) {
+    // Remove peer by userId if available, otherwise by nickname
+    if (data.userId) {
+      this.removePeerConnection(data.userId);
+    } else {
+      // Fallback: Find and remove peer by nickname
+      for (const [peerId, connection] of Array.from(this.peers.entries())) {
+        if (connection.peerNickname === data.nickname) {
+          this.removePeerConnection(peerId);
+          break;
+        }
       }
     }
   }
