@@ -101,34 +101,85 @@ async function runMigrations() {
     `);
 
     // Add missing columns if they don't exist
-    await db.execute(sql`
-      ALTER TABLE messages
-      ADD COLUMN IF NOT EXISTS "profileImage" TEXT
-    `);
-    await db.execute(sql`
-      ALTER TABLE accounts
-      ADD COLUMN IF NOT EXISTS "profileImage" TEXT
-    `);
-    await db.execute(sql`
-      ALTER TABLE accounts
-      ADD COLUMN IF NOT EXISTS "emailVerified" TIMESTAMP
-    `);
-    await db.execute(sql`
-      ALTER TABLE accounts
-      ADD COLUMN IF NOT EXISTS "verificationToken" VARCHAR(255)
-    `);
-    await db.execute(sql`
-      ALTER TABLE accounts
-      ADD COLUMN IF NOT EXISTS "resetToken" VARCHAR(255)
-    `);
-    await db.execute(sql`
-      ALTER TABLE accounts
-      ADD COLUMN IF NOT EXISTS "resetTokenExpiry" TIMESTAMP
-    `);
-    await db.execute(sql`
-      ALTER TABLE accounts
-      ADD COLUMN IF NOT EXISTS "normalizedNickname" VARCHAR(100)
-    `);
+    try {
+      await db.execute(sql`
+        ALTER TABLE messages
+        ADD COLUMN IF NOT EXISTS "profileImage" TEXT
+      `);
+      console.log("[DB] ✓ messages.profileImage verified");
+    } catch (e) {
+      console.log("[DB] messages.profileImage already exists or error:", (e as Error).message.slice(0, 50));
+    }
+    
+    try {
+      await db.execute(sql`
+        ALTER TABLE messages
+        ADD COLUMN IF NOT EXISTS "textColor" VARCHAR(7) DEFAULT '#ffffff'
+      `);
+      console.log("[DB] ✓ messages.textColor verified");
+    } catch (e) {
+      console.log("[DB] messages.textColor already exists or error:", (e as Error).message.slice(0, 50));
+    }
+    
+    try {
+      await db.execute(sql`
+        ALTER TABLE accounts
+        ADD COLUMN IF NOT EXISTS "profileImage" TEXT
+      `);
+      console.log("[DB] ✓ accounts.profileImage verified");
+    } catch (e) {
+      console.log("[DB] accounts.profileImage already exists or error:", (e as Error).message.slice(0, 50));
+    }
+    
+    try {
+      await db.execute(sql`
+        ALTER TABLE accounts
+        ADD COLUMN IF NOT EXISTS "emailVerified" TIMESTAMP
+      `);
+      console.log("[DB] ✓ accounts.emailVerified verified");
+    } catch (e) {
+      console.log("[DB] accounts.emailVerified already exists or error:", (e as Error).message.slice(0, 50));
+    }
+    
+    try {
+      await db.execute(sql`
+        ALTER TABLE accounts
+        ADD COLUMN IF NOT EXISTS "verificationToken" VARCHAR(255)
+      `);
+      console.log("[DB] ✓ accounts.verificationToken verified");
+    } catch (e) {
+      console.log("[DB] accounts.verificationToken already exists or error:", (e as Error).message.slice(0, 50));
+    }
+    
+    try {
+      await db.execute(sql`
+        ALTER TABLE accounts
+        ADD COLUMN IF NOT EXISTS "resetToken" VARCHAR(255)
+      `);
+      console.log("[DB] ✓ accounts.resetToken verified");
+    } catch (e) {
+      console.log("[DB] accounts.resetToken already exists or error:", (e as Error).message.slice(0, 50));
+    }
+    
+    try {
+      await db.execute(sql`
+        ALTER TABLE accounts
+        ADD COLUMN IF NOT EXISTS "resetTokenExpiry" TIMESTAMP
+      `);
+      console.log("[DB] ✓ accounts.resetTokenExpiry verified");
+    } catch (e) {
+      console.log("[DB] accounts.resetTokenExpiry already exists or error:", (e as Error).message.slice(0, 50));
+    }
+    
+    try {
+      await db.execute(sql`
+        ALTER TABLE accounts
+        ADD COLUMN IF NOT EXISTS "normalizedNickname" VARCHAR(100)
+      `);
+      console.log("[DB] ✓ accounts.normalizedNickname verified");
+    } catch (e) {
+      console.log("[DB] accounts.normalizedNickname already exists or error:", (e as Error).message.slice(0, 50));
+    }
 
     console.log("[DB] Tables created/verified!");
     await pool.end();
