@@ -1,104 +1,58 @@
-import { eq, desc, and, lt } from "drizzle-orm";
-import { drizzle as drizzlePg } from "drizzle-orm/node-postgres";
+import { eq, desc, lt } from "drizzle-orm";
 import { drizzle as drizzleMysql } from "drizzle-orm/mysql2";
-import { Pool as PgPool } from "pg";
 import mysql from "mysql2/promise";
 import { InsertUser, users, rooms, messages, activeNicknames, accounts } from "../drizzle/schema";
-import { ENV } from './_core/env';
 import * as bcrypt from "bcryptjs";
 import { sendVerificationEmail, sendPasswordResetEmail } from "./email";
 import { nanoid } from "nanoid";
 import { normalizeNickname } from "../shared/utils";
 
 let _db: any = null;
+let _pool: any = null;
 
 export async function getDb() {
-  if (!_db && process.env.DATABASE_URL) {
-    const dbUrl = process.env.DATABASE_URL;
-    try {
-      if (dbUrl.startsWith("mysql")) {
-        const connection = await mysql.createPool(dbUrl);
-        _db = drizzleMysql(connection);
-        console.log("[Database] Connected to MySQL");
-      } else {
-        const pool = new PgPool({
-          connectionString: dbUrl,
-          ssl: process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : false,
-        });
-        _db = drizzlePg(pool);
-        console.log("[Database] Connected to PostgreSQL");
-      }
-    } catch (error) {
-      console.warn("[Database] Failed to connect:", error);
-      _db = null;
-    }
-  }
-  return _db;
-}
+  if (_db) return _db;
 
-export async function upsertUser(user: InsertUser): Promise<void> {
-  if (!user.openId) {
-    throw new Error("User openId is required for upsert");
-  }
-
-  const db = await getDb();
-  if (!db) {
-    console.warn("[Database] Cannot upsert user: database not available");
-    return;
+  const dbUrl = process.env.DATABASE_URL;
+  if (!dbUrl) {
+    console.error("[Database] DATABASE_URL is not defined");
+    return null;
   }
 
   try {
-    const values: InsertUser = {
-      openId: user.openId,
+    console.log("[Database] Attempting to connect to MySQL...");
+    _pool = mysql.createPool(dbUrl);
+    _db = drizzleMysql(_pool);
+    
+    // Test connection
+    const connection = await _pool.getConnection();
+    console.log("[Database] SUCCESS: Connected to MySQL");
+    connection.release();
+    
+    return _db;
+  } catch (error) {
+    console.error("[Database] FAILED to connect to MySQL:", error);
+    _db = null;
+    _pool = null;
+    return null;
+  }
+}
+
+export async function upsertUser(user: InsertUser): Promise<void> {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  try {
+    const updateSet: any = {
+      name: user.name,
+      email: user.email,
+      loginMethod: user.loginMethod,
+      lastSignedIn: user.lastSignedIn || new Date(),
     };
 
-    const updateSet: Record<string, unknown> = {};
-
-    const textFields = ["name", "email", "loginMethod"] as const;
-    type TextField = (typeof textFields)[number];
-
-    const assignNullable = (field: TextField) => {
-      const value = user[field];
-      if (value === undefined) return;
-      const normalized = value ?? null;
-      values[field] = normalized;
-      updateSet[field] = normalized;
-    };
-
-    textFields.forEach(assignNullable);
-
-    if (user.lastSignedIn !== undefined) {
-      values.lastSignedIn = user.lastSignedIn;
-      updateSet.lastSignedIn = user.lastSignedIn;
-    }
-
-    if (user.role !== undefined) {
-      values.role = user.role;
-      updateSet.role = user.role;
-    } else if (user.openId === ENV.ownerOpenId) {
-      values.role = 'admin';
-      updateSet.role = 'admin';
-    }
-
-    if (!values.lastSignedIn) {
-      values.lastSignedIn = new Date();
-    }
-
-    if (Object.keys(updateSet).length === 0) {
-      updateSet.lastSignedIn = new Date();
-    }
-
-    // Handle conflict based on DB type
-    if (process.env.DATABASE_URL?.startsWith("mysql")) {
-      await db.insert(users).values(values).onDuplicateKeyUpdate({
-        set: updateSet
-      });
-    } else {
-      await db.insert(users).values(values).onConflictDoUpdate({
-        target: [users.openId],
-        set: updateSet,
-      });
-    }
+    await db.insert(users).values(user).onDuplicateKeyUpdate({
+      set: updateSet
+    });
   } catch (error) {
     console.error("[Database] Failed to upsert user:", error);
     throw error;
@@ -112,30 +66,15 @@ export async function getUserByOpenId(openId: string) {
   return result.length > 0 ? result[0] : undefined;
 }
 
-const inMemoryRooms: Map<string, { id: number; slug: string; createdAt: Date }> = new Map();
-let nextRoomId = 1;
-
 export async function getOrCreateRoom(slug: string) {
   const db = await getDb();
-  if (!db) {
-    let room = inMemoryRooms.get(slug);
-    if (!room) {
-      room = { id: nextRoomId++, slug, createdAt: new Date() };
-      inMemoryRooms.set(slug, room);
-    }
-    return room;
-  }
+  if (!db) throw new Error("Database not available");
 
   const existing = await db.select().from(rooms).where(eq(rooms.slug, slug)).limit(1);
   if (existing.length > 0) return existing[0];
 
-  if (process.env.DATABASE_URL?.startsWith("mysql")) {
-    const [result] = await db.insert(rooms).values({ slug });
-    return { id: result.insertId, slug, createdAt: new Date() };
-  } else {
-    const created = await db.insert(rooms).values({ slug }).returning();
-    return created[0];
-  }
+  const [result] = await db.insert(rooms).values({ slug });
+  return { id: result.insertId, slug, createdAt: new Date() };
 }
 
 export async function getMessages(roomId: number, limit: number = 50) {
@@ -150,31 +89,20 @@ export async function addMessage(roomId: number, nickname: string, content: stri
   return await db.insert(messages).values({ roomId, nickname, content, fontFamily, profileImage });
 }
 
-const inMemoryNicknames: Set<string> = new Set();
-
 export async function checkNicknameAvailable(nickname: string): Promise<boolean> {
   const db = await getDb();
-  if (!db) return !inMemoryNicknames.has(nickname);
+  if (!db) return true;
   const existing = await db.select().from(activeNicknames).where(eq(activeNicknames.nickname, nickname)).limit(1);
   return existing.length === 0;
 }
 
 export async function reserveNickname(nickname: string): Promise<boolean> {
   const db = await getDb();
-  if (!db) {
-    if (inMemoryNicknames.has(nickname)) return false;
-    inMemoryNicknames.add(nickname);
-    return true;
-  }
+  if (!db) return false;
 
   try {
-    if (process.env.DATABASE_URL?.startsWith("mysql")) {
-      await db.insert(activeNicknames).values({ nickname });
-      return true;
-    } else {
-      const result = await db.insert(activeNicknames).values({ nickname }).onConflictDoNothing().returning();
-      return result.length > 0;
-    }
+    await db.insert(activeNicknames).values({ nickname });
+    return true;
   } catch (error) {
     return false;
   }
@@ -182,10 +110,7 @@ export async function reserveNickname(nickname: string): Promise<boolean> {
 
 export async function releaseNickname(nickname: string): Promise<void> {
   const db = await getDb();
-  if (!db) {
-    inMemoryNicknames.delete(nickname);
-    return;
-  }
+  if (!db) return;
   await db.delete(activeNicknames).where(eq(activeNicknames.nickname, nickname));
 }
 

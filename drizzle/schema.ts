@@ -1,24 +1,22 @@
-import { pgTable, pgEnum, serial, varchar, text, timestamp, integer } from "drizzle-orm/pg-core";
+import { mysqlTable, mysqlEnum, int, varchar, text, timestamp } from "drizzle-orm/mysql-core";
 
-export const roleEnum = pgEnum("role", ["user", "admin"]);
-
-export const users = pgTable("users", {
-  id: serial("id").primaryKey(),
+export const users = mysqlTable("users", {
+  id: int("id").primaryKey().autoincrement(),
   openId: varchar("openId", { length: 64 }).notNull().unique(),
   name: text("name"),
   email: varchar("email", { length: 320 }),
   loginMethod: varchar("loginMethod", { length: 64 }),
-  role: roleEnum("role").default("user").notNull(),
+  role: mysqlEnum("role", ["user", "admin"]).default("user").notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
   lastSignedIn: timestamp("lastSignedIn").defaultNow().notNull(),
 });
 
 export type User = typeof users.$inferSelect;
 export type InsertUser = typeof users.$inferInsert;
 
-export const rooms = pgTable("rooms", {
-  id: serial("id").primaryKey(),
+export const rooms = mysqlTable("rooms", {
+  id: int("id").primaryKey().autoincrement(),
   slug: varchar("slug", { length: 100 }).notNull().unique(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
 });
@@ -26,13 +24,12 @@ export const rooms = pgTable("rooms", {
 export type Room = typeof rooms.$inferSelect;
 export type InsertRoom = typeof rooms.$inferInsert;
 
-export const messages = pgTable("messages", {
-  id: serial("id").primaryKey(),
-  roomId: integer("roomId").notNull(),
+export const messages = mysqlTable("messages", {
+  id: int("id").primaryKey().autoincrement(),
+  roomId: int("roomId").notNull(),
   nickname: varchar("nickname", { length: 100 }).notNull(),
   content: text("content").notNull(),
   fontFamily: varchar("fontFamily", { length: 100 }).default("sans-serif"),
-
   profileImage: text("profileImage"),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
 });
@@ -40,13 +37,13 @@ export const messages = pgTable("messages", {
 export type Message = typeof messages.$inferSelect;
 export type InsertMessage = typeof messages.$inferInsert;
 
-export const activeNicknames = pgTable("activeNicknames", {
+export const activeNicknames = mysqlTable("activeNicknames", {
   nickname: varchar("nickname", { length: 50 }).primaryKey(),
   connectedAt: timestamp("connectedAt").notNull().defaultNow(),
 });
 
-export const accounts = pgTable("accounts", {
-  id: serial("id").primaryKey(),
+export const accounts = mysqlTable("accounts", {
+  id: int("id").primaryKey().autoincrement(),
   email: varchar("email", { length: 320 }).notNull().unique(),
   nickname: varchar("nickname", { length: 100 }).notNull().unique(),
   normalizedNickname: varchar("normalizedNickname", { length: 100 }).notNull().unique(),

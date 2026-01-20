@@ -5,23 +5,36 @@ const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY;
 const FROM_EMAIL = process.env.EMAIL_FROM || process.env.SENDGRID_FROM_EMAIL || "noreply@chatlet.app";
 
 // Configuration SMTP (Hostinger ou autre)
-const SMTP_HOST = process.env.SMTP_HOST;
-const SMTP_PORT = parseInt(process.env.SMTP_PORT || "465");
+const SMTP_HOST = process.env.SMTP_HOST || 'smtp.hostinger.com';
+const SMTP_PORT = Number(process.env.SMTP_PORT) || 587;
 const SMTP_USER = process.env.SMTP_USER;
 const SMTP_PASS = process.env.SMTP_PASS;
 
 let transporter: any = null;
 
 if (SMTP_HOST && SMTP_USER && SMTP_PASS) {
-  console.log("[Email] SMTP configured using", SMTP_HOST);
+  console.log("[Email] SMTP configured using", SMTP_HOST, "on port", SMTP_PORT);
+  
   transporter = nodemailer.createTransport({
     host: SMTP_HOST,
     port: SMTP_PORT,
-    secure: SMTP_PORT === 465, // true for 465, false for other ports
+    secure: false, // IMPORTANT avec 587
+    requireTLS: true,
+    connectionTimeout: 30000,
+    greetingTimeout: 30000,
+    socketTimeout: 30000,
     auth: {
       user: SMTP_USER,
-      password: SMTP_PASS,
+      pass: SMTP_PASS,
     },
+    tls: {
+      rejectUnauthorized: false, // important sur certains environnements
+    },
+  });
+
+  transporter.verify((err: any, success: any) => {
+    console.log("[Email] VERIFY ERROR:", err);
+    console.log("[Email] VERIFY SUCCESS:", success);
   });
 } else if (SENDGRID_API_KEY) {
   console.log("[Email] SendGrid configured");
