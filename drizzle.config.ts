@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 dotenv.config();
-console.log("DATABASE_URL =", process.env.DATABASE_URL);
+
 import { defineConfig } from "drizzle-kit";
 
 const connectionString = process.env.DATABASE_URL;
@@ -8,10 +8,12 @@ if (!connectionString) {
   throw new Error("DATABASE_URL is required to run drizzle commands");
 }
 
+const isMysql = connectionString.startsWith("mysql");
+
 export default defineConfig({
   schema: "./drizzle/schema.ts",
   out: "./drizzle",
-  dialect: "postgresql",
+  dialect: isMysql ? "mysql" : "postgresql",
   dbCredentials: {
     url: connectionString,
   },
