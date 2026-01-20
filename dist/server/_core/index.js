@@ -1,6 +1,39 @@
 import "dotenv/config";
 import express from "express";
 import { createServer } from "http";
+import fs from "fs";
+import path from "path";
+
+// --- DEBUG LOGGING FOR HOSTINGER ---
+const logFile = path.join(process.cwd(), "debug.log");
+function log(msg) {
+    const timestamp = new Date().toISOString();
+    const formattedMsg = `[${timestamp}] ${msg}\n`;
+    console.log(msg);
+    try {
+        fs.appendFileSync(logFile, formattedMsg);
+    } catch (e) {}
+}
+
+log("=== SERVER STARTING ===");
+log(`Node version: ${process.version}`);
+log(`Current directory: ${process.cwd()}`);
+log(`NODE_ENV: ${process.env.NODE_ENV}`);
+log(`PORT env: ${process.env.PORT}`);
+log(`DATABASE_URL set: ${!!process.env.DATABASE_URL}`);
+
+process.on("uncaughtException", (err) => {
+    log(`!!! UNCAUGHT EXCEPTION: ${err.message}`);
+    log(err.stack);
+    process.exit(1);
+});
+
+process.on("unhandledRejection", (reason, promise) => {
+    log(`!!! UNHANDLED REJECTION: ${reason}`);
+    process.exit(1);
+});
+// -----------------------------------
+
 import { drizzle as drizzlePg } from "drizzle-orm/node-postgres";
 import { drizzle as drizzleMysql } from "drizzle-orm/mysql2";
 import { sql } from "drizzle-orm";
@@ -28,7 +61,7 @@ async function runMigrations() {
     }
     try {
         const isMysql = dbUrl.startsWith("mysql");
-        console.log(`[DB] Detected ${isMysql ? "MySQL" : "PostgreSQL"} database. Checking tables...`);
+        log(`[DB] Detected ${isMysql ? "MySQL" : "PostgreSQL"} database. Checking tables...`);
         if (isMysql) {
             const connection = await mysql.createConnection(dbUrl);
             const db = drizzleMysql(connection);
@@ -152,10 +185,11 @@ async function runMigrations() {
       `);
             await pool.end();
         }
-        console.log("[DB] Tables created/verified!");
+        log("[DB] Tables created/verified!");
     }
     catch (err) {
-        console.error("[DB] Migration error:", err);
+        log(`[DB] Migration error: ${err.message}`);
+        log(err.stack);
         throw err;
     }
 }
@@ -185,9 +219,10 @@ async function startServer() {
     else {
         serveStatic(app);
     }
-    const port = parseInt(process.env.PORT || "5000");
+    const port = parseInt(process.env.PORT || "3000");
+    log(`Attempting to listen on port: ${port}`);
     server.listen(port, "0.0.0.0", () => {
-        console.log(`Server running on http://0.0.0.0:${port}/`);
+        log(`Server successfully running on http://0.0.0.0:${port}/`);
     });
 }
 if (process.argv.includes("--build")) {
