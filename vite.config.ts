@@ -24,7 +24,9 @@ export default defineConfig({
   publicDir: path.resolve(import.meta.dirname, "client", "public"),
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
-    emptyOutDir: true
+    emptyOutDir: true,
+    minify: false,
+    cssMinify: false
   },
   server: {
     host: "0.0.0.0",
