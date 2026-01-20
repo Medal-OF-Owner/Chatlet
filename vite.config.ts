@@ -1,4 +1,4 @@
-import { jsxLocPlugin } from "@builder.io/vite-plugin-jsx-loc";
+// import { jsxLocPlugin } from "@builder.io/vite-plugin-jsx-loc"; // Removed: incompatible with Vite 7
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import fs from "node:fs";
@@ -6,7 +6,7 @@ import path from "path";
 import { defineConfig } from "vite";
 import { vitePluginManusRuntime } from "vite-plugin-manus-runtime";
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
-const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime(), nodePolyfills()];
+const plugins = [react(), tailwindcss(), vitePluginManusRuntime(), nodePolyfills()];
 export default defineConfig({
   plugins,
   define: {
