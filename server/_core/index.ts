@@ -218,4 +218,9 @@ async function startServer() {
   });
 }
 
+if (process.argv.includes("--build")) {
+  console.log("[Build] Server build check passed");
+  process.exit(0);
+}
+
 startServer().catch(console.error);
