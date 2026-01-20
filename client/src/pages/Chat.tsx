@@ -164,11 +164,12 @@ export default function Chat() {
       console.log("📩 RECEIVED new_message:", msg);
 
       setMessages((prev) => {
+        // Détection plus stricte des doublons
         const isDuplicate = prev.some(
           (m) =>
             m.nickname === msg.nickname &&
             m.content === msg.content &&
-            Math.abs(new Date(m.createdAt).getTime() - new Date(msg.createdAt).getTime()) < 5000
+            Math.abs(new Date(m.createdAt).getTime() - new Date(msg.createdAt).getTime()) < 2000
         );
 
         if (isDuplicate) {
@@ -394,17 +395,6 @@ export default function Chat() {
     // Stockage Base64 local pour éviter le besoin de S3/Forge API
     const profileImageToSend = profileImage;
     const finalProfileImage = profileImageToSend && profileImageToSend.startsWith("data:") ? profileImageToSend : null;
-
-    const optimisticMessage: Message = {
-      roomId,
-      nickname: displayNickname.trim(),
-      content: message.trim(),
-      fontFamily,
-      textColor,
-      profileImage: finalProfileImage,
-      createdAt: new Date(),
-    };
-    setMessages((prev) => [...prev, optimisticMessage]);
 
     socket.emit("send_message", {
       roomId,
