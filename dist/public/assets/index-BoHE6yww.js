@@ -20070,7 +20070,7 @@ const Toaster2 = ({ ...props }) => {
   return /* @__PURE__ */ jsxRuntimeExports.jsx(
     Toaster$1,
     {
-      "data-loc": "client/src/components/ui/sonner.tsx:8",
+      "data-loc": "client\\src\\components\\ui\\sonner.tsx:8",
       theme,
       className: "toaster group",
       style: {
@@ -26346,7 +26346,7 @@ function TooltipProvider({
   return /* @__PURE__ */ jsxRuntimeExports.jsx(
     Provider,
     {
-      "data-loc": "client/src/components/ui/tooltip.tsx:11",
+      "data-loc": "client\\src\\components\\ui\\tooltip.tsx:11",
       "data-slot": "tooltip-provider",
       delayDuration,
       ...props
@@ -26528,7 +26528,7 @@ function Button({
   return /* @__PURE__ */ jsxRuntimeExports.jsx(
     Comp,
     {
-      "data-loc": "client/src/components/ui/button.tsx:52",
+      "data-loc": "client\\src\\components\\ui\\button.tsx:52",
       "data-slot": "button",
       className: cn(buttonVariants({ variant, size: size2, className })),
       ...props
@@ -26998,7 +26998,7 @@ function NotFound() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(
     "div",
     {
-      "data-loc": "client/src/pages/NotFound.tsx:13",
+      "data-loc": "client\\src\\pages\\NotFound.tsx:13",
       className: "min-h-screen relative overflow-hidden w-full flex items-center justify-center",
       style: {
         backgroundImage: "url(/space-bg.jpg)",
@@ -27007,27 +27007,27 @@ function NotFound() {
         backgroundAttachment: "fixed"
       },
       children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client/src/pages/NotFound.tsx:22", className: "absolute inset-0 bg-black/40 pointer-events-none" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/NotFound.tsx:23", className: "relative z-10 w-full max-w-lg mx-4 bg-gradient-to-br from-purple-900/50 via-slate-900/70 to-slate-900/50 backdrop-blur-xl rounded-3xl p-8 border-2 border-cyan-400/50 shadow-2xl text-center", style: { boxShadow: "0 0 30px rgba(0, 217, 255, 0.3), 0 0 60px rgba(255, 0, 255, 0.2)" }, children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client/src/pages/NotFound.tsx:24", className: "flex justify-center mb-6", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/NotFound.tsx:25", className: "relative", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client/src/pages/NotFound.tsx:26", className: "absolute inset-0 bg-cyan-400/20 rounded-full animate-pulse" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(CircleAlert, { "data-loc": "client/src/pages/NotFound.tsx:27", className: "relative h-16 w-16 text-cyan-400" })
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client\\src\\pages\\NotFound.tsx:22", className: "absolute inset-0 bg-black/40 pointer-events-none" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\NotFound.tsx:23", className: "relative z-10 w-full max-w-lg mx-4 bg-gradient-to-br from-purple-900/50 via-slate-900/70 to-slate-900/50 backdrop-blur-xl rounded-3xl p-8 border-2 border-cyan-400/50 shadow-2xl text-center", style: { boxShadow: "0 0 30px rgba(0, 217, 255, 0.3), 0 0 60px rgba(255, 0, 255, 0.2)" }, children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client\\src\\pages\\NotFound.tsx:24", className: "flex justify-center mb-6", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\NotFound.tsx:25", className: "relative", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client\\src\\pages\\NotFound.tsx:26", className: "absolute inset-0 bg-cyan-400/20 rounded-full animate-pulse" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(CircleAlert, { "data-loc": "client\\src\\pages\\NotFound.tsx:27", className: "relative h-16 w-16 text-cyan-400" })
           ] }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { "data-loc": "client/src/pages/NotFound.tsx:31", className: "text-6xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent mb-2", children: "404" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { "data-loc": "client/src/pages/NotFound.tsx:33", className: "text-2xl font-bold text-slate-200 mb-4", children: "Page Not Found" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { "data-loc": "client/src/pages/NotFound.tsx:37", className: "text-slate-300 mb-8 leading-relaxed", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { "data-loc": "client\\src\\pages\\NotFound.tsx:31", className: "text-6xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent mb-2", children: "404" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { "data-loc": "client\\src\\pages\\NotFound.tsx:33", className: "text-2xl font-bold text-slate-200 mb-4", children: "Page Not Found" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { "data-loc": "client\\src\\pages\\NotFound.tsx:37", className: "text-slate-300 mb-8 leading-relaxed", children: [
             "Sorry, the page you are looking for doesn't exist.",
-            /* @__PURE__ */ jsxRuntimeExports.jsx("br", { "data-loc": "client/src/pages/NotFound.tsx:39" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("br", { "data-loc": "client\\src\\pages\\NotFound.tsx:39" }),
             "It may have been moved or deleted."
           ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client/src/pages/NotFound.tsx:43", className: "flex flex-col sm:flex-row gap-3 justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client\\src\\pages\\NotFound.tsx:43", className: "flex flex-col sm:flex-row gap-3 justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
             Button,
             {
-              "data-loc": "client/src/pages/NotFound.tsx:44",
+              "data-loc": "client\\src\\pages\\NotFound.tsx:44",
               onClick: handleGoHome,
               className: "bg-gradient-to-r from-cyan-400 to-cyan-300 text-slate-900 hover:shadow-xl hover:shadow-cyan-400/50 rounded-xl px-6 py-3 font-bold transition-all duration-200",
               children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx(House, { "data-loc": "client/src/pages/NotFound.tsx:48", className: "w-4 h-4 mr-2" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(House, { "data-loc": "client\\src\\pages\\NotFound.tsx:48", className: "w-4 h-4 mr-2" }),
                 "Go Home"
               ]
             }
@@ -27047,21 +27047,21 @@ class ErrorBoundary extends reactExports.Component {
   }
   render() {
     if (this.state.hasError) {
-      return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client/src/components/ErrorBoundary.tsx:27", className: "flex items-center justify-center min-h-screen p-8 bg-background", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/components/ErrorBoundary.tsx:28", className: "flex flex-col items-center w-full max-w-2xl p-8", children: [
+      return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client\\src\\components\\ErrorBoundary.tsx:27", className: "flex items-center justify-center min-h-screen p-8 bg-background", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\components\\ErrorBoundary.tsx:28", className: "flex flex-col items-center w-full max-w-2xl p-8", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           TriangleAlert,
           {
-            "data-loc": "client/src/components/ErrorBoundary.tsx:29",
+            "data-loc": "client\\src\\components\\ErrorBoundary.tsx:29",
             size: 48,
             className: "text-destructive mb-6 flex-shrink-0"
           }
         ),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { "data-loc": "client/src/components/ErrorBoundary.tsx:34", className: "text-xl mb-4", children: "An unexpected error occurred." }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client/src/components/ErrorBoundary.tsx:36", className: "p-4 w-full rounded bg-muted overflow-auto mb-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx("pre", { "data-loc": "client/src/components/ErrorBoundary.tsx:37", className: "text-sm text-muted-foreground whitespace-break-spaces", children: this.state.error?.stack }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { "data-loc": "client\\src\\components\\ErrorBoundary.tsx:34", className: "text-xl mb-4", children: "An unexpected error occurred." }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client\\src\\components\\ErrorBoundary.tsx:36", className: "p-4 w-full rounded bg-muted overflow-auto mb-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx("pre", { "data-loc": "client\\src\\components\\ErrorBoundary.tsx:37", className: "text-sm text-muted-foreground whitespace-break-spaces", children: this.state.error?.stack }) }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs(
           "button",
           {
-            "data-loc": "client/src/components/ErrorBoundary.tsx:42",
+            "data-loc": "client\\src\\components\\ErrorBoundary.tsx:42",
             onClick: () => window.location.reload(),
             className: cn(
               "flex items-center gap-2 px-4 py-2 rounded-lg",
@@ -27069,7 +27069,7 @@ class ErrorBoundary extends reactExports.Component {
               "hover:opacity-90 cursor-pointer"
             ),
             children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(RotateCcw, { "data-loc": "client/src/components/ErrorBoundary.tsx:50", size: 16 }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(RotateCcw, { "data-loc": "client\\src\\components\\ErrorBoundary.tsx:50", size: 16 }),
               "Reload Page"
             ]
           }
@@ -27106,7 +27106,7 @@ function ThemeProvider({
   const toggleTheme = switchable ? () => {
     setTheme((prev) => prev === "light" ? "dark" : "light");
   } : void 0;
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(ThemeContext.Provider, { "data-loc": "client/src/contexts/ThemeContext.tsx:52", value: { theme, toggleTheme, switchable }, children });
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(ThemeContext.Provider, { "data-loc": "client\\src\\contexts\\ThemeContext.tsx:52", value: { theme, toggleTheme, switchable }, children });
 }
 const DialogCompositionContext = reactExports.createContext({
   isComposing: () => false,
@@ -27210,7 +27210,7 @@ function Input({
   return /* @__PURE__ */ jsxRuntimeExports.jsx(
     "input",
     {
-      "data-loc": "client/src/components/ui/input.tsx:53",
+      "data-loc": "client\\src\\components\\ui\\input.tsx:53",
       type: type2,
       "data-slot": "input",
       className: cn(
@@ -27253,13 +27253,13 @@ function Avatar({ src, nickname, size: size2 = "md", onClick, className = "" }) 
     return /* @__PURE__ */ jsxRuntimeExports.jsx(
       "div",
       {
-        "data-loc": "client/src/components/Avatar.tsx:44",
+        "data-loc": "client\\src\\components\\Avatar.tsx:44",
         className: `${sizes[size2]} rounded-full overflow-hidden flex-shrink-0 ${className}`,
         onClick,
         children: /* @__PURE__ */ jsxRuntimeExports.jsx(
           "img",
           {
-            "data-loc": "client/src/components/Avatar.tsx:48",
+            "data-loc": "client\\src\\components\\Avatar.tsx:48",
             src,
             alt: nickname,
             className: "w-full h-full object-cover"
@@ -27271,7 +27271,7 @@ function Avatar({ src, nickname, size: size2 = "md", onClick, className = "" }) 
   return /* @__PURE__ */ jsxRuntimeExports.jsx(
     "div",
     {
-      "data-loc": "client/src/components/Avatar.tsx:58",
+      "data-loc": "client\\src\\components\\Avatar.tsx:58",
       className: `${sizes[size2]} ${getColorFromNickname(nickname)} rounded-full flex items-center justify-center text-white font-bold flex-shrink-0 ${className}`,
       onClick,
       children: getInitials(nickname)
@@ -27361,36 +27361,36 @@ function ProfileImageUpload({
       fileInputRef.current.value = "";
     }
   };
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/components/ProfileImageUpload.tsx:101", className: "flex items-center gap-3", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Avatar, { "data-loc": "client/src/components/ProfileImageUpload.tsx:102", src: preview, nickname, size: "md" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/components/ProfileImageUpload.tsx:103", className: "flex gap-2", children: [
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\components\\ProfileImageUpload.tsx:101", className: "flex items-center gap-3", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Avatar, { "data-loc": "client\\src\\components\\ProfileImageUpload.tsx:102", src: preview, nickname, size: "md" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\components\\ProfileImageUpload.tsx:103", className: "flex gap-2", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(
         "button",
         {
-          "data-loc": "client/src/components/ProfileImageUpload.tsx:104",
+          "data-loc": "client\\src\\components\\ProfileImageUpload.tsx:104",
           onClick: () => fileInputRef.current?.click(),
           disabled: isGuest,
           className: `p-2 ${isGuest ? "bg-gray-400 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"} text-white rounded-lg transition`,
           title: isGuest ? "Les utilisateurs anonymes ne peuvent pas changer leur photo" : "Upload photo",
-          children: /* @__PURE__ */ jsxRuntimeExports.jsx(Upload, { "data-loc": "client/src/components/ProfileImageUpload.tsx:110", size: 16 })
+          children: /* @__PURE__ */ jsxRuntimeExports.jsx(Upload, { "data-loc": "client\\src\\components\\ProfileImageUpload.tsx:110", size: 16 })
         }
       ),
       preview && /* @__PURE__ */ jsxRuntimeExports.jsx(
         "button",
         {
-          "data-loc": "client/src/components/ProfileImageUpload.tsx:113",
+          "data-loc": "client\\src\\components\\ProfileImageUpload.tsx:113",
           onClick: handleRemove,
           disabled: isGuest,
           className: `p-2 ${isGuest ? "bg-gray-400 cursor-not-allowed" : "bg-red-600 hover:bg-red-700"} text-white rounded-lg transition`,
           title: isGuest ? "Les utilisateurs anonymes ne peuvent pas changer leur photo" : "Remove photo",
-          children: /* @__PURE__ */ jsxRuntimeExports.jsx(X, { "data-loc": "client/src/components/ProfileImageUpload.tsx:119", size: 16 })
+          children: /* @__PURE__ */ jsxRuntimeExports.jsx(X, { "data-loc": "client\\src\\components\\ProfileImageUpload.tsx:119", size: 16 })
         }
       )
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       "input",
       {
-        "data-loc": "client/src/components/ProfileImageUpload.tsx:123",
+        "data-loc": "client\\src\\components\\ProfileImageUpload.tsx:123",
         ref: fileInputRef,
         type: "file",
         accept: "image/*",
@@ -27464,7 +27464,7 @@ function Home() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(
     "div",
     {
-      "data-loc": "client/src/pages/Home.tsx:66",
+      "data-loc": "client\\src\\pages\\Home.tsx:66",
       className: "min-h-screen relative overflow-hidden",
       style: {
         backgroundImage: "url(/space-bg.jpg)",
@@ -27473,8 +27473,8 @@ function Home() {
         backgroundAttachment: "fixed"
       },
       children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client/src/pages/Home.tsx:76", className: "absolute inset-0 bg-black/40 pointer-events-none" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("style", { "data-loc": "client/src/pages/Home.tsx:78", children: `
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client\\src\\pages\\Home.tsx:76", className: "absolute inset-0 bg-black/40 pointer-events-none" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("style", { "data-loc": "client\\src\\pages\\Home.tsx:78", children: `
         @keyframes glow {
           0%, 100% { opacity: 0.4; }
           50% { opacity: 0.8; }
@@ -27491,10 +27491,10 @@ function Home() {
           box-shadow: 0 0 30px rgba(0, 217, 255, 0.3), 0 0 60px rgba(255, 0, 255, 0.2);
         }
       ` }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client/src/pages/Home.tsx:97", className: "absolute inset-0 pointer-events-none", children: [...Array(50)].map((_, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client\\src\\pages\\Home.tsx:97", className: "absolute inset-0 pointer-events-none", children: [...Array(50)].map((_, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(
           "div",
           {
-            "data-loc": "client/src/pages/Home.tsx:99",
+            "data-loc": "client\\src\\pages\\Home.tsx:99",
             className: "absolute w-1 h-1 bg-white rounded-full",
             style: {
               left: `${Math.random() * 100}%`,
@@ -27506,29 +27506,29 @@ function Home() {
           },
           i
         )) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/Home.tsx:114", className: "relative z-10", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/Home.tsx:116", className: "flex items-center justify-between px-8 py-6", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client/src/pages/Home.tsx:118", className: "w-12 h-12 float", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { "data-loc": "client/src/pages/Home.tsx:119", className: "w-full h-full", viewBox: "0 0 40 40", fill: "none", xmlns: "http://www.w3.org/2000/svg", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { "data-loc": "client/src/pages/Home.tsx:120", d: "M10 8L20 15L10 22", stroke: "#00d9ff", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { "data-loc": "client/src/pages/Home.tsx:121", d: "M20 8L30 15L20 22", stroke: "#00d9ff", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { "data-loc": "client/src/pages/Home.tsx:122", d: "M10 22L20 29L10 36", stroke: "#00d9ff", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { "data-loc": "client/src/pages/Home.tsx:123", d: "M20 22L30 29L20 36", stroke: "#ff00ff", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round" })
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\Home.tsx:114", className: "relative z-10", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\Home.tsx:116", className: "flex items-center justify-between px-8 py-6", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client\\src\\pages\\Home.tsx:118", className: "w-12 h-12 float", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { "data-loc": "client\\src\\pages\\Home.tsx:119", className: "w-full h-full", viewBox: "0 0 40 40", fill: "none", xmlns: "http://www.w3.org/2000/svg", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { "data-loc": "client\\src\\pages\\Home.tsx:120", d: "M10 8L20 15L10 22", stroke: "#00d9ff", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { "data-loc": "client\\src\\pages\\Home.tsx:121", d: "M20 8L30 15L20 22", stroke: "#00d9ff", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { "data-loc": "client\\src\\pages\\Home.tsx:122", d: "M10 22L20 29L10 36", stroke: "#00d9ff", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { "data-loc": "client\\src\\pages\\Home.tsx:123", d: "M20 22L30 29L20 36", stroke: "#ff00ff", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round" })
             ] }) }),
-            isUserLoggedIn ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/Home.tsx:129", className: "flex items-center gap-4", children: [
+            isUserLoggedIn ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\Home.tsx:129", className: "flex items-center gap-4", children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 ProfileImageUpload,
                 {
-                  "data-loc": "client/src/pages/Home.tsx:130",
+                  "data-loc": "client\\src\\pages\\Home.tsx:130",
                   nickname: user?.name || displayNickname || "Guest",
                   currentImage: user?.profileImage || profileImage,
                   onImageChange: setProfileImage
                 }
               ),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { "data-loc": "client/src/pages/Home.tsx:135", className: "text-cyan-300 font-semibold text-lg hidden sm:inline", children: displayNickname }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { "data-loc": "client\\src\\pages\\Home.tsx:135", className: "text-cyan-300 font-semibold text-lg hidden sm:inline", children: displayNickname }),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 Button,
                 {
-                  "data-loc": "client/src/pages/Home.tsx:138",
+                  "data-loc": "client\\src\\pages\\Home.tsx:138",
                   onClick: () => {
                     sessionStorage.removeItem("sessionNickname");
                     logout();
@@ -27538,39 +27538,39 @@ function Home() {
                   children: "Logout"
                 }
               )
-            ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/Home.tsx:150", className: "flex gap-3", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { "data-loc": "client/src/pages/Home.tsx:151", href: "/login", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { "data-loc": "client/src/pages/Home.tsx:152", className: "border-2 border-cyan-400 bg-transparent text-cyan-400 hover:bg-cyan-400/10 rounded-lg px-8 py-2 font-semibold transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-cyan-400/50", children: "Login" }) }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { "data-loc": "client/src/pages/Home.tsx:156", href: "/signup", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { "data-loc": "client/src/pages/Home.tsx:157", className: "bg-gradient-to-r from-cyan-400 to-cyan-300 text-slate-900 hover:shadow-lg hover:shadow-cyan-400/50 rounded-lg px-8 py-2 font-semibold transition-all duration-300", children: "Sign Up" }) })
+            ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\Home.tsx:150", className: "flex gap-3", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { "data-loc": "client\\src\\pages\\Home.tsx:151", href: "/login", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { "data-loc": "client\\src\\pages\\Home.tsx:152", className: "border-2 border-cyan-400 bg-transparent text-cyan-400 hover:bg-cyan-400/10 rounded-lg px-8 py-2 font-semibold transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-cyan-400/50", children: "Login" }) }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { "data-loc": "client\\src\\pages\\Home.tsx:156", href: "/signup", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { "data-loc": "client\\src\\pages\\Home.tsx:157", className: "bg-gradient-to-r from-cyan-400 to-cyan-300 text-slate-900 hover:shadow-lg hover:shadow-cyan-400/50 rounded-lg px-8 py-2 font-semibold transition-all duration-300", children: "Sign Up" }) })
             ] })
           ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client/src/pages/Home.tsx:166", className: "flex items-center justify-center min-h-[calc(100vh-100px)] px-6", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/Home.tsx:167", className: "grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-5xl", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/Home.tsx:169", className: "relative group", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client/src/pages/Home.tsx:170", className: "absolute inset-0 bg-gradient-to-br from-pink-500/20 to-purple-500/20 rounded-3xl blur-2xl group-hover:blur-3xl transition-all opacity-0 group-hover:opacity-100" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/Home.tsx:171", className: "relative bg-gradient-to-br from-purple-900/50 via-slate-900/70 to-slate-900/50 backdrop-blur-xl rounded-3xl p-6 sm:p-12 glow-border", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { "data-loc": "client/src/pages/Home.tsx:172", className: "text-4xl sm:text-6xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent mb-4", children: "Join a Room" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { "data-loc": "client/src/pages/Home.tsx:175", className: "text-slate-200 mb-10 text-lg sm:text-xl", children: "Connect instantly with friends or colleagues." }),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { "data-loc": "client/src/pages/Home.tsx:179", className: "space-y-6", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client\\src\\pages\\Home.tsx:166", className: "flex items-center justify-center min-h-[calc(100vh-100px)] px-6", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\Home.tsx:167", className: "grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-5xl", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\Home.tsx:169", className: "relative group", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client\\src\\pages\\Home.tsx:170", className: "absolute inset-0 bg-gradient-to-br from-pink-500/20 to-purple-500/20 rounded-3xl blur-2xl group-hover:blur-3xl transition-all opacity-0 group-hover:opacity-100" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\Home.tsx:171", className: "relative bg-gradient-to-br from-purple-900/50 via-slate-900/70 to-slate-900/50 backdrop-blur-xl rounded-3xl p-6 sm:p-12 glow-border", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { "data-loc": "client\\src\\pages\\Home.tsx:172", className: "text-4xl sm:text-6xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent mb-4", children: "Join a Room" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { "data-loc": "client\\src\\pages\\Home.tsx:175", className: "text-slate-200 mb-10 text-lg sm:text-xl", children: "Connect instantly with friends or colleagues." }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { "data-loc": "client\\src\\pages\\Home.tsx:179", className: "space-y-6", children: [
                   isUserLoggedIn ? (
                     // Logged-in User Nickname
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/Home.tsx:183", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("label", { "data-loc": "client/src/pages/Home.tsx:184", className: "block text-sm font-semibold text-cyan-300 mb-2", children: "Your Nickname" }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/Home.tsx:187", className: "flex items-center gap-2 bg-slate-800/60 border-2 border-cyan-400/60 rounded-xl px-4 py-3 backdrop-blur-sm", children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsx(User, { "data-loc": "client/src/pages/Home.tsx:188", className: "w-5 h-5 text-cyan-400" }),
-                        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { "data-loc": "client/src/pages/Home.tsx:189", className: "flex-1 text-cyan-300 font-semibold text-lg", children: displayNickname || "Guest" })
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\Home.tsx:183", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("label", { "data-loc": "client\\src\\pages\\Home.tsx:184", className: "block text-sm font-semibold text-cyan-300 mb-2", children: "Your Nickname" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\Home.tsx:187", className: "flex items-center gap-2 bg-slate-800/60 border-2 border-cyan-400/60 rounded-xl px-4 py-3 backdrop-blur-sm", children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(User, { "data-loc": "client\\src\\pages\\Home.tsx:188", className: "w-5 h-5 text-cyan-400" }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { "data-loc": "client\\src\\pages\\Home.tsx:189", className: "flex-1 text-cyan-300 font-semibold text-lg", children: displayNickname || "Guest" })
                       ] }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { "data-loc": "client/src/pages/Home.tsx:191", className: "text-xs text-slate-400 mt-1", children: "Logged in as a registered user." })
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { "data-loc": "client\\src\\pages\\Home.tsx:191", className: "text-xs text-slate-400 mt-1", children: "Logged in as a registered user." })
                     ] })
                   ) : (
                     // Guest Nickname Logic
-                    !nicknameLoading && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/Home.tsx:198", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("label", { "data-loc": "client/src/pages/Home.tsx:199", className: "block text-sm font-semibold text-cyan-300 mb-2", children: "Your Nickname" }),
-                      nicknameError && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { "data-loc": "client/src/pages/Home.tsx:203", className: "text-red-400 text-sm font-semibold mb-2", children: nicknameError }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/Home.tsx:205", className: "flex items-center gap-2 bg-slate-800/60 border-2 border-cyan-400/60 rounded-xl px-4 py-3 backdrop-blur-sm", children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsx(User, { "data-loc": "client/src/pages/Home.tsx:206", className: "w-5 h-5 text-cyan-400" }),
+                    !nicknameLoading && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\Home.tsx:198", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("label", { "data-loc": "client\\src\\pages\\Home.tsx:199", className: "block text-sm font-semibold text-cyan-300 mb-2", children: "Your Nickname" }),
+                      nicknameError && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { "data-loc": "client\\src\\pages\\Home.tsx:203", className: "text-red-400 text-sm font-semibold mb-2", children: nicknameError }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\Home.tsx:205", className: "flex items-center gap-2 bg-slate-800/60 border-2 border-cyan-400/60 rounded-xl px-4 py-3 backdrop-blur-sm", children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(User, { "data-loc": "client\\src\\pages\\Home.tsx:206", className: "w-5 h-5 text-cyan-400" }),
                         /* @__PURE__ */ jsxRuntimeExports.jsx(
                           Input,
                           {
-                            "data-loc": "client/src/pages/Home.tsx:207",
+                            "data-loc": "client\\src\\pages\\Home.tsx:207",
                             value: tempNickname,
                             onChange: (e) => setTempNickname(e.target.value),
                             className: "flex-1 bg-transparent border-0 text-cyan-300 text-lg font-semibold p-0 focus-visible:ring-0",
@@ -27583,39 +27583,39 @@ function Home() {
                             }
                           }
                         ),
-                        tempNickname && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/Home.tsx:220", className: "flex items-center gap-2", children: [
+                        tempNickname && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\Home.tsx:220", className: "flex items-center gap-2", children: [
                           /* @__PURE__ */ jsxRuntimeExports.jsx(
                             Button,
                             {
-                              "data-loc": "client/src/pages/Home.tsx:221",
+                              "data-loc": "client\\src\\pages\\Home.tsx:221",
                               type: "button",
                               onClick: handleSaveNickname,
                               className: "h-7 w-7 p-0 bg-green-500/80 hover:bg-green-500 text-white rounded-full transition-all",
                               title: "Save Nickname",
-                              children: /* @__PURE__ */ jsxRuntimeExports.jsx(Check, { "data-loc": "client/src/pages/Home.tsx:227", className: "h-4 w-4" })
+                              children: /* @__PURE__ */ jsxRuntimeExports.jsx(Check, { "data-loc": "client\\src\\pages\\Home.tsx:227", className: "h-4 w-4" })
                             }
                           ),
                           /* @__PURE__ */ jsxRuntimeExports.jsx(
                             Button,
                             {
-                              "data-loc": "client/src/pages/Home.tsx:229",
+                              "data-loc": "client\\src\\pages\\Home.tsx:229",
                               type: "button",
                               onClick: () => setTempNickname(""),
                               className: "h-7 w-7 p-0 bg-red-500/80 hover:bg-red-500 text-white rounded-full transition-all",
                               title: "Clear Nickname",
-                              children: /* @__PURE__ */ jsxRuntimeExports.jsx(X, { "data-loc": "client/src/pages/Home.tsx:235", className: "h-4 w-4" })
+                              children: /* @__PURE__ */ jsxRuntimeExports.jsx(X, { "data-loc": "client\\src\\pages\\Home.tsx:235", className: "h-4 w-4" })
                             }
                           )
                         ] })
                       ] })
                     ] })
                   ),
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/Home.tsx:245", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("label", { "data-loc": "client/src/pages/Home.tsx:246", className: "block text-sm font-semibold text-cyan-300 mb-2", children: "Room Name" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\Home.tsx:245", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("label", { "data-loc": "client\\src\\pages\\Home.tsx:246", className: "block text-sm font-semibold text-cyan-300 mb-2", children: "Room Name" }),
                     /* @__PURE__ */ jsxRuntimeExports.jsx(
                       "input",
                       {
-                        "data-loc": "client/src/pages/Home.tsx:249",
+                        "data-loc": "client\\src\\pages\\Home.tsx:249",
                         placeholder: "Enter room name...",
                         value: roomName,
                         onChange: (e) => setRoomName(e.target.value),
@@ -27623,42 +27623,42 @@ function Home() {
                       }
                     )
                   ] }),
-                  roomName.trim() ? /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { "data-loc": "client/src/pages/Home.tsx:258", href: `/room/${roomName}`, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { "data-loc": "client/src/pages/Home.tsx:259", className: "w-full bg-gradient-to-r from-cyan-400 to-cyan-300 text-slate-900 hover:shadow-2xl hover:shadow-cyan-400/70 rounded-xl py-5 font-bold text-xl transition-all duration-300 transform hover:scale-105", children: "Enter Room →" }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { "data-loc": "client/src/pages/Home.tsx:264", disabled: true, className: "w-full bg-slate-700/50 text-slate-500 rounded-xl py-5 font-bold text-xl cursor-not-allowed", children: "Enter Room →" })
+                  roomName.trim() ? /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { "data-loc": "client\\src\\pages\\Home.tsx:258", href: `/room/${roomName}`, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { "data-loc": "client\\src\\pages\\Home.tsx:259", className: "w-full bg-gradient-to-r from-cyan-400 to-cyan-300 text-slate-900 hover:shadow-2xl hover:shadow-cyan-400/70 rounded-xl py-5 font-bold text-xl transition-all duration-300 transform hover:scale-105", children: "Enter Room →" }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { "data-loc": "client\\src\\pages\\Home.tsx:264", disabled: true, className: "w-full bg-slate-700/50 text-slate-500 rounded-xl py-5 font-bold text-xl cursor-not-allowed", children: "Enter Room →" })
                 ] })
               ] })
             ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/Home.tsx:273", className: "relative group", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client/src/pages/Home.tsx:274", className: "absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-purple-500/20 rounded-3xl blur-2xl group-hover:blur-3xl transition-all opacity-0 group-hover:opacity-100" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/Home.tsx:275", className: "relative bg-gradient-to-br from-slate-900/30 via-purple-900/20 to-slate-900/30 backdrop-blur-xl rounded-3xl p-6 sm:p-12 glow-border", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { "data-loc": "client/src/pages/Home.tsx:276", className: "text-3xl sm:text-5xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent mb-10", children: "Features" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/Home.tsx:280", className: "space-y-6", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/Home.tsx:281", className: "flex items-center gap-4", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(MessageSquare, { "data-loc": "client/src/pages/Home.tsx:282", className: "w-6 h-6 text-cyan-400 flex-shrink-0" }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { "data-loc": "client/src/pages/Home.tsx:283", className: "text-slate-300 text-lg", children: "Real-time messaging" })
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\Home.tsx:273", className: "relative group", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client\\src\\pages\\Home.tsx:274", className: "absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-purple-500/20 rounded-3xl blur-2xl group-hover:blur-3xl transition-all opacity-0 group-hover:opacity-100" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\Home.tsx:275", className: "relative bg-gradient-to-br from-slate-900/30 via-purple-900/20 to-slate-900/30 backdrop-blur-xl rounded-3xl p-6 sm:p-12 glow-border", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { "data-loc": "client\\src\\pages\\Home.tsx:276", className: "text-3xl sm:text-5xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent mb-10", children: "Features" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\Home.tsx:280", className: "space-y-6", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\Home.tsx:281", className: "flex items-center gap-4", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(MessageSquare, { "data-loc": "client\\src\\pages\\Home.tsx:282", className: "w-6 h-6 text-cyan-400 flex-shrink-0" }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { "data-loc": "client\\src\\pages\\Home.tsx:283", className: "text-slate-300 text-lg", children: "Real-time messaging" })
                   ] }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/Home.tsx:285", className: "flex items-center gap-4", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(Video, { "data-loc": "client/src/pages/Home.tsx:286", className: "w-6 h-6 text-cyan-400 flex-shrink-0" }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { "data-loc": "client/src/pages/Home.tsx:287", className: "text-slate-300 text-lg", children: "Video & audio calls" })
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\Home.tsx:285", className: "flex items-center gap-4", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(Video, { "data-loc": "client\\src\\pages\\Home.tsx:286", className: "w-6 h-6 text-cyan-400 flex-shrink-0" }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { "data-loc": "client\\src\\pages\\Home.tsx:287", className: "text-slate-300 text-lg", children: "Video & audio calls" })
                   ] }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/Home.tsx:289", className: "flex items-center gap-4", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(Lock, { "data-loc": "client/src/pages/Home.tsx:290", className: "w-6 h-6 text-cyan-400 flex-shrink-0" }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { "data-loc": "client/src/pages/Home.tsx:291", className: "text-slate-300 text-lg", children: "Custom room creation" })
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\Home.tsx:289", className: "flex items-center gap-4", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(Lock, { "data-loc": "client\\src\\pages\\Home.tsx:290", className: "w-6 h-6 text-cyan-400 flex-shrink-0" }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { "data-loc": "client\\src\\pages\\Home.tsx:291", className: "text-slate-300 text-lg", children: "Custom room creation" })
                   ] }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/Home.tsx:293", className: "flex items-center gap-4", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(Eye, { "data-loc": "client/src/pages/Home.tsx:294", className: "w-6 h-6 text-cyan-400 flex-shrink-0" }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { "data-loc": "client/src/pages/Home.tsx:295", className: "text-slate-300 text-lg", children: "No account required" })
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\Home.tsx:293", className: "flex items-center gap-4", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(Eye, { "data-loc": "client\\src\\pages\\Home.tsx:294", className: "w-6 h-6 text-cyan-400 flex-shrink-0" }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { "data-loc": "client\\src\\pages\\Home.tsx:295", className: "text-slate-300 text-lg", children: "No account required" })
                   ] }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/Home.tsx:297", className: "flex items-center gap-4", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(CircleCheck, { "data-loc": "client/src/pages/Home.tsx:298", className: "w-6 h-6 text-cyan-400 flex-shrink-0" }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { "data-loc": "client/src/pages/Home.tsx:299", className: "text-slate-300 text-lg", children: "Completely anonymous" })
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\Home.tsx:297", className: "flex items-center gap-4", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(CircleCheck, { "data-loc": "client\\src\\pages\\Home.tsx:298", className: "w-6 h-6 text-cyan-400 flex-shrink-0" }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { "data-loc": "client\\src\\pages\\Home.tsx:299", className: "text-slate-300 text-lg", children: "Completely anonymous" })
                   ] })
                 ] })
               ] })
             ] })
           ] }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client/src/pages/Home.tsx:308", className: "absolute bottom-6 right-8 text-slate-400 text-sm font-semibold", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/Home.tsx:309", className: "flex items-center gap-2", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { "data-loc": "client/src/pages/Home.tsx:310", className: "w-6 h-6 text-cyan-400", fill: "currentColor", viewBox: "0 0 20 20", children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { "data-loc": "client/src/pages/Home.tsx:311", d: "M10 0L12.5 7.5L20 10L12.5 12.5L10 20L7.5 12.5L0 10L7.5 7.5L10 0Z" }) }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { "data-loc": "client/src/pages/Home.tsx:313", children: "OG -2025" })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client\\src\\pages\\Home.tsx:308", className: "absolute bottom-6 right-8 text-slate-400 text-sm font-semibold", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\Home.tsx:309", className: "flex items-center gap-2", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { "data-loc": "client\\src\\pages\\Home.tsx:310", className: "w-6 h-6 text-cyan-400", fill: "currentColor", viewBox: "0 0 20 20", children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { "data-loc": "client\\src\\pages\\Home.tsx:311", d: "M10 0L12.5 7.5L20 10L12.5 12.5L10 20L7.5 12.5L0 10L7.5 7.5L10 0Z" }) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { "data-loc": "client\\src\\pages\\Home.tsx:313", children: "OG -2025" })
           ] }) })
         ] })
       ]
@@ -39656,7 +39656,7 @@ function Card({ className, ...props }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsx(
     "div",
     {
-      "data-loc": "client/src/components/ui/card.tsx:7",
+      "data-loc": "client\\src\\components\\ui\\card.tsx:7",
       "data-slot": "card",
       className: cn(
         "bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm",
@@ -39961,7 +39961,7 @@ function Chat() {
     return /* @__PURE__ */ jsxRuntimeExports.jsxs(
       "div",
       {
-        "data-loc": "client/src/pages/Chat.tsx:462",
+        "data-loc": "client\\src\\pages\\Chat.tsx:462",
         className: "min-h-screen relative overflow-hidden flex items-center justify-center",
         style: {
           backgroundImage: "url(/space-bg.jpg)",
@@ -39970,8 +39970,8 @@ function Chat() {
           backgroundAttachment: "fixed"
         },
         children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client/src/pages/Chat.tsx:471", className: "absolute inset-0 bg-black/40 pointer-events-none" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { "data-loc": "client/src/pages/Chat.tsx:472", className: "relative z-10 bg-gradient-to-br from-purple-900/50 via-slate-900/70 to-slate-900/50 backdrop-blur-xl border-2 border-cyan-400/50 p-8 w-full max-w-md rounded-3xl shadow-2xl", style: { boxShadow: "0 0 30px rgba(0, 217, 255, 0.3), 0 0 60px rgba(255, 0, 255, 0.2)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { "data-loc": "client/src/pages/Chat.tsx:473", className: "text-3xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent mb-6", children: "Loading..." }) })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client\\src\\pages\\Chat.tsx:471", className: "absolute inset-0 bg-black/40 pointer-events-none" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { "data-loc": "client\\src\\pages\\Chat.tsx:472", className: "relative z-10 bg-gradient-to-br from-purple-900/50 via-slate-900/70 to-slate-900/50 backdrop-blur-xl border-2 border-cyan-400/50 p-8 w-full max-w-md rounded-3xl shadow-2xl", style: { boxShadow: "0 0 30px rgba(0, 217, 255, 0.3), 0 0 60px rgba(255, 0, 255, 0.2)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { "data-loc": "client\\src\\pages\\Chat.tsx:473", className: "text-3xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent mb-6", children: "Loading..." }) })
         ]
       }
     );
@@ -39980,37 +39980,37 @@ function Chat() {
     /* @__PURE__ */ jsxRuntimeExports.jsxs(
       "div",
       {
-        "data-loc": "client/src/pages/Chat.tsx:482",
+        "data-loc": "client\\src\\pages\\Chat.tsx:482",
         className: `fixed top-0 right-0 h-full w-80 bg-slate-900/90 backdrop-blur-md z-[100] transform transition-transform duration-300 ease-in-out ${isSidebarOpen ? "translate-x-0" : "translate-x-full"} border-l border-cyan-400/30 p-6`,
         children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             "button",
             {
-              "data-loc": "client/src/pages/Chat.tsx:487",
+              "data-loc": "client\\src\\pages\\Chat.tsx:487",
               onClick: () => setIsSidebarOpen(false),
               className: "absolute top-4 right-4 text-cyan-400 hover:text-cyan-300",
-              children: /* @__PURE__ */ jsxRuntimeExports.jsx(X, { "data-loc": "client/src/pages/Chat.tsx:491", size: 24 })
+              children: /* @__PURE__ */ jsxRuntimeExports.jsx(X, { "data-loc": "client\\src\\pages\\Chat.tsx:491", size: 24 })
             }
           ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { "data-loc": "client/src/pages/Chat.tsx:493", className: "text-2xl font-bold text-cyan-400 mb-6", children: "Paramètres Utilisateur" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/Chat.tsx:495", className: "space-y-6", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/Chat.tsx:496", className: "flex flex-col items-center", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { "data-loc": "client\\src\\pages\\Chat.tsx:493", className: "text-2xl font-bold text-cyan-400 mb-6", children: "Paramètres Utilisateur" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\Chat.tsx:495", className: "space-y-6", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\Chat.tsx:496", className: "flex flex-col items-center", children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 ProfileImageUpload,
                 {
-                  "data-loc": "client/src/pages/Chat.tsx:497",
+                  "data-loc": "client\\src\\pages\\Chat.tsx:497",
                   nickname: user?.name || displayNickname || "Guest",
                   currentImage: user?.profileImage || profileImage,
                   onImageChange: setProfileImage
                 }
               ),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { "data-loc": "client/src/pages/Chat.tsx:502", className: "mt-2 text-lg font-semibold text-white", children: user?.name || displayNickname }),
-              user && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { "data-loc": "client/src/pages/Chat.tsx:505", className: "text-sm text-gray-400", children: user.email })
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { "data-loc": "client\\src\\pages\\Chat.tsx:502", className: "mt-2 text-lg font-semibold text-white", children: user?.name || displayNickname }),
+              user && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { "data-loc": "client\\src\\pages\\Chat.tsx:505", className: "text-sm text-gray-400", children: user.email })
             ] }),
             user && /* @__PURE__ */ jsxRuntimeExports.jsx(
               Button,
               {
-                "data-loc": "client/src/pages/Chat.tsx:510",
+                "data-loc": "client\\src\\pages\\Chat.tsx:510",
                 onClick: () => {
                   alert("Déconnexion non implémentée");
                 },
@@ -40025,7 +40025,7 @@ function Chat() {
     /* @__PURE__ */ jsxRuntimeExports.jsxs(
       "div",
       {
-        "data-loc": "client/src/pages/Chat.tsx:522",
+        "data-loc": "client\\src\\pages\\Chat.tsx:522",
         className: "min-h-screen relative overflow-hidden",
         style: {
           backgroundImage: "url(/space-bg.jpg)",
@@ -40034,24 +40034,24 @@ function Chat() {
           backgroundAttachment: "fixed"
         },
         children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client/src/pages/Chat.tsx:531", className: "absolute inset-0 bg-black/40 pointer-events-none" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/Chat.tsx:532", className: "relative z-10", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client/src/pages/Chat.tsx:535", className: "bg-gradient-to-b from-slate-900/60 to-transparent border-b border-cyan-400/30 p-4 backdrop-blur-sm", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/Chat.tsx:536", className: "max-w-6xl mx-auto flex items-center justify-between", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/Chat.tsx:537", className: "flex items-center gap-4", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsxs(Link, { "data-loc": "client/src/pages/Chat.tsx:538", href: "/", className: "text-cyan-400 hover:text-cyan-300 flex items-center gap-2 font-semibold", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(House, { "data-loc": "client/src/pages/Chat.tsx:539", className: "w-4 h-4" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client\\src\\pages\\Chat.tsx:531", className: "absolute inset-0 bg-black/40 pointer-events-none" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\Chat.tsx:532", className: "relative z-10", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client\\src\\pages\\Chat.tsx:535", className: "bg-gradient-to-b from-slate-900/60 to-transparent border-b border-cyan-400/30 p-4 backdrop-blur-sm", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\Chat.tsx:536", className: "max-w-6xl mx-auto flex items-center justify-between", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\Chat.tsx:537", className: "flex items-center gap-4", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs(Link, { "data-loc": "client\\src\\pages\\Chat.tsx:538", href: "/", className: "text-cyan-400 hover:text-cyan-300 flex items-center gap-2 font-semibold", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(House, { "data-loc": "client\\src\\pages\\Chat.tsx:539", className: "w-4 h-4" }),
                   "Home"
                 ] }),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("h1", { "data-loc": "client/src/pages/Chat.tsx:542", className: "text-3xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("h1", { "data-loc": "client\\src\\pages\\Chat.tsx:542", className: "text-3xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent", children: [
                   "/",
                   room
                 ] }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { "data-loc": "client/src/pages/Chat.tsx:543", className: `text-sm font-semibold ${connected ? "text-cyan-400" : "text-red-400"}`, children: connected ? "● Connected" : "● Disconnected" })
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { "data-loc": "client\\src\\pages\\Chat.tsx:543", className: `text-sm font-semibold ${connected ? "text-cyan-400" : "text-red-400"}`, children: connected ? "● Connected" : "● Disconnected" })
               ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client/src/pages/Chat.tsx:549", className: "flex items-center gap-2", children: !isAuthLoading && /* @__PURE__ */ jsxRuntimeExports.jsx(
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client\\src\\pages\\Chat.tsx:549", className: "flex items-center gap-2", children: !isAuthLoading && /* @__PURE__ */ jsxRuntimeExports.jsx(
                 Avatar,
                 {
-                  "data-loc": "client/src/pages/Chat.tsx:552",
+                  "data-loc": "client\\src\\pages\\Chat.tsx:552",
                   src: user?.profileImage || profileImage,
                   nickname: user?.name || displayNickname || "Guest",
                   size: "md",
@@ -40060,26 +40060,26 @@ function Chat() {
                 }
               ) })
             ] }) }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/Chat.tsx:564", className: "max-w-6xl mx-auto p-4 grid grid-cols-1 lg:grid-cols-3 gap-4 h-[calc(100vh-80px)]", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/Chat.tsx:566", className: "lg:col-span-2 flex flex-col gap-4", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { "data-loc": "client/src/pages/Chat.tsx:568", className: "flex-1 bg-gradient-to-br from-purple-900/40 via-slate-900/50 to-slate-900/40 backdrop-blur-md border-2 border-cyan-400/40 p-4 overflow-y-auto rounded-2xl shadow-lg", style: { boxShadow: "0 0 20px rgba(0, 217, 255, 0.2)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/Chat.tsx:569", className: "space-y-4", children: [
-                  !messages || messages.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client/src/pages/Chat.tsx:571", className: "text-center text-slate-400 py-8", children: "No messages yet. Start the conversation!" }) : messages.map((msg, idx) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\Chat.tsx:564", className: "max-w-6xl mx-auto p-4 grid grid-cols-1 lg:grid-cols-3 gap-4 h-[calc(100vh-80px)]", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\Chat.tsx:566", className: "lg:col-span-2 flex flex-col gap-4", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { "data-loc": "client\\src\\pages\\Chat.tsx:568", className: "flex-1 bg-gradient-to-br from-purple-900/40 via-slate-900/50 to-slate-900/40 backdrop-blur-md border-2 border-cyan-400/40 p-4 overflow-y-auto rounded-2xl shadow-lg", style: { boxShadow: "0 0 20px rgba(0, 217, 255, 0.2)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\Chat.tsx:569", className: "space-y-4", children: [
+                  !messages || messages.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client\\src\\pages\\Chat.tsx:571", className: "text-center text-slate-400 py-8", children: "No messages yet. Start the conversation!" }) : messages.map((msg, idx) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
                     "div",
                     {
-                      "data-loc": "client/src/pages/Chat.tsx:576",
+                      "data-loc": "client\\src\\pages\\Chat.tsx:576",
                       className: `rounded-lg p-3 break-words ${msg.nickname === "System" ? "bg-slate-700 text-slate-300 text-center text-sm italic" : "bg-slate-700"}`,
                       children: [
-                        msg.nickname !== "System" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/Chat.tsx:585", className: "flex justify-between items-start gap-2 mb-1", children: [
-                          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/Chat.tsx:586", className: "flex items-center gap-2", children: [
-                            /* @__PURE__ */ jsxRuntimeExports.jsx(Avatar, { "data-loc": "client/src/pages/Chat.tsx:587", src: msg.profileImage, nickname: msg.nickname, size: "sm" }),
-                            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { "data-loc": "client/src/pages/Chat.tsx:588", className: "font-semibold text-blue-400", children: msg.nickname })
+                        msg.nickname !== "System" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\Chat.tsx:585", className: "flex justify-between items-start gap-2 mb-1", children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\Chat.tsx:586", className: "flex items-center gap-2", children: [
+                            /* @__PURE__ */ jsxRuntimeExports.jsx(Avatar, { "data-loc": "client\\src\\pages\\Chat.tsx:587", src: msg.profileImage, nickname: msg.nickname, size: "sm" }),
+                            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { "data-loc": "client\\src\\pages\\Chat.tsx:588", className: "font-semibold text-blue-400", children: msg.nickname })
                           ] }),
-                          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { "data-loc": "client/src/pages/Chat.tsx:592", className: "text-xs text-slate-400", children: new Date(msg.createdAt).toLocaleTimeString() })
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { "data-loc": "client\\src\\pages\\Chat.tsx:592", className: "text-xs text-slate-400", children: new Date(msg.createdAt).toLocaleTimeString() })
                         ] }),
                         /* @__PURE__ */ jsxRuntimeExports.jsx(
                           "p",
                           {
-                            "data-loc": "client/src/pages/Chat.tsx:597",
+                            "data-loc": "client\\src\\pages\\Chat.tsx:597",
                             className: "text-white",
                             style: {
                               fontFamily: msg.fontFamily || "sans-serif",
@@ -40092,15 +40092,15 @@ function Chat() {
                     },
                     idx
                   )),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client/src/pages/Chat.tsx:609", ref: messagesEndRef })
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client\\src\\pages\\Chat.tsx:609", ref: messagesEndRef })
                 ] }) }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { "data-loc": "client/src/pages/Chat.tsx:614", className: "bg-gradient-to-br from-purple-900/40 via-slate-900/50 to-slate-900/40 backdrop-blur-md border-2 border-cyan-400/40 p-4 rounded-2xl shadow-lg", style: { boxShadow: "0 0 20px rgba(0, 217, 255, 0.2)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { "data-loc": "client/src/pages/Chat.tsx:615", onSubmit: handleSendMessage, className: "space-y-3", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/Chat.tsx:616", className: "flex gap-3 relative items-center", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(Avatar, { "data-loc": "client/src/pages/Chat.tsx:618", src: profileImage, nickname: displayNickname, size: "md" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { "data-loc": "client\\src\\pages\\Chat.tsx:614", className: "bg-gradient-to-br from-purple-900/40 via-slate-900/50 to-slate-900/40 backdrop-blur-md border-2 border-cyan-400/40 p-4 rounded-2xl shadow-lg", style: { boxShadow: "0 0 20px rgba(0, 217, 255, 0.2)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { "data-loc": "client\\src\\pages\\Chat.tsx:615", onSubmit: handleSendMessage, className: "space-y-3", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\Chat.tsx:616", className: "flex gap-3 relative items-center", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(Avatar, { "data-loc": "client\\src\\pages\\Chat.tsx:618", src: profileImage, nickname: displayNickname, size: "md" }),
                     /* @__PURE__ */ jsxRuntimeExports.jsx(
                       Input,
                       {
-                        "data-loc": "client/src/pages/Chat.tsx:621",
+                        "data-loc": "client\\src\\pages\\Chat.tsx:621",
                         placeholder: "Type a message...",
                         value: message,
                         onChange: (e) => setMessage(e.target.value),
@@ -40111,7 +40111,7 @@ function Chat() {
                     /* @__PURE__ */ jsxRuntimeExports.jsx(
                       "input",
                       {
-                        "data-loc": "client/src/pages/Chat.tsx:630",
+                        "data-loc": "client\\src\\pages\\Chat.tsx:630",
                         ref: colorInputRef,
                         type: "color",
                         value: textColor,
@@ -40123,7 +40123,7 @@ function Chat() {
                     /* @__PURE__ */ jsxRuntimeExports.jsx(
                       Button,
                       {
-                        "data-loc": "client/src/pages/Chat.tsx:638",
+                        "data-loc": "client\\src\\pages\\Chat.tsx:638",
                         type: "button",
                         onClick: () => colorInputRef.current?.click(),
                         className: "bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 text-slate-900 font-semibold hover:shadow-lg hover:shadow-cyan-400/50 transition-all",
@@ -40133,28 +40133,28 @@ function Chat() {
                     /* @__PURE__ */ jsxRuntimeExports.jsx(
                       Button,
                       {
-                        "data-loc": "client/src/pages/Chat.tsx:645",
+                        "data-loc": "client\\src\\pages\\Chat.tsx:645",
                         type: "button",
                         onClick: () => setShowEmojiPicker(!showEmojiPicker),
                         className: "bg-slate-700 hover:bg-slate-600",
-                        children: /* @__PURE__ */ jsxRuntimeExports.jsx(Smile, { "data-loc": "client/src/pages/Chat.tsx:650", className: "w-4 h-4" })
+                        children: /* @__PURE__ */ jsxRuntimeExports.jsx(Smile, { "data-loc": "client\\src\\pages\\Chat.tsx:650", className: "w-4 h-4" })
                       }
                     ),
                     /* @__PURE__ */ jsxRuntimeExports.jsx(
                       Button,
                       {
-                        "data-loc": "client/src/pages/Chat.tsx:652",
+                        "data-loc": "client\\src\\pages\\Chat.tsx:652",
                         type: "submit",
                         disabled: !connected,
                         className: "bg-blue-600 hover:bg-blue-700",
-                        children: /* @__PURE__ */ jsxRuntimeExports.jsx(Send, { "data-loc": "client/src/pages/Chat.tsx:657", className: "w-4 h-4" })
+                        children: /* @__PURE__ */ jsxRuntimeExports.jsx(Send, { "data-loc": "client\\src\\pages\\Chat.tsx:657", className: "w-4 h-4" })
                       }
                     )
                   ] }),
-                  showEmojiPicker && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client/src/pages/Chat.tsx:662", className: "bg-slate-700 border border-slate-600 rounded p-3 grid grid-cols-10 gap-2", children: emojis.map((emoji) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  showEmojiPicker && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client\\src\\pages\\Chat.tsx:662", className: "bg-slate-700 border border-slate-600 rounded p-3 grid grid-cols-10 gap-2", children: emojis.map((emoji) => /* @__PURE__ */ jsxRuntimeExports.jsx(
                     "button",
                     {
-                      "data-loc": "client/src/pages/Chat.tsx:664",
+                      "data-loc": "client\\src\\pages\\Chat.tsx:664",
                       type: "button",
                       onClick: () => handleEmojiClick(emoji),
                       className: "text-2xl hover:bg-slate-600 rounded p-1 transition",
@@ -40164,19 +40164,19 @@ function Chat() {
                   )) })
                 ] }) })
               ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/Chat.tsx:680", className: "flex flex-col gap-4", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { "data-loc": "client/src/pages/Chat.tsx:682", className: "bg-slate-800 border-slate-700 p-4", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { "data-loc": "client/src/pages/Chat.tsx:683", className: "text-white font-semibold mb-4", children: "Media" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/Chat.tsx:684", className: "space-y-2", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\Chat.tsx:680", className: "flex flex-col gap-4", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { "data-loc": "client\\src\\pages\\Chat.tsx:682", className: "bg-slate-800 border-slate-700 p-4", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { "data-loc": "client\\src\\pages\\Chat.tsx:683", className: "text-white font-semibold mb-4", children: "Media" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\Chat.tsx:684", className: "space-y-2", children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       Button,
                       {
-                        "data-loc": "client/src/pages/Chat.tsx:685",
+                        "data-loc": "client\\src\\pages\\Chat.tsx:685",
                         onClick: () => setCameraOn(!cameraOn),
                         variant: cameraOn ? "default" : "outline",
                         className: "w-full",
                         children: [
-                          /* @__PURE__ */ jsxRuntimeExports.jsx(Video, { "data-loc": "client/src/pages/Chat.tsx:690", className: "w-4 h-4 mr-2" }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(Video, { "data-loc": "client\\src\\pages\\Chat.tsx:690", className: "w-4 h-4 mr-2" }),
                           "Camera ",
                           cameraOn ? "ON" : "OFF"
                         ]
@@ -40185,12 +40185,12 @@ function Chat() {
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       Button,
                       {
-                        "data-loc": "client/src/pages/Chat.tsx:693",
+                        "data-loc": "client\\src\\pages\\Chat.tsx:693",
                         onClick: () => setMicOn(!micOn),
                         variant: micOn ? "default" : "outline",
                         className: "w-full",
                         children: [
-                          /* @__PURE__ */ jsxRuntimeExports.jsx(Mic, { "data-loc": "client/src/pages/Chat.tsx:698", className: "w-4 h-4 mr-2" }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(Mic, { "data-loc": "client\\src\\pages\\Chat.tsx:698", className: "w-4 h-4 mr-2" }),
                           "Mic ",
                           micOn ? "ON" : "OFF"
                         ]
@@ -40198,37 +40198,37 @@ function Chat() {
                     )
                   ] })
                 ] }),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { "data-loc": "client/src/pages/Chat.tsx:705", className: "bg-slate-800 border-slate-700 p-4", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { "data-loc": "client/src/pages/Chat.tsx:706", className: "text-white font-semibold mb-2", children: "Your Video" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client/src/pages/Chat.tsx:707", className: "bg-slate-900 rounded aspect-video flex items-center justify-center overflow-hidden", children: cameraOn ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+                /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { "data-loc": "client\\src\\pages\\Chat.tsx:705", className: "bg-slate-800 border-slate-700 p-4", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { "data-loc": "client\\src\\pages\\Chat.tsx:706", className: "text-white font-semibold mb-2", children: "Your Video" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client\\src\\pages\\Chat.tsx:707", className: "bg-slate-900 rounded aspect-video flex items-center justify-center overflow-hidden", children: cameraOn ? /* @__PURE__ */ jsxRuntimeExports.jsx(
                     "video",
                     {
-                      "data-loc": "client/src/pages/Chat.tsx:709",
+                      "data-loc": "client\\src\\pages\\Chat.tsx:709",
                       ref: videoRef,
                       autoPlay: true,
                       playsInline: true,
                       muted: true,
                       className: "w-full h-full object-cover"
                     }
-                  ) : /* @__PURE__ */ jsxRuntimeExports.jsx("span", { "data-loc": "client/src/pages/Chat.tsx:717", className: "text-slate-500 text-sm", children: "Camera off" }) })
+                  ) : /* @__PURE__ */ jsxRuntimeExports.jsx("span", { "data-loc": "client\\src\\pages\\Chat.tsx:717", className: "text-slate-500 text-sm", children: "Camera off" }) })
                 ] }),
-                remoteUsers.size > 0 && /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { "data-loc": "client/src/pages/Chat.tsx:724", className: "bg-slate-800 border-slate-700 p-4", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs("h3", { "data-loc": "client/src/pages/Chat.tsx:725", className: "text-white font-semibold mb-2", children: [
+                remoteUsers.size > 0 && /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { "data-loc": "client\\src\\pages\\Chat.tsx:724", className: "bg-slate-800 border-slate-700 p-4", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("h3", { "data-loc": "client\\src\\pages\\Chat.tsx:725", className: "text-white font-semibold mb-2", children: [
                     "Users (",
                     remoteUsers.size,
                     ")"
                   ] }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client/src/pages/Chat.tsx:728", className: "space-y-2 max-h-96 overflow-y-auto", children: Array.from(remoteUsers.values()).map((user2) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/Chat.tsx:730", className: "space-y-1", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { "data-loc": "client/src/pages/Chat.tsx:731", className: "text-sm text-slate-300", children: user2.nickname }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client/src/pages/Chat.tsx:732", className: "bg-slate-900 rounded aspect-video flex items-center justify-center overflow-hidden", children: user2.stream ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client\\src\\pages\\Chat.tsx:728", className: "space-y-2 max-h-96 overflow-y-auto", children: Array.from(remoteUsers.values()).map((user2) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\Chat.tsx:730", className: "space-y-1", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { "data-loc": "client\\src\\pages\\Chat.tsx:731", className: "text-sm text-slate-300", children: user2.nickname }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client\\src\\pages\\Chat.tsx:732", className: "bg-slate-900 rounded aspect-video flex items-center justify-center overflow-hidden", children: user2.stream ? /* @__PURE__ */ jsxRuntimeExports.jsx(
                       "video",
                       {
-                        "data-loc": "client/src/pages/Chat.tsx:734",
+                        "data-loc": "client\\src\\pages\\Chat.tsx:734",
                         ref: (el) => {
                           if (el) {
                             remoteVideoRefs.current.set(user2.id, el);
                             if (el.srcObject !== user2.stream) {
-                              el.srcObject = user2.stream;
+                              el.srcObject = user2.stream ?? null;
                             }
                           }
                         },
@@ -40236,7 +40236,7 @@ function Chat() {
                         playsInline: true,
                         className: "w-full h-full object-cover"
                       }
-                    ) : /* @__PURE__ */ jsxRuntimeExports.jsx("span", { "data-loc": "client/src/pages/Chat.tsx:748", className: "text-slate-500 text-xs", children: "No video" }) })
+                    ) : /* @__PURE__ */ jsxRuntimeExports.jsx("span", { "data-loc": "client\\src\\pages\\Chat.tsx:748", className: "text-slate-500 text-xs", children: "No video" }) })
                   ] }, user2.id)) })
                 ] })
               ] })
@@ -40291,7 +40291,7 @@ function Auth() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(
     "div",
     {
-      "data-loc": "client/src/pages/Auth.tsx:55",
+      "data-loc": "client\\src\\pages\\Auth.tsx:55",
       className: "min-h-screen relative overflow-hidden",
       style: {
         backgroundImage: "url(/space-bg.jpg)",
@@ -40300,23 +40300,23 @@ function Auth() {
         backgroundAttachment: "fixed"
       },
       children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client/src/pages/Auth.tsx:64", className: "absolute inset-0 bg-black/40 pointer-events-none" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/Auth.tsx:66", className: "relative z-10", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client/src/pages/Auth.tsx:68", className: "flex items-center justify-between px-8 py-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { "data-loc": "client/src/pages/Auth.tsx:69", href: "/", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Button, { "data-loc": "client/src/pages/Auth.tsx:70", className: "border-2 border-cyan-400 bg-transparent text-cyan-400 hover:bg-cyan-400/10 rounded-lg px-4 py-2 gap-2", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowLeft, { "data-loc": "client/src/pages/Auth.tsx:71", className: "w-4 h-4" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client\\src\\pages\\Auth.tsx:64", className: "absolute inset-0 bg-black/40 pointer-events-none" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\Auth.tsx:66", className: "relative z-10", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client\\src\\pages\\Auth.tsx:68", className: "flex items-center justify-between px-8 py-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { "data-loc": "client\\src\\pages\\Auth.tsx:69", href: "/", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Button, { "data-loc": "client\\src\\pages\\Auth.tsx:70", className: "border-2 border-cyan-400 bg-transparent text-cyan-400 hover:bg-cyan-400/10 rounded-lg px-4 py-2 gap-2", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowLeft, { "data-loc": "client\\src\\pages\\Auth.tsx:71", className: "w-4 h-4" }),
             "Back"
           ] }) }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client/src/pages/Auth.tsx:78", className: "flex items-center justify-center min-h-[calc(100vh-100px)]", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client/src/pages/Auth.tsx:79", className: "w-full max-w-md px-6", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/Auth.tsx:80", className: "relative bg-gradient-to-br from-purple-900/50 via-slate-900/70 to-slate-900/50 backdrop-blur-xl rounded-3xl p-8 border-2 border-cyan-400/50 shadow-2xl", style: { boxShadow: "0 0 30px rgba(0, 217, 255, 0.3), 0 0 60px rgba(255, 0, 255, 0.2)" }, children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { "data-loc": "client/src/pages/Auth.tsx:81", className: "text-4xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent mb-6", children: isLogin ? "Login" : "Create Account" }),
-            error && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client/src/pages/Auth.tsx:86", className: "bg-red-900/40 border-2 border-red-400/60 text-red-200 px-4 py-3 rounded-lg mb-4", children: error }),
-            success && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client/src/pages/Auth.tsx:92", className: "bg-green-900/40 border-2 border-green-400/60 text-green-200 px-4 py-3 rounded-lg mb-4", children: success }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { "data-loc": "client/src/pages/Auth.tsx:97", onSubmit: handleSubmit, className: "space-y-5", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/Auth.tsx:98", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("label", { "data-loc": "client/src/pages/Auth.tsx:99", className: "block text-sm font-semibold text-cyan-300 mb-2", children: isLogin ? "Email ou Pseudo" : "Email" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client\\src\\pages\\Auth.tsx:78", className: "flex items-center justify-center min-h-[calc(100vh-100px)]", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client\\src\\pages\\Auth.tsx:79", className: "w-full max-w-md px-6", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\Auth.tsx:80", className: "relative bg-gradient-to-br from-purple-900/50 via-slate-900/70 to-slate-900/50 backdrop-blur-xl rounded-3xl p-8 border-2 border-cyan-400/50 shadow-2xl", style: { boxShadow: "0 0 30px rgba(0, 217, 255, 0.3), 0 0 60px rgba(255, 0, 255, 0.2)" }, children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { "data-loc": "client\\src\\pages\\Auth.tsx:81", className: "text-4xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent mb-6", children: isLogin ? "Login" : "Create Account" }),
+            error && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client\\src\\pages\\Auth.tsx:86", className: "bg-red-900/40 border-2 border-red-400/60 text-red-200 px-4 py-3 rounded-lg mb-4", children: error }),
+            success && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client\\src\\pages\\Auth.tsx:92", className: "bg-green-900/40 border-2 border-green-400/60 text-green-200 px-4 py-3 rounded-lg mb-4", children: success }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { "data-loc": "client\\src\\pages\\Auth.tsx:97", onSubmit: handleSubmit, className: "space-y-5", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\Auth.tsx:98", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("label", { "data-loc": "client\\src\\pages\\Auth.tsx:99", className: "block text-sm font-semibold text-cyan-300 mb-2", children: isLogin ? "Email ou Pseudo" : "Email" }),
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   Input,
                   {
-                    "data-loc": "client/src/pages/Auth.tsx:102",
+                    "data-loc": "client\\src\\pages\\Auth.tsx:102",
                     type: isLogin ? "text" : "email",
                     placeholder: isLogin ? "email@example.com ou pseudo" : "your@email.com",
                     value: isLogin ? identifier : email,
@@ -40326,12 +40326,12 @@ function Auth() {
                   }
                 )
               ] }),
-              !isLogin && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/Auth.tsx:113", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("label", { "data-loc": "client/src/pages/Auth.tsx:114", className: "block text-sm font-semibold text-cyan-300 mb-2", children: "Pseudo" }),
+              !isLogin && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\Auth.tsx:113", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("label", { "data-loc": "client\\src\\pages\\Auth.tsx:114", className: "block text-sm font-semibold text-cyan-300 mb-2", children: "Pseudo" }),
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   Input,
                   {
-                    "data-loc": "client/src/pages/Auth.tsx:117",
+                    "data-loc": "client\\src\\pages\\Auth.tsx:117",
                     placeholder: "Ton pseudo unique",
                     value: nickname,
                     onChange: (e) => setNickname(e.target.value),
@@ -40341,12 +40341,12 @@ function Auth() {
                   }
                 )
               ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/Auth.tsx:128", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("label", { "data-loc": "client/src/pages/Auth.tsx:129", className: "block text-sm font-semibold text-cyan-300 mb-2", children: "Password" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\Auth.tsx:128", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("label", { "data-loc": "client\\src\\pages\\Auth.tsx:129", className: "block text-sm font-semibold text-cyan-300 mb-2", children: "Password" }),
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   Input,
                   {
-                    "data-loc": "client/src/pages/Auth.tsx:132",
+                    "data-loc": "client\\src\\pages\\Auth.tsx:132",
                     type: "password",
                     placeholder: "At least 6 characters",
                     value: password,
@@ -40360,7 +40360,7 @@ function Auth() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 Button,
                 {
-                  "data-loc": "client/src/pages/Auth.tsx:143",
+                  "data-loc": "client\\src\\pages\\Auth.tsx:143",
                   type: "submit",
                   className: "w-full bg-gradient-to-r from-cyan-400 to-cyan-300 text-slate-900 hover:shadow-xl hover:shadow-cyan-400/50 rounded-xl py-3 font-bold text-lg transition-all",
                   disabled: signupMutation.isPending || loginMutation.isPending,
@@ -40368,14 +40368,14 @@ function Auth() {
                 }
               )
             ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client/src/pages/Auth.tsx:152", className: "mt-6 pt-6 border-t border-cyan-400/30 text-center space-y-3", children: isLogin ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { "data-loc": "client/src/pages/Auth.tsx:155", className: "text-slate-300", children: "Don't have an account?" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { "data-loc": "client/src/pages/Auth.tsx:156", href: "/signup", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { "data-loc": "client/src/pages/Auth.tsx:157", variant: "link", className: "text-cyan-400 hover:text-cyan-300 font-semibold", children: "Sign up here" }) }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { "data-loc": "client/src/pages/Auth.tsx:161", className: "text-slate-300 pt-2", children: "Forgot your password?" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { "data-loc": "client/src/pages/Auth.tsx:162", href: "/forgot-password", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { "data-loc": "client/src/pages/Auth.tsx:163", variant: "link", className: "text-cyan-400 hover:text-cyan-300 font-semibold", children: "Reset it here" }) })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client\\src\\pages\\Auth.tsx:152", className: "mt-6 pt-6 border-t border-cyan-400/30 text-center space-y-3", children: isLogin ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { "data-loc": "client\\src\\pages\\Auth.tsx:155", className: "text-slate-300", children: "Don't have an account?" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { "data-loc": "client\\src\\pages\\Auth.tsx:156", href: "/signup", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { "data-loc": "client\\src\\pages\\Auth.tsx:157", variant: "link", className: "text-cyan-400 hover:text-cyan-300 font-semibold", children: "Sign up here" }) }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { "data-loc": "client\\src\\pages\\Auth.tsx:161", className: "text-slate-300 pt-2", children: "Forgot your password?" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { "data-loc": "client\\src\\pages\\Auth.tsx:162", href: "/forgot-password", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { "data-loc": "client\\src\\pages\\Auth.tsx:163", variant: "link", className: "text-cyan-400 hover:text-cyan-300 font-semibold", children: "Reset it here" }) })
             ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { "data-loc": "client/src/pages/Auth.tsx:170", className: "text-slate-300", children: "Already have an account?" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { "data-loc": "client/src/pages/Auth.tsx:171", href: "/login", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { "data-loc": "client/src/pages/Auth.tsx:172", variant: "link", className: "text-cyan-400 hover:text-cyan-300 font-semibold", children: "Login here" }) })
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { "data-loc": "client\\src\\pages\\Auth.tsx:170", className: "text-slate-300", children: "Already have an account?" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { "data-loc": "client\\src\\pages\\Auth.tsx:171", href: "/login", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { "data-loc": "client\\src\\pages\\Auth.tsx:172", variant: "link", className: "text-cyan-400 hover:text-cyan-300 font-semibold", children: "Login here" }) })
             ] }) })
           ] }) }) })
         ] })
@@ -40410,7 +40410,7 @@ function ForgotPassword() {
     return /* @__PURE__ */ jsxRuntimeExports.jsxs(
       "div",
       {
-        "data-loc": "client/src/pages/ForgotPassword.tsx:37",
+        "data-loc": "client\\src\\pages\\ForgotPassword.tsx:37",
         className: "min-h-screen relative overflow-hidden flex items-center justify-center p-4",
         style: {
           backgroundImage: "url(/space-bg.jpg)",
@@ -40419,18 +40419,18 @@ function ForgotPassword() {
           backgroundAttachment: "fixed"
         },
         children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client/src/pages/ForgotPassword.tsx:46", className: "absolute inset-0 bg-black/40 pointer-events-none" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/ForgotPassword.tsx:47", className: "relative z-10 w-full max-w-md bg-gradient-to-br from-purple-900/50 via-slate-900/70 to-slate-900/50 backdrop-blur-xl rounded-3xl p-8 border-2 border-cyan-400/50 shadow-2xl", style: { boxShadow: "0 0 30px rgba(0, 217, 255, 0.3), 0 0 60px rgba(255, 0, 255, 0.2)" }, children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { "data-loc": "client/src/pages/ForgotPassword.tsx:48", className: "text-3xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent mb-4", children: "Email envoyé ✅" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { "data-loc": "client/src/pages/ForgotPassword.tsx:49", className: "text-slate-200 mb-6", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client\\src\\pages\\ForgotPassword.tsx:46", className: "absolute inset-0 bg-black/40 pointer-events-none" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\ForgotPassword.tsx:47", className: "relative z-10 w-full max-w-md bg-gradient-to-br from-purple-900/50 via-slate-900/70 to-slate-900/50 backdrop-blur-xl rounded-3xl p-8 border-2 border-cyan-400/50 shadow-2xl", style: { boxShadow: "0 0 30px rgba(0, 217, 255, 0.3), 0 0 60px rgba(255, 0, 255, 0.2)" }, children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { "data-loc": "client\\src\\pages\\ForgotPassword.tsx:48", className: "text-3xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent mb-4", children: "Email envoyé ✅" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { "data-loc": "client\\src\\pages\\ForgotPassword.tsx:49", className: "text-slate-200 mb-6", children: [
               "Nous avons envoyé un lien de réinitialisation à ",
-              /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { "data-loc": "client/src/pages/ForgotPassword.tsx:50", children: email }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { "data-loc": "client\\src\\pages\\ForgotPassword.tsx:50", children: email }),
               ". Clique sur le lien dans ton email pour réinitialiser ton mot de passe."
             ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               Button,
               {
-                "data-loc": "client/src/pages/ForgotPassword.tsx:53",
+                "data-loc": "client\\src\\pages\\ForgotPassword.tsx:53",
                 onClick: () => navigate2("/login"),
                 className: "w-full bg-gradient-to-r from-cyan-400 to-cyan-300 text-slate-900 hover:shadow-xl hover:shadow-cyan-400/50 rounded-xl py-3 font-bold",
                 children: "Retour au login"
@@ -40444,7 +40444,7 @@ function ForgotPassword() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(
     "div",
     {
-      "data-loc": "client/src/pages/ForgotPassword.tsx:65",
+      "data-loc": "client\\src\\pages\\ForgotPassword.tsx:65",
       className: "min-h-screen relative overflow-hidden flex items-center justify-center p-4",
       style: {
         backgroundImage: "url(/space-bg.jpg)",
@@ -40453,17 +40453,17 @@ function ForgotPassword() {
         backgroundAttachment: "fixed"
       },
       children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client/src/pages/ForgotPassword.tsx:74", className: "absolute inset-0 bg-black/40 pointer-events-none" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/ForgotPassword.tsx:75", className: "relative z-10 w-full max-w-md bg-gradient-to-br from-purple-900/50 via-slate-900/70 to-slate-900/50 backdrop-blur-xl rounded-3xl p-8 border-2 border-cyan-400/50 shadow-2xl", style: { boxShadow: "0 0 30px rgba(0, 217, 255, 0.3), 0 0 60px rgba(255, 0, 255, 0.2)" }, children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { "data-loc": "client/src/pages/ForgotPassword.tsx:76", className: "text-3xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent mb-2", children: "Mot de passe oublié ?" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { "data-loc": "client/src/pages/ForgotPassword.tsx:77", className: "text-slate-300 mb-6", children: "Saisis ton email et nous t'enverrons un lien pour réinitialiser ton mot de passe." }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { "data-loc": "client/src/pages/ForgotPassword.tsx:81", onSubmit: handleSubmit, className: "space-y-5", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/ForgotPassword.tsx:82", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("label", { "data-loc": "client/src/pages/ForgotPassword.tsx:83", className: "block text-sm font-semibold text-cyan-300 mb-2", children: "Email" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client\\src\\pages\\ForgotPassword.tsx:74", className: "absolute inset-0 bg-black/40 pointer-events-none" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\ForgotPassword.tsx:75", className: "relative z-10 w-full max-w-md bg-gradient-to-br from-purple-900/50 via-slate-900/70 to-slate-900/50 backdrop-blur-xl rounded-3xl p-8 border-2 border-cyan-400/50 shadow-2xl", style: { boxShadow: "0 0 30px rgba(0, 217, 255, 0.3), 0 0 60px rgba(255, 0, 255, 0.2)" }, children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { "data-loc": "client\\src\\pages\\ForgotPassword.tsx:76", className: "text-3xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent mb-2", children: "Mot de passe oublié ?" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { "data-loc": "client\\src\\pages\\ForgotPassword.tsx:77", className: "text-slate-300 mb-6", children: "Saisis ton email et nous t'enverrons un lien pour réinitialiser ton mot de passe." }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { "data-loc": "client\\src\\pages\\ForgotPassword.tsx:81", onSubmit: handleSubmit, className: "space-y-5", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\ForgotPassword.tsx:82", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("label", { "data-loc": "client\\src\\pages\\ForgotPassword.tsx:83", className: "block text-sm font-semibold text-cyan-300 mb-2", children: "Email" }),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 Input,
                 {
-                  "data-loc": "client/src/pages/ForgotPassword.tsx:86",
+                  "data-loc": "client\\src\\pages\\ForgotPassword.tsx:86",
                   type: "email",
                   placeholder: "ton.email@example.com",
                   value: email,
@@ -40476,7 +40476,7 @@ function ForgotPassword() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               Button,
               {
-                "data-loc": "client/src/pages/ForgotPassword.tsx:96",
+                "data-loc": "client\\src\\pages\\ForgotPassword.tsx:96",
                 type: "submit",
                 disabled: resetMutation.isPending,
                 className: "w-full bg-gradient-to-r from-cyan-400 to-cyan-300 text-slate-900 hover:shadow-xl hover:shadow-cyan-400/50 rounded-xl py-3 font-bold",
@@ -40484,13 +40484,13 @@ function ForgotPassword() {
               }
             )
           ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client/src/pages/ForgotPassword.tsx:105", className: "mt-6 pt-6 border-t border-cyan-400/30", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { "data-loc": "client/src/pages/ForgotPassword.tsx:106", className: "text-slate-300 text-sm text-center", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client\\src\\pages\\ForgotPassword.tsx:105", className: "mt-6 pt-6 border-t border-cyan-400/30", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { "data-loc": "client\\src\\pages\\ForgotPassword.tsx:106", className: "text-slate-300 text-sm text-center", children: [
             "Tu te souviens de ton mot de passe ?",
             " ",
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               "button",
               {
-                "data-loc": "client/src/pages/ForgotPassword.tsx:108",
+                "data-loc": "client\\src\\pages\\ForgotPassword.tsx:108",
                 onClick: () => navigate2("/login"),
                 className: "text-cyan-400 hover:text-cyan-300 font-semibold",
                 children: "Retour au login"
@@ -40553,7 +40553,7 @@ function ResetPassword() {
     return /* @__PURE__ */ jsxRuntimeExports.jsxs(
       "div",
       {
-        "data-loc": "client/src/pages/ResetPassword.tsx:66",
+        "data-loc": "client\\src\\pages\\ResetPassword.tsx:66",
         className: "min-h-screen relative overflow-hidden flex items-center justify-center p-4",
         style: {
           backgroundImage: "url(/space-bg.jpg)",
@@ -40562,11 +40562,11 @@ function ResetPassword() {
           backgroundAttachment: "fixed"
         },
         children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client/src/pages/ResetPassword.tsx:75", className: "absolute inset-0 bg-black/40 pointer-events-none" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/ResetPassword.tsx:76", className: "relative z-10 w-full max-w-md bg-gradient-to-br from-purple-900/50 via-slate-900/70 to-slate-900/50 backdrop-blur-xl rounded-3xl p-8 border-2 border-cyan-400/50 shadow-2xl text-center", style: { boxShadow: "0 0 30px rgba(0, 217, 255, 0.3), 0 0 60px rgba(255, 0, 255, 0.2)" }, children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { "data-loc": "client/src/pages/ResetPassword.tsx:77", className: "text-3xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent mb-4", children: "Succès ✅" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { "data-loc": "client/src/pages/ResetPassword.tsx:78", className: "text-slate-200 mb-6", children: "Ton mot de passe a été réinitialisé avec succès!" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { "data-loc": "client/src/pages/ResetPassword.tsx:81", className: "text-slate-400 text-sm", children: "Redirection vers le login..." })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client\\src\\pages\\ResetPassword.tsx:75", className: "absolute inset-0 bg-black/40 pointer-events-none" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\ResetPassword.tsx:76", className: "relative z-10 w-full max-w-md bg-gradient-to-br from-purple-900/50 via-slate-900/70 to-slate-900/50 backdrop-blur-xl rounded-3xl p-8 border-2 border-cyan-400/50 shadow-2xl text-center", style: { boxShadow: "0 0 30px rgba(0, 217, 255, 0.3), 0 0 60px rgba(255, 0, 255, 0.2)" }, children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { "data-loc": "client\\src\\pages\\ResetPassword.tsx:77", className: "text-3xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent mb-4", children: "Succès ✅" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { "data-loc": "client\\src\\pages\\ResetPassword.tsx:78", className: "text-slate-200 mb-6", children: "Ton mot de passe a été réinitialisé avec succès!" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { "data-loc": "client\\src\\pages\\ResetPassword.tsx:81", className: "text-slate-400 text-sm", children: "Redirection vers le login..." })
           ] })
         ]
       }
@@ -40575,7 +40575,7 @@ function ResetPassword() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(
     "div",
     {
-      "data-loc": "client/src/pages/ResetPassword.tsx:88",
+      "data-loc": "client\\src\\pages\\ResetPassword.tsx:88",
       className: "min-h-screen relative overflow-hidden flex items-center justify-center p-4",
       style: {
         backgroundImage: "url(/space-bg.jpg)",
@@ -40584,17 +40584,17 @@ function ResetPassword() {
         backgroundAttachment: "fixed"
       },
       children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client/src/pages/ResetPassword.tsx:97", className: "absolute inset-0 bg-black/40 pointer-events-none" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/ResetPassword.tsx:98", className: "relative z-10 w-full max-w-md bg-gradient-to-br from-purple-900/50 via-slate-900/70 to-slate-900/50 backdrop-blur-xl rounded-3xl p-8 border-2 border-cyan-400/50 shadow-2xl", style: { boxShadow: "0 0 30px rgba(0, 217, 255, 0.3), 0 0 60px rgba(255, 0, 255, 0.2)" }, children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { "data-loc": "client/src/pages/ResetPassword.tsx:99", className: "text-3xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent mb-2", children: "Réinitialiser le mot de passe" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { "data-loc": "client/src/pages/ResetPassword.tsx:100", className: "text-slate-300 mb-6", children: "Entre ton nouveau mot de passe ci-dessous." }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { "data-loc": "client/src/pages/ResetPassword.tsx:104", onSubmit: handleSubmit, className: "space-y-5", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/ResetPassword.tsx:105", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("label", { "data-loc": "client/src/pages/ResetPassword.tsx:106", className: "block text-sm font-semibold text-cyan-300 mb-2", children: "Nouveau mot de passe" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client\\src\\pages\\ResetPassword.tsx:97", className: "absolute inset-0 bg-black/40 pointer-events-none" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\ResetPassword.tsx:98", className: "relative z-10 w-full max-w-md bg-gradient-to-br from-purple-900/50 via-slate-900/70 to-slate-900/50 backdrop-blur-xl rounded-3xl p-8 border-2 border-cyan-400/50 shadow-2xl", style: { boxShadow: "0 0 30px rgba(0, 217, 255, 0.3), 0 0 60px rgba(255, 0, 255, 0.2)" }, children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { "data-loc": "client\\src\\pages\\ResetPassword.tsx:99", className: "text-3xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent mb-2", children: "Réinitialiser le mot de passe" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { "data-loc": "client\\src\\pages\\ResetPassword.tsx:100", className: "text-slate-300 mb-6", children: "Entre ton nouveau mot de passe ci-dessous." }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { "data-loc": "client\\src\\pages\\ResetPassword.tsx:104", onSubmit: handleSubmit, className: "space-y-5", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\ResetPassword.tsx:105", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("label", { "data-loc": "client\\src\\pages\\ResetPassword.tsx:106", className: "block text-sm font-semibold text-cyan-300 mb-2", children: "Nouveau mot de passe" }),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 Input,
                 {
-                  "data-loc": "client/src/pages/ResetPassword.tsx:109",
+                  "data-loc": "client\\src\\pages\\ResetPassword.tsx:109",
                   type: "password",
                   placeholder: "Au moins 6 caractères",
                   value: password,
@@ -40604,12 +40604,12 @@ function ResetPassword() {
                 }
               )
             ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/ResetPassword.tsx:119", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("label", { "data-loc": "client/src/pages/ResetPassword.tsx:120", className: "block text-sm font-semibold text-cyan-300 mb-2", children: "Confirmer le mot de passe" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\ResetPassword.tsx:119", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("label", { "data-loc": "client\\src\\pages\\ResetPassword.tsx:120", className: "block text-sm font-semibold text-cyan-300 mb-2", children: "Confirmer le mot de passe" }),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 Input,
                 {
-                  "data-loc": "client/src/pages/ResetPassword.tsx:123",
+                  "data-loc": "client\\src\\pages\\ResetPassword.tsx:123",
                   type: "password",
                   placeholder: "Confirme ton mot de passe",
                   value: passwordConfirm,
@@ -40622,7 +40622,7 @@ function ResetPassword() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               Button,
               {
-                "data-loc": "client/src/pages/ResetPassword.tsx:133",
+                "data-loc": "client\\src\\pages\\ResetPassword.tsx:133",
                 type: "submit",
                 disabled: resetMutation.isPending,
                 className: "w-full bg-gradient-to-r from-cyan-400 to-cyan-300 text-slate-900 hover:shadow-xl hover:shadow-cyan-400/50 rounded-xl py-3 font-bold",
@@ -40675,7 +40675,7 @@ function VerifyEmail() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(
     "div",
     {
-      "data-loc": "client/src/pages/VerifyEmail.tsx:51",
+      "data-loc": "client\\src\\pages\\VerifyEmail.tsx:51",
       className: "min-h-screen relative overflow-hidden flex items-center justify-center p-4",
       style: {
         backgroundImage: "url(/space-bg.jpg)",
@@ -40684,25 +40684,25 @@ function VerifyEmail() {
         backgroundAttachment: "fixed"
       },
       children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client/src/pages/VerifyEmail.tsx:60", className: "absolute inset-0 bg-black/40 pointer-events-none" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client/src/pages/VerifyEmail.tsx:61", className: "relative z-10 w-full max-w-md bg-gradient-to-br from-purple-900/50 via-slate-900/70 to-slate-900/50 backdrop-blur-xl rounded-3xl p-8 border-2 border-cyan-400/50 shadow-2xl text-center", style: { boxShadow: "0 0 30px rgba(0, 217, 255, 0.3), 0 0 60px rgba(255, 0, 255, 0.2)" }, children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client\\src\\pages\\VerifyEmail.tsx:60", className: "absolute inset-0 bg-black/40 pointer-events-none" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-loc": "client\\src\\pages\\VerifyEmail.tsx:61", className: "relative z-10 w-full max-w-md bg-gradient-to-br from-purple-900/50 via-slate-900/70 to-slate-900/50 backdrop-blur-xl rounded-3xl p-8 border-2 border-cyan-400/50 shadow-2xl text-center", style: { boxShadow: "0 0 30px rgba(0, 217, 255, 0.3), 0 0 60px rgba(255, 0, 255, 0.2)" }, children: [
           status === "loading" && /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client/src/pages/VerifyEmail.tsx:64", className: "animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-400 mx-auto mb-4" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { "data-loc": "client/src/pages/VerifyEmail.tsx:65", className: "text-3xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent mb-2", children: "Vérification en cours..." }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { "data-loc": "client/src/pages/VerifyEmail.tsx:66", className: "text-slate-300", children: "On confirme ton email..." })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-loc": "client\\src\\pages\\VerifyEmail.tsx:64", className: "animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-400 mx-auto mb-4" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { "data-loc": "client\\src\\pages\\VerifyEmail.tsx:65", className: "text-3xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent mb-2", children: "Vérification en cours..." }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { "data-loc": "client\\src\\pages\\VerifyEmail.tsx:66", className: "text-slate-300", children: "On confirme ton email..." })
           ] }),
           status === "success" && /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { "data-loc": "client/src/pages/VerifyEmail.tsx:72", className: "text-3xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent mb-2", children: "Email vérifié ✅" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { "data-loc": "client/src/pages/VerifyEmail.tsx:73", className: "text-slate-200", children: message }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { "data-loc": "client/src/pages/VerifyEmail.tsx:74", className: "text-slate-400 text-sm mt-4", children: "Redirection vers le login..." })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { "data-loc": "client\\src\\pages\\VerifyEmail.tsx:72", className: "text-3xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent mb-2", children: "Email vérifié ✅" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { "data-loc": "client\\src\\pages\\VerifyEmail.tsx:73", className: "text-slate-200", children: message }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { "data-loc": "client\\src\\pages\\VerifyEmail.tsx:74", className: "text-slate-400 text-sm mt-4", children: "Redirection vers le login..." })
           ] }),
           status === "error" && /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { "data-loc": "client/src/pages/VerifyEmail.tsx:80", className: "text-3xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent mb-2", children: "Erreur ❌" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { "data-loc": "client/src/pages/VerifyEmail.tsx:81", className: "text-slate-300 mb-6", children: message }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { "data-loc": "client\\src\\pages\\VerifyEmail.tsx:80", className: "text-3xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent mb-2", children: "Erreur ❌" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { "data-loc": "client\\src\\pages\\VerifyEmail.tsx:81", className: "text-slate-300 mb-6", children: message }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               "button",
               {
-                "data-loc": "client/src/pages/VerifyEmail.tsx:82",
+                "data-loc": "client\\src\\pages\\VerifyEmail.tsx:82",
                 onClick: () => window.location.href = "/login",
                 className: "text-cyan-400 hover:text-cyan-300 font-semibold",
                 children: "Retour au login"
@@ -40715,27 +40715,27 @@ function VerifyEmail() {
   );
 }
 function Router() {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(Switch, { "data-loc": "client/src/App.tsx:16", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { "data-loc": "client/src/App.tsx:17", path: "/", component: Home }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { "data-loc": "client/src/App.tsx:18", path: "/login", component: Auth }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { "data-loc": "client/src/App.tsx:19", path: "/signup", component: Auth }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { "data-loc": "client/src/App.tsx:20", path: "/forgot-password", component: ForgotPassword }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { "data-loc": "client/src/App.tsx:21", path: "/reset-password", component: ResetPassword }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { "data-loc": "client/src/App.tsx:22", path: "/verify", component: VerifyEmail }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { "data-loc": "client/src/App.tsx:23", path: "/room/:room", component: Chat }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { "data-loc": "client/src/App.tsx:24", path: "/404", component: NotFound }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { "data-loc": "client/src/App.tsx:26", component: NotFound })
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(Switch, { "data-loc": "client\\src\\App.tsx:16", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { "data-loc": "client\\src\\App.tsx:17", path: "/", component: Home }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { "data-loc": "client\\src\\App.tsx:18", path: "/login", component: Auth }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { "data-loc": "client\\src\\App.tsx:19", path: "/signup", component: Auth }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { "data-loc": "client\\src\\App.tsx:20", path: "/forgot-password", component: ForgotPassword }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { "data-loc": "client\\src\\App.tsx:21", path: "/reset-password", component: ResetPassword }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { "data-loc": "client\\src\\App.tsx:22", path: "/verify", component: VerifyEmail }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { "data-loc": "client\\src\\App.tsx:23", path: "/room/:room", component: Chat }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { "data-loc": "client\\src\\App.tsx:24", path: "/404", component: NotFound }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { "data-loc": "client\\src\\App.tsx:26", component: NotFound })
   ] });
 }
 function App() {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(ErrorBoundary, { "data-loc": "client/src/App.tsx:33", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(ErrorBoundary, { "data-loc": "client\\src\\App.tsx:33", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
     ThemeProvider,
     {
-      "data-loc": "client/src/App.tsx:34",
+      "data-loc": "client\\src\\App.tsx:34",
       defaultTheme: "dark",
-      children: /* @__PURE__ */ jsxRuntimeExports.jsxs(TooltipProvider, { "data-loc": "client/src/App.tsx:37", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Toaster2, { "data-loc": "client/src/App.tsx:38" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Router, { "data-loc": "client/src/App.tsx:39" })
+      children: /* @__PURE__ */ jsxRuntimeExports.jsxs(TooltipProvider, { "data-loc": "client\\src\\App.tsx:37", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Toaster2, { "data-loc": "client\\src\\App.tsx:38" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Router, { "data-loc": "client\\src\\App.tsx:39" })
       ] })
     }
   ) });
@@ -40784,5 +40784,5 @@ const trpcClient = trpc.createClient({
   ]
 });
 clientExports.createRoot(document.getElementById("root")).render(
-  /* @__PURE__ */ jsxRuntimeExports.jsx(trpc.Provider, { "data-loc": "client/src/main.tsx:56", client: trpcClient, queryClient, children: /* @__PURE__ */ jsxRuntimeExports.jsx(QueryClientProvider, { "data-loc": "client/src/main.tsx:57", client: queryClient, children: /* @__PURE__ */ jsxRuntimeExports.jsx(App, { "data-loc": "client/src/main.tsx:58" }) }) })
+  /* @__PURE__ */ jsxRuntimeExports.jsx(trpc.Provider, { "data-loc": "client\\src\\main.tsx:56", client: trpcClient, queryClient, children: /* @__PURE__ */ jsxRuntimeExports.jsx(QueryClientProvider, { "data-loc": "client\\src\\main.tsx:57", client: queryClient, children: /* @__PURE__ */ jsxRuntimeExports.jsx(App, { "data-loc": "client\\src\\main.tsx:58" }) }) })
 );
