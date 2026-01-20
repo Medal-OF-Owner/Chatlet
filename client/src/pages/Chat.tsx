@@ -736,7 +736,7 @@ export default function Chat() {
                             if (el) {
                               remoteVideoRefs.current.set(user.id, el);
                               if (el.srcObject !== user.stream) {
-                                el.srcObject = user.stream;
+                                el.srcObject = user.stream ?? null;
                               }
                             }
                           }}

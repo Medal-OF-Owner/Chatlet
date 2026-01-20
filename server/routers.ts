@@ -63,7 +63,7 @@ export const appRouter = router({
         profileImage: z.string().nullable(),
       }))
       .mutation(async ({ ctx, input }) => {
-        if (!ctx.user) {
+        if (!ctx.user?.email) {
           throw new Error("Unauthorized");
         }
         const db = await getDb();
@@ -73,7 +73,7 @@ export const appRouter = router({
         const { accounts } = await import("../drizzle/schema");
         const { eq } = await import("drizzle-orm");
 
-        await db.update(accounts).set({ profileImage: input.profileImage }).where(eq(accounts.email, ctx.user.email));
+        await db.update(accounts).set({ profileImage: input.profileImage }).where(eq(accounts.email, ctx.user.email!));
 
         return { success: true };
       }),
