@@ -61,7 +61,7 @@ export const appRouter = router({
             profileImage: z.string().nullable(),
         }))
             .mutation(async ({ ctx, input }) => {
-            if (!ctx.user) {
+            if (!ctx.user?.email) {
                 throw new Error("Unauthorized");
             }
             const db = await getDb();

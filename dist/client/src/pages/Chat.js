@@ -400,7 +400,7 @@ export default function Chat() {
                                                                             if (el) {
                                                                                 remoteVideoRefs.current.set(user.id, el);
                                                                                 if (el.srcObject !== user.stream) {
-                                                                                    el.srcObject = user.stream;
+                                                                                    el.srcObject = user.stream ?? null;
                                                                                 }
                                                                             }
                                                                         }, autoPlay: true, playsInline: true, className: "w-full h-full object-cover" })) : (_jsx("span", { className: "text-slate-500 text-xs", children: "No video" })) })] }, user.id))) })] }))] })] })] })] })] }));
