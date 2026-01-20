@@ -25,11 +25,7 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
-    minify: 'terser',
-    terserOptions: {
-      compress: false,
-      mangle: false
-    },
+    minify: false,
     cssMinify: false,
     ssr: false
   },
