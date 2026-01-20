@@ -1,9 +1,11 @@
 import "dotenv/config";
 import express from "express";
 import { createServer } from "http";
-import { drizzle } from "drizzle-orm/node-postgres";
+import { drizzle as drizzlePg } from "drizzle-orm/node-postgres";
+import { drizzle as drizzleMysql } from "drizzle-orm/mysql2";
 import { sql } from "drizzle-orm";
-import { Pool } from "pg";
+import { Pool as PgPool } from "pg";
+import mysql from "mysql2/promise";
 
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { registerOAuthRoutes } from "./oauth";
@@ -15,7 +17,6 @@ import { setupSocketIO } from "./socketio";
 
 // Run database migrations on startup
 async function runMigrations() {
-  // Wait for DATABASE_URL to be available (Render may inject it with delay)
   let dbUrl = process.env.DATABASE_URL;
   let attempts = 0;
 
@@ -32,157 +33,144 @@ async function runMigrations() {
   }
 
   try {
-    console.log("[DB] Creating tables if needed...");
-    const pool = new Pool({
-      connectionString: dbUrl,
-      ssl: process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : false,
-    });
+    const isMysql = dbUrl.startsWith("mysql");
+    console.log(`[DB] Detected ${isMysql ? "MySQL" : "PostgreSQL"} database. Checking tables...`);
 
-    const db = drizzle(pool);
+    if (isMysql) {
+      const connection = await mysql.createConnection(dbUrl);
+      const db = drizzleMysql(connection);
 
-    // Create tables
-    await db.execute(sql`
-      CREATE TABLE IF NOT EXISTS users (
-        id SERIAL PRIMARY KEY,
-        "openId" VARCHAR(64) NOT NULL UNIQUE,
-        name TEXT,
-        email VARCHAR(320),
-        "loginMethod" VARCHAR(64),
-        role VARCHAR(64) DEFAULT 'user' NOT NULL,
-        "createdAt" TIMESTAMP NOT NULL DEFAULT NOW(),
-        "updatedAt" TIMESTAMP NOT NULL DEFAULT NOW(),
-        "lastSignedIn" TIMESTAMP NOT NULL DEFAULT NOW()
-      )
-    `);
+      // MySQL Table Creation
+      await db.execute(sql`
+        CREATE TABLE IF NOT EXISTS users (
+          id INT AUTO_INCREMENT PRIMARY KEY,
+          openId VARCHAR(64) NOT NULL UNIQUE,
+          name TEXT,
+          email VARCHAR(320),
+          loginMethod VARCHAR(64),
+          role VARCHAR(64) DEFAULT 'user' NOT NULL,
+          createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+          updatedAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+          lastSignedIn TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+        )
+      `);
 
-    await db.execute(sql`
-      CREATE TABLE IF NOT EXISTS rooms (
-        id SERIAL PRIMARY KEY,
-        slug VARCHAR(100) NOT NULL UNIQUE,
-        "createdAt" TIMESTAMP NOT NULL DEFAULT NOW()
-      )
-    `);
+      await db.execute(sql`
+        CREATE TABLE IF NOT EXISTS rooms (
+          id INT AUTO_INCREMENT PRIMARY KEY,
+          slug VARCHAR(100) NOT NULL UNIQUE,
+          createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+        )
+      `);
 
-    await db.execute(sql`
-      CREATE TABLE IF NOT EXISTS messages (
-        id SERIAL PRIMARY KEY,
-        "roomId" INTEGER NOT NULL,
-        nickname VARCHAR(100) NOT NULL,
-        content TEXT NOT NULL,
-        "fontFamily" VARCHAR(100) DEFAULT 'sans-serif',
-        "textColor" VARCHAR(7) DEFAULT '#ffffff',
-        "profileImage" TEXT,
-        "createdAt" TIMESTAMP NOT NULL DEFAULT NOW()
-      )
-    `);
+      await db.execute(sql`
+        CREATE TABLE IF NOT EXISTS messages (
+          id INT AUTO_INCREMENT PRIMARY KEY,
+          roomId INT NOT NULL,
+          nickname VARCHAR(100) NOT NULL,
+          content TEXT NOT NULL,
+          fontFamily VARCHAR(100) DEFAULT 'sans-serif',
+          textColor VARCHAR(7) DEFAULT '#ffffff',
+          profileImage TEXT,
+          createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+        )
+      `);
 
-    await db.execute(sql`
-      CREATE TABLE IF NOT EXISTS "activeNicknames" (
-        nickname VARCHAR(50) PRIMARY KEY,
-        "connectedAt" TIMESTAMP NOT NULL DEFAULT NOW()
-      )
-    `);
+      await db.execute(sql`
+        CREATE TABLE IF NOT EXISTS activeNicknames (
+          nickname VARCHAR(100) PRIMARY KEY,
+          connectedAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+        )
+      `);
 
-    await db.execute(sql`
-      CREATE TABLE IF NOT EXISTS accounts (
-        id SERIAL PRIMARY KEY,
-        email VARCHAR(320) NOT NULL UNIQUE,
-        nickname VARCHAR(100) NOT NULL UNIQUE,
-        "normalizedNickname" VARCHAR(100) NOT NULL UNIQUE,
-        "passwordHash" VARCHAR(255) NOT NULL,
-        "emailVerified" TIMESTAMP,
-        "verificationToken" VARCHAR(255),
-        "resetToken" VARCHAR(255),
-        "resetTokenExpiry" TIMESTAMP,
-        "profileImage" TEXT,
-        "createdAt" TIMESTAMP NOT NULL DEFAULT NOW(),
-        "lastLogin" TIMESTAMP NOT NULL DEFAULT NOW()
-      )
-    `);
+      await db.execute(sql`
+        CREATE TABLE IF NOT EXISTS accounts (
+          id INT AUTO_INCREMENT PRIMARY KEY,
+          email VARCHAR(320) NOT NULL UNIQUE,
+          nickname VARCHAR(100) NOT NULL UNIQUE,
+          normalizedNickname VARCHAR(100) NOT NULL UNIQUE,
+          passwordHash VARCHAR(255) NOT NULL,
+          emailVerified TIMESTAMP NULL,
+          verificationToken VARCHAR(255),
+          resetToken VARCHAR(255),
+          resetTokenExpiry TIMESTAMP NULL,
+          profileImage TEXT,
+          createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+          lastLogin TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+        )
+      `);
+      
+      await connection.end();
+    } else {
+      // PostgreSQL Table Creation
+      const pool = new PgPool({
+        connectionString: dbUrl,
+        ssl: process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : false,
+      });
+      const db = drizzlePg(pool);
 
-    // Add missing columns if they don't exist
-    try {
       await db.execute(sql`
-        ALTER TABLE messages
-        ADD COLUMN IF NOT EXISTS "profileImage" TEXT
+        CREATE TABLE IF NOT EXISTS users (
+          id SERIAL PRIMARY KEY,
+          "openId" VARCHAR(64) NOT NULL UNIQUE,
+          name TEXT,
+          email VARCHAR(320),
+          "loginMethod" VARCHAR(64),
+          role VARCHAR(64) DEFAULT 'user' NOT NULL,
+          "createdAt" TIMESTAMP NOT NULL DEFAULT NOW(),
+          "updatedAt" TIMESTAMP NOT NULL DEFAULT NOW(),
+          "lastSignedIn" TIMESTAMP NOT NULL DEFAULT NOW()
+        )
       `);
-      console.log("[DB] ✓ messages.profileImage verified");
-    } catch (e) {
-      console.log("[DB] messages.profileImage already exists or error:", (e as Error).message.slice(0, 50));
-    }
-    
-    try {
+
       await db.execute(sql`
-        ALTER TABLE messages
-        ADD COLUMN IF NOT EXISTS "textColor" VARCHAR(7) DEFAULT '#ffffff'
+        CREATE TABLE IF NOT EXISTS rooms (
+          id SERIAL PRIMARY KEY,
+          slug VARCHAR(100) NOT NULL UNIQUE,
+          "createdAt" TIMESTAMP NOT NULL DEFAULT NOW()
+        )
       `);
-      console.log("[DB] ✓ messages.textColor verified");
-    } catch (e) {
-      console.log("[DB] messages.textColor already exists or error:", (e as Error).message.slice(0, 50));
-    }
-    
-    try {
+
       await db.execute(sql`
-        ALTER TABLE accounts
-        ADD COLUMN IF NOT EXISTS "profileImage" TEXT
+        CREATE TABLE IF NOT EXISTS messages (
+          id SERIAL PRIMARY KEY,
+          "roomId" INTEGER NOT NULL,
+          nickname VARCHAR(100) NOT NULL,
+          content TEXT NOT NULL,
+          "fontFamily" VARCHAR(100) DEFAULT 'sans-serif',
+          "textColor" VARCHAR(7) DEFAULT '#ffffff',
+          "profileImage" TEXT,
+          "createdAt" TIMESTAMP NOT NULL DEFAULT NOW()
+        )
       `);
-      console.log("[DB] ✓ accounts.profileImage verified");
-    } catch (e) {
-      console.log("[DB] accounts.profileImage already exists or error:", (e as Error).message.slice(0, 50));
-    }
-    
-    try {
+
       await db.execute(sql`
-        ALTER TABLE accounts
-        ADD COLUMN IF NOT EXISTS "emailVerified" TIMESTAMP
+        CREATE TABLE IF NOT EXISTS "activeNicknames" (
+          nickname VARCHAR(50) PRIMARY KEY,
+          "connectedAt" TIMESTAMP NOT NULL DEFAULT NOW()
+        )
       `);
-      console.log("[DB] ✓ accounts.emailVerified verified");
-    } catch (e) {
-      console.log("[DB] accounts.emailVerified already exists or error:", (e as Error).message.slice(0, 50));
-    }
-    
-    try {
+
       await db.execute(sql`
-        ALTER TABLE accounts
-        ADD COLUMN IF NOT EXISTS "verificationToken" VARCHAR(255)
+        CREATE TABLE IF NOT EXISTS accounts (
+          id SERIAL PRIMARY KEY,
+          email VARCHAR(320) NOT NULL UNIQUE,
+          nickname VARCHAR(100) NOT NULL UNIQUE,
+          "normalizedNickname" VARCHAR(100) NOT NULL UNIQUE,
+          "passwordHash" VARCHAR(255) NOT NULL,
+          "emailVerified" TIMESTAMP,
+          "verificationToken" VARCHAR(255),
+          "resetToken" VARCHAR(255),
+          "resetTokenExpiry" TIMESTAMP,
+          "profileImage" TEXT,
+          "createdAt" TIMESTAMP NOT NULL DEFAULT NOW(),
+          "lastLogin" TIMESTAMP NOT NULL DEFAULT NOW()
+        )
       `);
-      console.log("[DB] ✓ accounts.verificationToken verified");
-    } catch (e) {
-      console.log("[DB] accounts.verificationToken already exists or error:", (e as Error).message.slice(0, 50));
-    }
-    
-    try {
-      await db.execute(sql`
-        ALTER TABLE accounts
-        ADD COLUMN IF NOT EXISTS "resetToken" VARCHAR(255)
-      `);
-      console.log("[DB] ✓ accounts.resetToken verified");
-    } catch (e) {
-      console.log("[DB] accounts.resetToken already exists or error:", (e as Error).message.slice(0, 50));
-    }
-    
-    try {
-      await db.execute(sql`
-        ALTER TABLE accounts
-        ADD COLUMN IF NOT EXISTS "resetTokenExpiry" TIMESTAMP
-      `);
-      console.log("[DB] ✓ accounts.resetTokenExpiry verified");
-    } catch (e) {
-      console.log("[DB] accounts.resetTokenExpiry already exists or error:", (e as Error).message.slice(0, 50));
-    }
-    
-    try {
-      await db.execute(sql`
-        ALTER TABLE accounts
-        ADD COLUMN IF NOT EXISTS "normalizedNickname" VARCHAR(100)
-      `);
-      console.log("[DB] ✓ accounts.normalizedNickname verified");
-    } catch (e) {
-      console.log("[DB] accounts.normalizedNickname already exists or error:", (e as Error).message.slice(0, 50));
+      await pool.end();
     }
 
     console.log("[DB] Tables created/verified!");
-    await pool.end();
   } catch (err) {
     console.error("[DB] Migration error:", err);
     throw err;
@@ -200,12 +188,8 @@ async function startServer() {
   // Configure body parser with larger size limit for file uploads
   app.use(express.json({ limit: "50mb" }));
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
-  // Health check endpoint (for keeping app alive on Render free tier)
-  app.get("/keep-alive", (req, res) => {
-    res.json({ status: "alive" });
-  });
+  
   app.get("/health", (req, res) => {
-    console.log(`🏥 Health check from ${req.ip} - Server alive!`);
     res.json({ status: "ok", timestamp: new Date().toISOString() });
   });
 
@@ -220,7 +204,7 @@ async function startServer() {
       createContext,
     })
   );
-  // development mode uses Vite, production mode uses static files
+  
   if (process.env.NODE_ENV === "development") {
     await setupVite(app, server);
   } else {
@@ -231,7 +215,6 @@ async function startServer() {
 
   server.listen(port, "0.0.0.0", () => {
     console.log(`Server running on http://0.0.0.0:${port}/`);
-    console.log(`Socket.IO ready on ws://0.0.0.0:${port}/`);
   });
 }
 
