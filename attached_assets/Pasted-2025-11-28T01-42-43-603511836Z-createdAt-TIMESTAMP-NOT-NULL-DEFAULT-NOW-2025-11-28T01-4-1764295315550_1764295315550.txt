@@ -1,0 +1,50 @@
+2025-11-28T01:42:43.603511836Z         "createdAt" TIMESTAMP NOT NULL DEFAULT NOW(),
+2025-11-28T01:42:43.603513936Z         "updatedAt" TIMESTAMP NOT NULL DEFAULT NOW(),
+2025-11-28T01:42:43.603516036Z         "lastSignedIn" TIMESTAMP NOT NULL DEFAULT NOW()
+2025-11-28T01:42:43.603518116Z       )
+2025-11-28T01:42:43.603520326Z     
+2025-11-28T01:42:43.603522506Z params: 
+2025-11-28T01:42:43.603524886Z     at NodePgPreparedQuery.queryWithCache (file:///app/node_modules/.pnpm/drizzle-orm@0.44.7_mysql2@3.15.3_pg@8.16.3/node_modules/drizzle-orm/pg-core/session.js:41:15)
+2025-11-28T01:42:43.603527237Z     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-11-28T01:42:43.603529327Z     at async runMigrations (file:///app/dist/index.js:960:5)
+2025-11-28T01:42:43.603531427Z     at async startServer (file:///app/dist/index.js:1014:3) {
+2025-11-28T01:42:43.603533557Z   query: '\n' +
+2025-11-28T01:42:43.603535727Z     '      CREATE TABLE IF NOT EXISTS users (\n' +
+2025-11-28T01:42:43.603537897Z     '        id SERIAL PRIMARY KEY,\n' +
+2025-11-28T01:42:43.603540087Z     '        "openId" VARCHAR(64) NOT NULL UNIQUE,\n' +
+2025-11-28T01:42:43.603542147Z     '        name TEXT,\n' +
+2025-11-28T01:42:43.603544227Z     '        email VARCHAR(320),\n' +
+2025-11-28T01:42:43.603546307Z     '        "loginMethod" VARCHAR(64),\n' +
+2025-11-28T01:42:43.603548407Z     "        role role DEFAULT 'user' NOT NULL,\n" +
+2025-11-28T01:42:43.603550477Z     '        "createdAt" TIMESTAMP NOT NULL DEFAULT NOW(),\n' +
+2025-11-28T01:42:43.603552507Z     '        "updatedAt" TIMESTAMP NOT NULL DEFAULT NOW(),\n' +
+2025-11-28T01:42:43.603554778Z     '        "lastSignedIn" TIMESTAMP NOT NULL DEFAULT NOW()\n' +
+2025-11-28T01:42:43.603556847Z     '      )\n' +
+2025-11-28T01:42:43.603558948Z     '    ',
+2025-11-28T01:42:43.603561058Z   params: [],
+2025-11-28T01:42:43.603563108Z   cause: error: type "role" does not exist
+2025-11-28T01:42:43.603565218Z       at /app/node_modules/.pnpm/pg-pool@3.10.1_pg@8.16.3/node_modules/pg-pool/index.js:45:11
+2025-11-28T01:42:43.603580278Z       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-11-28T01:42:43.603584508Z       at async file:///app/node_modules/.pnpm/drizzle-orm@0.44.7_mysql2@3.15.3_pg@8.16.3/node_modules/drizzle-orm/node-postgres/session.js:113:20
+2025-11-28T01:42:43.603587799Z       at async NodePgPreparedQuery.queryWithCache (file:///app/node_modules/.pnpm/drizzle-orm@0.44.7_mysql2@3.15.3_pg@8.16.3/node_modules/drizzle-orm/pg-core/session.js:39:16)
+2025-11-28T01:42:43.603591519Z       at async runMigrations (file:///app/dist/index.js:960:5)
+2025-11-28T01:42:43.603594889Z       at async startServer (file:///app/dist/index.js:1014:3) {
+2025-11-28T01:42:43.603598309Z     length: 92,
+2025-11-28T01:42:43.603601649Z     severity: 'ERROR',
+2025-11-28T01:42:43.603603769Z     code: '42704',
+2025-11-28T01:42:43.603605809Z     detail: undefined,
+2025-11-28T01:42:43.603607839Z     hint: undefined,
+2025-11-28T01:42:43.603609949Z     position: '215',
+2025-11-28T01:42:43.603612049Z     internalPosition: undefined,
+2025-11-28T01:42:43.603614159Z     internalQuery: undefined,
+2025-11-28T01:42:43.6036162Z     where: undefined,
+2025-11-28T01:42:43.60361832Z     schema: undefined,
+2025-11-28T01:42:43.60362058Z     table: undefined,
+2025-11-28T01:42:43.6036227Z     column: undefined,
+2025-11-28T01:42:43.60362474Z     dataType: undefined,
+2025-11-28T01:42:43.60362684Z     constraint: undefined,
+2025-11-28T01:42:43.60362894Z     file: 'parse_type.c',
+2025-11-28T01:42:43.60363099Z     line: '270',
+2025-11-28T01:42:43.60363305Z     routine: 'typenameType'
+2025-11-28T01:42:43.60363515Z   }
+2025-11-28T01:42:43.60363728Z }

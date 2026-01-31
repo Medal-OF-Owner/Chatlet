@@ -1,0 +1,96 @@
+Search
+[Auth] Missing session cookie
+User connected: kp0XuxAsVilq9XVGAAAB
+User connected: W8cWpoyOZSny2yacAAAD
+file:///app/node_modules/.pnpm/drizzle-orm@0.44.7_knex@2.5.1_mysql2@3.15.3_pg@8.16.3__mysql2@3.15.3_pg@8.16.3/node_modules/drizzle-orm/pg-core/session.js:41
+        throw new DrizzleQueryError(queryString, params, e);
+              ^
+DrizzleQueryError: Failed query: select "id", "roomId", "nickname", "content", "fontFamily", "profileImage", "createdAt" from "messages" where "messages"."roomId" = $1 order by "messages"."createdAt" desc limit $2
+params: 9,50
+    at NodePgPreparedQuery.queryWithCache (file:///app/node_modules/.pnpm/drizzle-orm@0.44.7_knex@2.5.1_mysql2@3.15.3_pg@8.16.3__mysql2@3.15.3_pg@8.16.3/node_modules/drizzle-orm/pg-core/session.js:41:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async file:///app/node_modules/.pnpm/drizzle-orm@0.44.7_knex@2.5.1_mysql2@3.15.3_pg@8.16.3__mysql2@3.15.3_pg@8.16.3/node_modules/drizzle-orm/node-postgres/session.js:117:22
+    at async getMessages (file:///app/dist/index.js:238:10)
+    at async Socket.<anonymous> (file:///app/dist/index.js:1012:25) {
+  query: 'select "id", "roomId", "nickname", "content", "fontFamily", "profileImage", "createdAt" from "messages" where "messages"."roomId" = $1 order by "messages"."createdAt" desc limit $2',
+  params: [ 9, 50 ],
+  cause: error: column "profileImage" does not exist
+      at /app/node_modules/.pnpm/pg-pool@3.10.1_pg@8.16.3/node_modules/pg-pool/index.js:45:11
+      at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+      at async file:///app/node_modules/.pnpm/drizzle-orm@0.44.7_knex@2.5.1_mysql2@3.15.3_pg@8.16.3__mysql2@3.15.3_pg@8.16.3/node_modules/drizzle-orm/node-postgres/session.js:124:18
+      at async NodePgPreparedQuery.queryWithCache (file:///app/node_modules/.pnpm/drizzle-orm@0.44.7_knex@2.5.1_mysql2@3.15.3_pg@8.16.3__mysql2@3.15.3_pg@8.16.3/node_modules/drizzle-orm/pg-core/session.js:39:16)
+      at async file:///app/node_modules/.pnpm/drizzle-orm@0.44.7_knex@2.5.1_mysql2@3.15.3_pg@8.16.3__mysql2@3.15.3_pg@8.16.3/node_modules/drizzle-orm/node-postgres/session.js:117:22
+      at async getMessages (file:///app/dist/index.js:238:10)
+      at async Socket.<anonymous> (file:///app/dist/index.js:1012:25) {
+    length: 112,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: undefined,
+    position: '61',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3822',
+    routine: 'errorMissingColumn'
+  }
+}
+Node.js v20.19.6
+ ELIFECYCLE  Command failed with exit code 1.
+> chatapp@1.0.0 start /app
+> NODE_ENV=production node dist/index.js
+[OAuth] Initialized with baseURL: 
+[OAuth] ERROR: OAUTH_SERVER_URL is not configured! Set OAUTH_SERVER_URL environment variable.
+[DB] Creating tables if needed...
+[DB] Tables created/verified!
+Server running on http://0.0.0.0:10000/
+Socket.IO ready on ws://0.0.0.0:10000/
+[Auth] Missing session cookie
+User connected: yZvQc1OECqxKUwtvAAAB
+file:///app/node_modules/.pnpm/drizzle-orm@0.44.7_knex@2.5.1_mysql2@3.15.3_pg@8.16.3__mysql2@3.15.3_pg@8.16.3/node_modules/drizzle-orm/pg-core/session.js:41
+        throw new DrizzleQueryError(queryString, params, e);
+              ^
+DrizzleQueryError: Failed query: select "id", "roomId", "nickname", "content", "fontFamily", "profileImage", "createdAt" from "messages" where "messages"."roomId" = $1 order by "messages"."createdAt" desc limit $2
+params: 9,50
+    at NodePgPreparedQuery.queryWithCache (file:///app/node_modules/.pnpm/drizzle-orm@0.44.7_knex@2.5.1_mysql2@3.15.3_pg@8.16.3__mysql2@3.15.3_pg@8.16.3/node_modules/drizzle-orm/pg-core/session.js:41:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async file:///app/node_modules/.pnpm/drizzle-orm@0.44.7_knex@2.5.1_mysql2@3.15.3_pg@8.16.3__mysql2@3.15.3_pg@8.16.3/node_modules/drizzle-orm/node-postgres/session.js:117:22
+    at async getMessages (file:///app/dist/index.js:238:10)
+    at async Socket.<anonymous> (file:///app/dist/index.js:1012:25) {
+  query: 'select "id", "roomId", "nickname", "content", "fontFamily", "profileImage", "createdAt" from "messages" where "messages"."roomId" = $1 order by "messages"."createdAt" desc limit $2',
+  params: [ 9, 50 ],
+  cause: error: column "profileImage" does not exist
+      at /app/node_modules/.pnpm/pg-pool@3.10.1_pg@8.16.3/node_modules/pg-pool/index.js:45:11
+      at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+      at async file:///app/node_modules/.pnpm/drizzle-orm@0.44.7_knex@2.5.1_mysql2@3.15.3_pg@8.16.3__mysql2@3.15.3_pg@8.16.3/node_modules/drizzle-orm/node-postgres/session.js:124:18
+      at async NodePgPreparedQuery.queryWithCache (file:///app/node_modules/.pnpm/drizzle-orm@0.44.7_knex@2.5.1_mysql2@3.15.3_pg@8.16.3__mysql2@3.15.3_pg@8.16.3/node_modules/drizzle-orm/pg-core/session.js:39:16)
+      at async file:///app/node_modules/.pnpm/drizzle-orm@0.44.7_knex@2.5.1_mysql2@3.15.3_pg@8.16.3__mysql2@3.15.3_pg@8.16.3/node_modules/drizzle-orm/node-postgres/session.js:117:22
+      at async getMessages (file:///app/dist/index.js:238:10)
+      at async Socket.<anonymous> (file:///app/dist/index.js:1012:25) {
+    length: 112,
+    severity: 'ERROR',
+    code: '42703',
+    detail: undefined,
+    hint: undefined,
+    position: '61',
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'parse_relation.c',
+    line: '3822',
+    routine: 'errorMissingColumn'
+  }
+}
+Node.js v20.19.6
+ ELIFECYCLE  Command failed with exit code 1.

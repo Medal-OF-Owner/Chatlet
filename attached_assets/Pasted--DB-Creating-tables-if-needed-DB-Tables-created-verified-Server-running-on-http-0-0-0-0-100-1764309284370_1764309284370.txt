@@ -1,0 +1,72 @@
+[DB] Creating tables if needed...
+[DB] Tables created/verified!
+Server running on http://0.0.0.0:10000/
+Socket.IO ready on ws://0.0.0.0:10000/
+     ==> Your service is live 🎉
+     ==> 
+     ==> ///////////////////////////////////////////////////////////
+     ==> 
+     ==> Available at your primary URL https://chatlet-i19c.onrender.com
+     ==> 
+     ==> ///////////////////////////////////////////////////////////
+[Auth] Missing session cookie
+[SendGrid] Failed to send verification email: ResponseError: Forbidden
+    at node_modules/.pnpm/@sendgrid+client@8.1.6/node_modules/@sendgrid/client/src/classes/client.js:167:29
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  code: 403,
+  response: {
+    headers: Object [AxiosHeaders] {
+      server: 'nginx',
+      date: 'Fri, 28 Nov 2025 05:46:59 GMT',
+      'content-type': 'application/json',
+      'content-length': '281',
+      connection: 'keep-alive',
+      'access-control-allow-origin': 'https://sendgrid.api-docs.io',
+      'access-control-allow-methods': 'POST',
+      'access-control-allow-headers': 'Authorization, Content-Type, On-behalf-of, x-sg-elas-acl',
+      'access-control-max-age': '600',
+      'x-no-cors-reason': 'https://sendgrid.com/docs/Classroom/Basics/API/cors.html',
+      'strict-transport-security': 'max-age=31536000; includeSubDomains',
+      'content-security-policy': "frame-ancestors 'none'",
+      'cache-control': 'no-cache',
+      'x-content-type-options': 'no-sniff',
+      'referrer-policy': 'strict-origin-when-cross-origin'
+    },
+    body: { errors: [Array] }
+  }
+}
+[Auth] Missing session cookie
+[Auth] Missing session cookie
+User connected: RPVIrxqaFm5pmTisAAAB
+✅ VividLion19 joined room 8
+👋 VividLion19 left room 8
+[Auth] Missing session cookie
+[SendGrid] Failed to send verification email: ResponseError: Forbidden
+    at node_modules/.pnpm/@sendgrid+client@8.1.6/node_modules/@sendgrid/client/src/classes/client.js:167:29
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  code: 403,
+  response: {
+    headers: Object [AxiosHeaders] {
+      server: 'nginx',
+      date: 'Fri, 28 Nov 2025 05:48:19 GMT',
+      'content-type': 'application/json',
+      'content-length': '281',
+      connection: 'keep-alive',
+      'access-control-allow-origin': 'https://sendgrid.api-docs.io',
+      'access-control-allow-methods': 'POST',
+      'access-control-allow-headers': 'Authorization, Content-Type, On-behalf-of, x-sg-elas-acl',
+      'access-control-max-age': '600',
+      'x-no-cors-reason': 'https://sendgrid.com/docs/Classroom/Basics/API/cors.html',
+      'strict-transport-security': 'max-age=31536000; includeSubDomains',
+      'content-security-policy': "frame-ancestors 'none'",
+      'cache-control': 'no-cache',
+      'x-content-type-options': 'no-sniff',
+      'referrer-policy': 'strict-origin-when-cross-origin'
+    },
+    body: { errors: [Array] }
+  }
+}
+🏥 Health check from 127.0.0.1 - Server alive!
+     ==> Detected service running on port 10000
+     ==> Docs on specifying a port: https://render.com/docs/web-services#port-binding
+🏥 Health check from 127.0.0.1 - Server alive!

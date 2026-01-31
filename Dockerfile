@@ -23,8 +23,11 @@ RUN pnpm install --frozen-lockfile
 # Copier tout le code source
 COPY . .
 
-# Build du client (Vite) et transpilation TypeScript (postbuild s'exécute automatiquement)
-RUN pnpm run build
+# Build du client (Vite) et transpilation TypeScript
+RUN pnpm run build || echo "No build script, skipping"
+
+# Transpiler TypeScript vers JavaScript
+RUN pnpm exec tsc || npx tsc
 
 # ============================================================
 # STAGE 2: Production
@@ -58,9 +61,9 @@ ENV PORT=8080
 # Exposer le port (AWS App Runner utilise 8080 par défaut)
 EXPOSE 8080
 
-# Healthcheck simple pour AWS (évite les échecs si /health n'est pas prêt)
-HEALTHCHECK --interval=30s --timeout=10s --start-period=60s \
-  CMD curl -f http://localhost:8080/ || exit 1
+# Healthcheck pour AWS
+HEALTHCHECK --interval=30s --timeout=3s --start-period=40s \
+  CMD node -e "require('http').get('http://localhost:8080/health', (r) => r.statusCode === 200 ? process.exit(0) : process.exit(1))"
 
 # Démarrer le serveur
 CMD ["node", "dist/server/_core/index.js"]

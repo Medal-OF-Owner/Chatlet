@@ -1,0 +1,35 @@
+#13 2.819     at failureErrorWithLog (/app/node_modules/.pnpm/esbuild@0.25.12/node_modules/esbuild/lib/main.js:1467:15)
+#13 2.819     at /app/node_modules/.pnpm/esbuild@0.25.12/node_modules/esbuild/lib/main.js:736:50
+#13 2.819     at responseCallbacks.<computed> (/app/node_modules/.pnpm/esbuild@0.25.12/node_modules/esbuild/lib/main.js:603:9)
+#13 2.819     at handleIncomingPacket (/app/node_modules/.pnpm/esbuild@0.25.12/node_modules/esbuild/lib/main.js:658:12)
+#13 2.819     at Socket.readFromStdout (/app/node_modules/.pnpm/esbuild@0.25.12/node_modules/esbuild/lib/main.js:581:7)
+#13 2.819     at Socket.emit (node:events:524:28)
+#13 2.819     at addChunk (node:internal/streams/readable:561:12)
+#13 2.819     at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+#13 2.819     at Readable.push (node:internal/streams/readable:392:5)
+#13 2.819     at Pipe.onStreamRead (node:internal/stream_base_commons:191:23)
+#13 2.843  ELIFECYCLE  Command failed with exit code 1.
+#13 ERROR: process "/bin/sh -c pnpm build" did not complete successfully: exit code: 1
+------
+ > [7/7] RUN pnpm build:
+2.819     at /app/node_modules/.pnpm/esbuild@0.25.12/node_modules/esbuild/lib/main.js:736:50
+2.819     at responseCallbacks.<computed> (/app/node_modules/.pnpm/esbuild@0.25.12/node_modules/esbuild/lib/main.js:603:9)
+2.819     at handleIncomingPacket (/app/node_modules/.pnpm/esbuild@0.25.12/node_modules/esbuild/lib/main.js:658:12)
+2.819     at Socket.readFromStdout (/app/node_modules/.pnpm/esbuild@0.25.12/node_modules/esbuild/lib/main.js:581:7)
+2.819     at Socket.emit (node:events:524:28)
+2.819     at addChunk (node:internal/streams/readable:561:12)
+2.819     at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2.819     at Readable.push (node:internal/streams/readable:392:5)
+2.819     at Pipe.onStreamRead (node:internal/stream_base_commons:191:23)
+2.843  ELIFECYCLE  Command failed with exit code 1.
+------
+Dockerfile:18
+--------------------
+  16 |     
+  17 |     # Build the project (client + server bundle)
+  18 | >>> RUN pnpm build
+  19 |     
+  20 |     # Expose port
+--------------------
+error: failed to solve: process "/bin/sh -c pnpm build" did not complete successfully: exit code: 1
+error: exit status 1

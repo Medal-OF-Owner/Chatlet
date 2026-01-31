@@ -1,0 +1,50 @@
+2025-11-28T04:33:19.295298288Z Socket.IO ready on ws://0.0.0.0:10000/
+2025-11-28T04:33:24.210592795Z ==> Your service is live 🎉
+2025-11-28T04:33:24.246424851Z ==> 
+2025-11-28T04:33:24.281442758Z ==> ///////////////////////////////////////////////////////////
+2025-11-28T04:33:24.317699395Z ==> 
+2025-11-28T04:33:24.355757031Z ==> Available at your primary URL https://chatlet-i19c.onrender.com
+2025-11-28T04:33:24.397367208Z ==> 
+2025-11-28T04:33:24.434885244Z ==> ///////////////////////////////////////////////////////////
+2025-11-28T04:34:08.076708964Z [Auth] Missing session cookie
+2025-11-28T04:34:08.177500143Z [Database] Failed to create account: DrizzleQueryError: Failed query: select "id", "email", "nickname", "passwordHash", "emailVerified", "verificationToken", "resetToken", "resetTokenExpiry", "createdAt", "lastLogin" from "accounts" where "accounts"."email" = $1 limit $2
+2025-11-28T04:34:08.177519344Z params: marcoponio7@gmail.com,1
+2025-11-28T04:34:08.177526024Z     at NodePgPreparedQuery.queryWithCache (file:///app/node_modules/.pnpm/drizzle-orm@0.44.7_mysql2@3.15.3_pg@8.16.3/node_modules/drizzle-orm/pg-core/session.js:41:15)
+2025-11-28T04:34:08.177543665Z     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-11-28T04:34:08.177548625Z     at async file:///app/node_modules/.pnpm/drizzle-orm@0.44.7_mysql2@3.15.3_pg@8.16.3/node_modules/drizzle-orm/node-postgres/session.js:117:22
+2025-11-28T04:34:08.177553206Z     ... 4 lines matching cause stack trace ...
+2025-11-28T04:34:08.177558006Z     at async callRecursive (file:///app/node_modules/.pnpm/@trpc+server@11.7.2_typescript@5.9.3/node_modules/@trpc/server/dist/initTRPC-DGaJyg8t.mjs:256:18)
+2025-11-28T04:34:08.177562066Z     at async procedure (file:///app/node_modules/.pnpm/@trpc+server@11.7.2_typescript@5.9.3/node_modules/@trpc/server/dist/initTRPC-DGaJyg8t.mjs:281:18)
+2025-11-28T04:34:08.177565786Z     at async file:///app/node_modules/.pnpm/@trpc+server@11.7.2_typescript@5.9.3/node_modules/@trpc/server/dist/resolveResponse-D7zvnoIM.mjs:1948:18 {
+2025-11-28T04:34:08.177570216Z   query: 'select "id", "email", "nickname", "passwordHash", "emailVerified", "verificationToken", "resetToken", "resetTokenExpiry", "createdAt", "lastLogin" from "accounts" where "accounts"."email" = $1 limit $2',
+2025-11-28T04:34:08.177574036Z   params: [ 'marcoponio7@gmail.com', 1 ],
+2025-11-28T04:34:08.177578257Z   cause: error: column "emailVerified" does not exist
+2025-11-28T04:34:08.177582217Z       at /app/node_modules/.pnpm/pg-pool@3.10.1_pg@8.16.3/node_modules/pg-pool/index.js:45:11
+2025-11-28T04:34:08.177586277Z       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-11-28T04:34:08.177590057Z       at async file:///app/node_modules/.pnpm/drizzle-orm@0.44.7_mysql2@3.15.3_pg@8.16.3/node_modules/drizzle-orm/node-postgres/session.js:124:18
+2025-11-28T04:34:08.177593918Z       at async NodePgPreparedQuery.queryWithCache (file:///app/node_modules/.pnpm/drizzle-orm@0.44.7_mysql2@3.15.3_pg@8.16.3/node_modules/drizzle-orm/pg-core/session.js:39:16)
+2025-11-28T04:34:08.177597788Z       at async file:///app/node_modules/.pnpm/drizzle-orm@0.44.7_mysql2@3.15.3_pg@8.16.3/node_modules/drizzle-orm/node-postgres/session.js:117:22
+2025-11-28T04:34:08.177601498Z       at async createAccount (file:///app/dist/index.js:268:27)
+2025-11-28T04:34:08.177605188Z       at async file:///app/dist/index.js:804:14
+2025-11-28T04:34:08.177608908Z       at async resolveMiddleware (file:///app/node_modules/.pnpm/@trpc+server@11.7.2_typescript@5.9.3/node_modules/@trpc/server/dist/initTRPC-DGaJyg8t.mjs:221:17)
+2025-11-28T04:34:08.177620429Z       at async callRecursive (file:///app/node_modules/.pnpm/@trpc+server@11.7.2_typescript@5.9.3/node_modules/@trpc/server/dist/initTRPC-DGaJyg8t.mjs:256:18)
+2025-11-28T04:34:08.177623199Z       at async callRecursive (file:///app/node_modules/.pnpm/@trpc+server@11.7.2_typescript@5.9.3/node_modules/@trpc/server/dist/initTRPC-DGaJyg8t.mjs:256:18) {
+2025-11-28T04:34:08.177625569Z     length: 113,
+2025-11-28T04:34:08.177628429Z     severity: 'ERROR',
+2025-11-28T04:34:08.17763077Z     code: '42703',
+2025-11-28T04:34:08.17763306Z     detail: undefined,
+2025-11-28T04:34:08.17763535Z     hint: undefined,
+2025-11-28T04:34:08.17763762Z     position: '51',
+2025-11-28T04:34:08.17764006Z     internalPosition: undefined,
+2025-11-28T04:34:08.17764238Z     internalQuery: undefined,
+2025-11-28T04:34:08.17764467Z     where: undefined,
+2025-11-28T04:34:08.17764698Z     schema: undefined,
+2025-11-28T04:34:08.177649251Z     table: undefined,
+2025-11-28T04:34:08.1776515Z     column: undefined,
+2025-11-28T04:34:08.177671882Z     dataType: undefined,
+2025-11-28T04:34:08.177676942Z     constraint: undefined,
+2025-11-28T04:34:08.177679492Z     file: 'parse_relation.c',
+2025-11-28T04:34:08.177681852Z     line: '3822',
+2025-11-28T04:34:08.177684132Z     routine: 'errorMissingColumn'
+2025-11-28T04:34:08.177686362Z   }
+2025-11-28T04:34:08.177688653Z }

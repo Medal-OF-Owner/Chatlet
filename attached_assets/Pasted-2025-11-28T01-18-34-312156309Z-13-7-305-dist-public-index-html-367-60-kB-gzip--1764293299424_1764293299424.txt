@@ -1,0 +1,50 @@
+2025-11-28T01:18:34.312156309Z #13 7.305 ../dist/public/index.html                 367.60 kB │ gzip: 105.47 kB
+2025-11-28T01:18:34.312159899Z #13 7.305 ../dist/public/assets/index-DRXV92l6.css  119.87 kB │ gzip:  18.66 kB
+2025-11-28T01:18:34.312163019Z #13 7.305 ../dist/public/assets/index-as1Dhzos.js   622.95 kB │ gzip: 190.27 kB
+2025-11-28T01:18:34.312165889Z #13 7.305 
+2025-11-28T01:18:34.312169309Z #13 7.305 (!) Some chunks are larger than 500 kB after minification. Consider:
+2025-11-28T01:18:34.31217283Z #13 7.305 - Using dynamic import() to code-split the application
+2025-11-28T01:18:34.312176659Z #13 7.305 - Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+2025-11-28T01:18:34.31217957Z #13 7.305 - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+2025-11-28T01:18:34.31218244Z #13 7.305 ✓ built in 5.93s
+2025-11-28T01:18:34.31218532Z #13 7.423 
+2025-11-28T01:18:34.31218914Z #13 7.423   dist/index.js  32.5kb
+2025-11-28T01:18:34.31219214Z #13 7.423 
+2025-11-28T01:18:34.31219494Z #13 7.423 ⚡ Done in 6ms
+2025-11-28T01:18:34.439549272Z #13 DONE 7.5s
+2025-11-28T01:18:34.594551629Z 
+2025-11-28T01:18:34.59458793Z #14 exporting to docker image format
+2025-11-28T01:18:34.59459198Z #14 exporting layers
+2025-11-28T01:18:34.600561552Z #14 exporting layers 0.2s done
+2025-11-28T01:18:34.84111504Z #14 exporting manifest sha256:51c139c6f1f37b255536640ee98c909849775a2bb195af6e89a936b80e2074ba 0.0s done
+2025-11-28T01:18:34.84113395Z #14 exporting config sha256:500f8ec5dae932cc9358dd0eb7831055123c4e12e699b3638928ff3f75187275 0.0s done
+2025-11-28T01:18:35.763114025Z #14 DONE 1.3s
+2025-11-28T01:18:35.867245136Z 
+2025-11-28T01:18:35.867266176Z #15 exporting cache to client directory
+2025-11-28T01:18:35.867268667Z #15 preparing build cache for export
+2025-11-28T01:18:35.867272456Z #15 writing cache image manifest sha256:83f72d0bfcb4739f2f55a6c6a8fc6698934a316e392d6f4e89dd54b0c420c0b4
+2025-11-28T01:18:35.954372563Z #15 writing cache image manifest sha256:83f72d0bfcb4739f2f55a6c6a8fc6698934a316e392d6f4e89dd54b0c420c0b4 0.0s done
+2025-11-28T01:18:35.954388963Z #15 DONE 0.1s
+2025-11-28T01:18:37.373282469Z Pushing image to registry...
+2025-11-28T01:18:39.008258611Z Upload succeeded
+2025-11-28T01:18:40.775017693Z ==> Deploying...
+2025-11-28T01:19:12.890388703Z 
+2025-11-28T01:19:12.890442984Z > chatapp@1.0.0 start /app
+2025-11-28T01:19:12.890450774Z > NODE_ENV=production node dist/index.js
+2025-11-28T01:19:12.890453604Z 
+2025-11-28T01:19:23.293000874Z [OAuth] Initialized with baseURL: 
+2025-11-28T01:19:23.293409093Z [OAuth] ERROR: OAUTH_SERVER_URL is not configured! Set OAUTH_SERVER_URL environment variable.
+2025-11-28T01:19:23.482664386Z [DB] DATABASE_URL not set, skipping migrations
+2025-11-28T01:19:23.493563086Z Server running on http://0.0.0.0:10000/
+2025-11-28T01:19:23.493673108Z Socket.IO ready on ws://0.0.0.0:10000/
+2025-11-28T01:19:31.813753569Z ==> Your service is live 🎉
+2025-11-28T01:19:31.879035813Z ==> 
+2025-11-28T01:19:31.91395492Z ==> ///////////////////////////////////////////////////////////
+2025-11-28T01:19:31.955632246Z ==> 
+2025-11-28T01:19:31.990387462Z ==> Available at your primary URL https://chatlet-i19c.onrender.com
+2025-11-28T01:19:32.029716539Z ==> 
+2025-11-28T01:19:32.064511686Z ==> ///////////////////////////////////////////////////////////
+2025-11-28T01:24:30.233672574Z ==> Detected service running on port 10000
+2025-11-28T01:24:30.411987268Z ==> Docs on specifying a port: https://render.com/docs/web-services#port-binding
+2025-11-28T01:27:01.985512873Z [Auth] Missing session cookie
+2025-11-28T01:27:02.095433912Z User connected: KMo8CwmNKpRLjTogAAAB

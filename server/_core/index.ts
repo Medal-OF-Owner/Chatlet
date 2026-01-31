@@ -14,15 +14,17 @@ import { appRouter } from "../routers";
 import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
 import { setupSocketIO } from "./socketio";
-import { ENV } from "./env";
 
 // Run database migrations on startup
 async function runMigrations() {
-  let dbUrl = ENV.databaseUrl;
+  let dbUrl = process.env.DATABASE_URL;
   let attempts = 0;
 
-  if (!dbUrl && attempts < 1) {
-    console.log(`[DB] DATABASE_URL not set, checking individual DB variables...`);
+  while (!dbUrl && attempts < 10) {
+    attempts++;
+    console.log(`[DB] DATABASE_URL not set (attempt ${attempts}/10), waiting...`);
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    dbUrl = process.env.DATABASE_URL;
   }
 
   if (!dbUrl) {
@@ -35,23 +37,7 @@ async function runMigrations() {
     console.log(`[DB] Detected ${isMysql ? "MySQL" : "PostgreSQL"} database. Checking tables...`);
 
     if (isMysql) {
-      console.log(`[DB] Attempting to connect to MySQL RDS...`);
-      const connection = await mysql.createConnection({
-        uri: dbUrl,
-        connectTimeout: 10000,
-        ssl: {
-          rejectUnauthorized: false
-        }
-      }).catch(err => {
-        console.error("[DB] CONNECTION ERROR DETAILS:", {
-          message: err.message,
-          code: err.code,
-          errno: err.errno,
-          host: process.env.DB_Host
-        });
-        throw err;
-      });
-      console.log(`[DB] Connected successfully to RDS.`);
+      const connection = await mysql.createConnection(dbUrl);
       const db = drizzleMysql(connection);
 
       // MySQL Table Creation
@@ -192,25 +178,6 @@ async function runMigrations() {
 }
 
 async function startServer() {
-  console.log("[System] Checking environment and files...");
-  console.log("[System] NODE_ENV:", process.env.NODE_ENV);
-  console.log("[System] PORT:", process.env.PORT || process.env.port || "8080 (default)");
-  
-  try {
-    const fs = await import("fs");
-    const path = await import("path");
-    const distPath = path.join(process.cwd(), "dist");
-    if (fs.existsSync(distPath)) {
-      console.log("[System] 'dist' directory found.");
-      const files = fs.readdirSync(distPath);
-      console.log("[System] 'dist' contents:", files);
-    } else {
-      console.warn("[System] 'dist' directory NOT found at:", distPath);
-    }
-  } catch (e) {
-    console.error("[System] Error checking files:", e);
-  }
-
   // Run migrations first
   await runMigrations();
   const app = express();
@@ -244,7 +211,7 @@ async function startServer() {
     serveStatic(app);
   }
 
-  const port = parseInt(process.env.PORT || process.env.port || "8080");
+  const port = parseInt(process.env.PORT || "5000");
 
   server.listen(port, "0.0.0.0", () => {
     console.log(`Server running on http://0.0.0.0:${port}/`);

@@ -1,0 +1,166 @@
+e le contrôle total de  
+0:03
+n’importe quel ordinateur à distance. Et le pire,  c’est que c’est gratuit et extrêmement simple  
+0:08
+à mettre en place. C’est un outil légitime et  open-source qui vous permet de réaliser énormément  
+0:12
+de choses à distance, comme gérer les fichiers  de la machine, récupérer des mots de passe,  
+0:16
+éteindre l’ordinateur et même voir exactement ce  que l’utilisateur est en train de faire en direct.
+0:20
+C’est ce qu’on appelle un outil d'administration  à distance. Il peut être transmis par email avec  
+0:25
+des pièces jointes, par SMS en cliquant sur un  lien, et sur les réseaux sociaux. Il suffit que  
+0:29
+votre cible télécharge le fichier que l’on  va créer dans cette vidéo et c’est terminé.
+0:32
+D’ailleurs, je tiens à préciser que cette  vidéo est uniquement à des fins éducatives.  
+0:36
+L’utilisation de ces outils doit être faite  de manière éthique et légale. Bonne vidéo.
+Les 3 Étapes
+0:40
+Pour que tout cela fonctionne, vous avez  juste besoin de suivre trois étapes.
+0:43
+Tout d’abord, il faudra que vous  téléchargiez l’outil magique appelé Quasar.
+0:46
+Ensuite, il faudra l’exécuter  et créer un fichier que votre  
+0:49
+cible devra télécharger selon différents moyens.
+0:52
+Enfin, lorsque l’utilisateur  va exécuter ce fichier,  
+0:54
+le programme se connectera et communiquera  en retour avec votre machine. À partir de là,  
+0:59
+c’est échec et mat, vous avez le  contrôle total sur son ordinateur.
+Installation
+1:02
+Maintenant que je vous ai mis l’eau à la bouche,  
+1:04
+passons directement à la  mise en place de tout ceci.
+1:06
+La première chose à faire est  d’ouvrir votre navigateur et  
+1:09
+de vous rendre sur la page GitHub de l’outil.
+1:11
+La méthode recommandée pour télécharger  Quasar est de passer par la page des  
+1:14
+releases de l’outil. Vous pourrez y retrouver la  dernière version. Descendez la page vers le bas,  
+1:19
+et vous pourrez télécharger ici le fichier .zip  en cliquant dessus. Une fois que c’est fait,  
+1:23
+il faut extraire ce que vous venez de télécharger  pour avoir accès à l’exécutable appelé Quasar.exe,  
+1:28
+qui va nous permettre de réaliser  l’outil de contrôle à distance.
+1:30
+Après l’avoir lancé avec succès, une fenêtre de  création de certificat s'affichera pour vous aider  
+1:34
+à créer un certificat serveur, indispensable pour  sécuriser la communication entre le serveur et  
+1:39
+les clients. Cliquez sur "Create" pour créer  ce certificat. Le processus de création peut  
+1:43
+prendre un certain temps. Une fois terminé,  il vous sera demandé de faire une sauvegarde  
+1:46
+du fichier appelé quasar.p12. Il est crucial de  sauvegarder ce fichier dans un endroit sécurisé,  
+1:51
+car il est unique et nécessaire pour restaurer  une installation précédente de Quasar.
+1:55
+Et maintenant, nous avons notre outil prêt à  être configuré. Après avoir lancé le fichier,  
+Configuration
+2:00
+vous arriverez sur cet environnement.  Utilisez alors le bouton "Builder" en  
+2:03
+haut de l'application pour démarrer  la création du fichier exécutable.
+2:06
+Ici, on va pouvoir retrouver pas mal d’infos.  Sélectionnez "Enable unattended mode".
+2:11
+Ensuite, l’onglet "Connection Settings" va être  très important. Nous avons besoin de l’adresse  
+2:15
+IP à laquelle la machine cible va devoir se  connecter. Pour trouver cette information, ouvrez  
+2:19
+votre invite de commande en écrivant CMD dans la  barre Windows, puis entrez la commande ipconfig.  
+2:24
+Calmez-vous, vous n’avez pas encore le niveau de  Mr. Robot. Copiez l’adresse IPv4 de votre machine.  
+2:28
+Entrez cette IP dans le champ textuel et cliquez  sur "Add Host" pour ajouter un hôte à la liste des  
+2:33
+hôtes disponibles auxquels le client essaiera  de se connecter. Laissez le port par défaut.
+2:37
+Dans "Installation Settings", on va pouvoir  retrouver également différentes options comme  
+2:41
+le dossier d’installation, son nom, et on  peut même cacher les sous-répertoires avec  
+2:45
+ces deux cases à cocher. Une autre option  importante est le démarrage automatique du  
+2:49
+client qui va s’assurer que la connexion reste  active même si l’ordinateur cible redémarre.
+2:53
+Enfin, dans "Monitoring Settings", vous pourrez  
+2:56
+activer l’enregistrement de frappes au  clavier, qui peut être très intéressant.
+2:59
+Après avoir configuré le client selon vos besoins,  
+3:01
+cliquez sur le bouton "Build Client" et  choisissez un emplacement pour le sauvegarder.
+3:05
+Il est maintenant temps de démarrer  le serveur Quasar. Pour cela,  
+3:08
+cliquez sur "Settings" en haut de la fenêtre  de Quasar, utilisez le port par défaut,  
+3:12
+qui sera le port que l’on va écouter,  cochez l'option pour écouter les nouvelles  
+3:15
+connexions au démarrage et essayez de transférer  automatiquement le port. Sélectionnez "Start  
+3:20
+Listening" puis "Save" pour démarrer l’écoute  comme vous pourrez le voir en bas à gauche.
+Prise De Contrôle
+3:24
+Maintenant, je vais utiliser une autre machine  de test pour lancer l’exécutable que nous  
+3:28
+venons de créer. Il existe différents  moyens pour télécharger ce fichier,  
+3:31
+comme par exemple via Discord, email, sites  web, etc. Voici l’exécutable sur le bureau,  
+3:36
+appelé Client-Build.exe. À partir du  moment où la cible va cliquer dessus,  
+3:40
+nous pourrons avoir accès à  distance à toute sa machine.
+3:42
+D’ailleurs, si vous souhaitez  que je réalise une vidéo pour  
+3:45
+cacher un fichier .exe dans une image  légitime, dites-le-moi en commentaire.
+3:48
+Donc, on va double-cliquer dessus et cliquer  sur "Lancer quand même". Et boom, si on revient  
+3:51
+sur notre machine, on peut voir qu’une connexion  s’est établie. On va pouvoir retrouver l’adresse  
+3:55
+IP de la cible, son nom d’utilisateur,  son pays, son système d’exploitation,  
+3:59
+etc. À partir d’ici, on va pouvoir réaliser  des tonnes d’actions en faisant un clic droit,  
+4:03
+comme par exemple obtenir des informations  sur le système, et gérer les fichiers de  
+4:07
+la cible. On va pouvoir également faire  des choses amusantes, comme envoyer un  
+4:10
+message de notre choix à la machine cliente  avec différentes options disponibles. Boom,  
+4:14
+cela apparaît sur la machine cliente. Encore  mieux, on a la possibilité de redémarrer ou  
+4:18
+d’éteindre l’ordinateur à distance. Et le meilleur  pour la fin : prendre le contrôle du bureau à  
+4:23
+distance et visualiser ce que la cible est en  train de faire en direct sur son ordinateur.  
+4:27
+Je vous laisse inspecter plus en détail toutes  les autres possibilités que vous offre l’outil.
+4:31
+Et voilà, vous savez maintenant comment  fonctionne un outil d'administration  
+Conclusion/Sensibilisation
+4:34
+à distance comme Quasar. Pour vous  protéger contre ce genre de choses,  
+4:37
+soyez vigilant. Ne téléchargez jamais de  fichiers provenant de sources non fiables,  
+4:41
+ne cliquez pas sur des liens suspects, et mettez  à jour régulièrement vos logiciels de sécurité.
+4:45
+Si vous souhaitez plus de vidéos de ce  genre, ou si vous avez des questions,  
+4:48
+n’hésitez pas à me le dire en commentaire.
+4:49
+Si vous avez aimé cette vidéo,  
+4:51
+n'oubliez pas de liker, de vous abonner,  et de partager pour me soutenir. Merci :)

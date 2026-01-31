@@ -1,0 +1,184 @@
+GET
+https://chatlet-i19c.onrender.com/room/refref
+[HTTP/3 200  306ms]
+
+Disconnected from Socket.IO index-as1Dhzos.js:19:67261
+GET
+https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js
+[HTTP/3 304  93ms]
+
+GET
+https://chatlet-i19c.onrender.com/assets/index-DRXV92l6.css
+[HTTP/3 304  85ms]
+
+Erreur d’analyse de la valeur pour « -webkit-text-size-adjust ».  Déclaration abandonnée. index-DRXV92l6.css:1:4901
+Propriété « field-sizing » inconnue.  Déclaration abandonnée. index-DRXV92l6.css:1:12659
+XHRGET
+https://chatlet-i19c.onrender.com/socket.io/?EIO=4&transport=polling&t=5oeyncg7
+[HTTP/3 200  102ms]
+
+XHRPOST
+https://chatlet-i19c.onrender.com/api/trpc/chat.getOrCreateRoom?batch=1
+[HTTP/3 500  107ms]
+
+XHRPOST
+https://chatlet-i19c.onrender.com/socket.io/?EIO=4&transport=polling&t=5of2hkh8&sid=cwRgNfgxjjJ4BBPbAAAI
+[HTTP/3 200  115ms]
+
+XHRGET
+https://chatlet-i19c.onrender.com/socket.io/?EIO=4&transport=polling&t=5of2le37&sid=cwRgNfgxjjJ4BBPbAAAI
+[HTTP/3 200  123ms]
+
+GET
+wss://chatlet-i19c.onrender.com/socket.io/?EIO=4&transport=websocket&sid=cwRgNfgxjjJ4BBPbAAAI
+[HTTP/1.1 101 Switching Protocols 292ms]
+
+[API Mutation Error] TRPCClientError: Database not available
+    Kl https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    from https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    mR https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    promise callback*mR/</</< https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    subscribe https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    eR https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    subscribe https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    u https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    JA https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    subscribe https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    DA https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    DA https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    requestAsPromise https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    mutation https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    mutationFn https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    fn https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    S https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    start https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    execute https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    mutate https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    nj https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:19
+    nj https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:19
+    xs https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    vg https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    Ln https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    vg https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    Ln https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    vg https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    Ln https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    vg https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    Ln https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    vg https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    Ln https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    vg https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    Ln https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    vg https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    Ln https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    vg https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    Ln https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    vg https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    Ln https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    vg https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    Ln https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    vg https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    Ln https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    vg https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    Ln https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    vg https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    Ln https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    vg https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    Ln https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    vg https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    Ln https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    vg https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    Ln https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    vg https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    Ln https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    vg https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    Pg https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    kg https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    de https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    QR https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    QR https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    GR https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    YR https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    KR https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:9
+    <anonymous> https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:9
+Caused by: undefined
+refref:73:113
+Failed to create/get room: TRPCClientError: Database not available
+    Kl https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    from https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    mR https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    promise callback*mR/</</< https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    subscribe https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    eR https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    subscribe https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    u https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    JA https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    subscribe https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    DA https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    DA https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    requestAsPromise https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    mutation https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    mutationFn https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    fn https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    S https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    start https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    execute https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    mutate https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    nj https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:19
+    nj https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:19
+    xs https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    vg https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    Ln https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    vg https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    Ln https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    vg https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    Ln https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    vg https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    Ln https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    vg https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    Ln https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    vg https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    Ln https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    vg https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    Ln https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    vg https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    Ln https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    vg https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    Ln https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    vg https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    Ln https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    vg https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    Ln https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    vg https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    Ln https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    vg https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    Ln https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    vg https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    Ln https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    vg https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    Ln https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    vg https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    Ln https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    vg https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    Ln https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    vg https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    Pg https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    kg https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:8
+    de https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    QR https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    QR https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    GR https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    YR https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:1
+    KR https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:9
+    <anonymous> https://chatlet-i19c.onrender.com/assets/index-as1Dhzos.js:9
+Caused by: undefined
+refref:73:113
+Connected to Socket.IO index-as1Dhzos.js:19:65494
+GET
+https://chatlet-i19c.onrender.com/favicon.ico
+[HTTP/3 200  0ms]
+
+XHRGET
+https://chatlet-i19c.onrender.com/socket.io/?EIO=4&transport=polling&t=5of69fek&sid=cwRgNfgxjjJ4BBPbAAAI
+[HTTP/3 200  382ms]
+

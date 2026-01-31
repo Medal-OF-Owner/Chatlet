@@ -1,0 +1,38 @@
+2025-11-28T00:20:24.100781761Z ==> Deploying...
+2025-11-28T00:21:06.744797712Z 
+2025-11-28T00:21:06.744824983Z > chatapp@1.0.0 start /app
+2025-11-28T00:21:06.744846795Z > NODE_ENV=production node dist/index.js
+2025-11-28T00:21:06.744849475Z 
+2025-11-28T00:21:16.753647871Z [OAuth] Initialized with baseURL: 
+2025-11-28T00:21:16.75397968Z [OAuth] ERROR: OAUTH_SERVER_URL is not configured! Set OAUTH_SERVER_URL environment variable.
+2025-11-28T00:21:16.95427846Z Server running on http://0.0.0.0:10000/
+2025-11-28T00:21:16.954445489Z Socket.IO ready on ws://0.0.0.0:10000/
+2025-11-28T00:21:17.60850858Z ==> Your service is live 🎉
+2025-11-28T00:21:17.649121825Z ==> 
+2025-11-28T00:21:17.685704422Z ==> ///////////////////////////////////////////////////////////
+2025-11-28T00:21:17.718146379Z ==> 
+2025-11-28T00:21:17.751243126Z ==> Available at your primary URL https://chatlet-i19c.onrender.com
+2025-11-28T00:21:17.788579013Z ==> 
+2025-11-28T00:21:17.82019574Z ==> ///////////////////////////////////////////////////////////
+2025-11-28T00:21:57.464647535Z [Auth] Missing session cookie
+2025-11-28T00:21:57.74538213Z User connected: 2TxsoGSmxXx7XJTEAAAB
+2025-11-28T00:27:12.09350746Z ==> Deploying...
+2025-11-28T00:27:48.639839991Z 
+2025-11-28T00:27:48.639887792Z > chatapp@1.0.0 start /app
+2025-11-28T00:27:48.639892972Z > NODE_ENV=production node dist/index.js
+2025-11-28T00:27:48.639895502Z 
+2025-11-28T00:27:58.93741987Z [OAuth] Initialized with baseURL: 
+2025-11-28T00:27:58.937668814Z [OAuth] ERROR: OAUTH_SERVER_URL is not configured! Set OAUTH_SERVER_URL environment variable.
+2025-11-28T00:27:59.137184855Z Server running on http://0.0.0.0:10000/
+2025-11-28T00:27:59.137211826Z Socket.IO ready on ws://0.0.0.0:10000/
+2025-11-28T00:28:03.001363383Z ==> Your service is live 🎉
+2025-11-28T00:28:03.03976684Z ==> 
+2025-11-28T00:28:03.075784106Z ==> ///////////////////////////////////////////////////////////
+2025-11-28T00:28:03.111004153Z ==> 
+2025-11-28T00:28:03.14904875Z ==> Available at your primary URL https://chatlet-i19c.onrender.com
+2025-11-28T00:28:03.183695476Z ==> 
+2025-11-28T00:28:03.226025072Z ==> ///////////////////////////////////////////////////////////
+2025-11-28T00:33:08.660219296Z ==> Detected service running on port 10000
+2025-11-28T00:33:08.800925179Z ==> Docs on specifying a port: https://render.com/docs/web-services#port-binding
+2025-11-28T00:37:36.53915949Z [Auth] Missing session cookie
+2025-11-28T00:37:36.638009515Z User connected: h6b4MggRcm1pF6A5AAAB
