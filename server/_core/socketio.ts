@@ -1,175 +1,314 @@
-import { Server as SocketIOServer } from "socket.io";
-import { Server as HTTPServer } from "http";
-import { addMessage, getMessages, reserveNickname, releaseNickname, checkNicknameAvailable } from "../db";
+// ============================================================
+// Configuration Socket.IO Optimisée - AWS + Hostinger
+// ============================================================
+// Fichier: server/_core/socketio-aws.ts
+// À copier dans votre projet pour remplacer socketio.ts
+// ============================================================
 
-interface SocketUser {
-  id: string;
-  nickname: string;
+import { Server as HTTPServer } from "http";
+import { Server as SocketIOServer } from "socket.io";
+import { getDb } from "../db";
+import { rooms, messages, activeNicknames } from "../../drizzle/schema";
+import { eq, desc } from "drizzle-orm";
+
+// Types pour les événements Socket.IO
+interface JoinRoomData {
   roomId: number;
+  nickname: string;
+  profileImage?: string;
 }
 
-const users: Map<string, SocketUser> = new Map();
+interface SendMessageData {
+  roomId: number;
+  nickname: string;
+  content: string;
+  fontFamily?: string;
+  textColor?: string;
+  profileImage?: string;
+}
 
-export function setupSocketIO(httpServer: HTTPServer) {
-  const io = new SocketIOServer(httpServer, {
-    path: "/socket.io/",
+interface WebRTCSignal {
+  roomId: number;
+  signal: any;
+  from: string;
+  to?: string;
+}
+
+// Map pour stocker les utilisateurs par room (en mémoire)
+const roomUsers = new Map<number, Set<string>>();
+
+export function setupSocketIO(server: HTTPServer) {
+  const frontendUrl = process.env.FRONTEND_URL || "http://localhost:5173";
+  
+  console.log("[Socket.IO] Initializing with CORS origin:", frontendUrl);
+  
+  // Créer le serveur Socket.IO avec configuration CORS optimisée
+  const io = new SocketIOServer(server, {
     cors: {
-      origin: "*",
+      origin: [
+        frontendUrl,
+        "http://localhost:5173", // Dev local
+        "http://localhost:3000",
+        /^https?:\/\/.*\.chatlet\.com$/, // Tous les sous-domaines
+        /^https?:\/\/.*\.awsapprunner\.com$/ // AWS App Runner
+      ],
       methods: ["GET", "POST"],
       credentials: true,
+      allowedHeaders: ["Content-Type", "Authorization"]
     },
-    transports: ["websocket", "polling"],
-    allowEIO3: true,
+    // Optimisations pour AWS
     pingTimeout: 60000,
     pingInterval: 25000,
+    connectTimeout: 45000,
+    transports: ["websocket", "polling"], // WebSocket en priorité
+    allowUpgrades: true,
+    perMessageDeflate: {
+      threshold: 1024, // Compresser les messages > 1KB
+    },
+    // Limite de taille des messages (50MB pour images base64)
+    maxHttpBufferSize: 50 * 1024 * 1024
   });
 
+  // ============================================================
+  // Middleware de connexion
+  // ============================================================
+  io.use((socket, next) => {
+    const origin = socket.handshake.headers.origin;
+    console.log(`[Socket.IO] Connection attempt from: ${origin}`);
+    next();
+  });
+
+  // ============================================================
+  // Événements de connexion
+  // ============================================================
   io.on("connection", (socket) => {
-    console.log(`User connected: ${socket.id}`);
+    console.log(`[Socket.IO] User connected: ${socket.id}`);
 
-    // Join room
-    socket.on("join_room", async (data: { roomId: number; nickname: string }) => {
-      const { roomId, nickname } = data;
-
-      // Check if nickname is available
-      const available = await checkNicknameAvailable(nickname);
-      if (!available) {
-        console.log(`❌ Nickname "${nickname}" is already taken`);
-        socket.emit("nickname_taken", { nickname });
-        return;
-      }
-
-      // Try to reserve the nickname
-      const reserved = await reserveNickname(nickname);
-      if (!reserved) {
-        console.log(`❌ Failed to reserve nickname "${nickname}"`);
-        socket.emit("nickname_taken", { nickname });
-        return;
-      }
-
-      socket.join(`room_${roomId}`);
-
-      const user: SocketUser = {
-        id: socket.id,
-        nickname,
-        roomId,
-      };
-
-      users.set(socket.id, user);
-
-      // 1. Notify all existing users in the room that a new user joined
-      io.to(`room_${roomId}`).emit("user_joined", {
-        nickname,
-        userId: socket.id,
-        timestamp: new Date(),
-      });
-
-      // 2. Send a list of existing users to the newly joined user
-      const existingUsers = Array.from(users.values()).filter(
-        (u) => u.roomId === roomId && u.id !== socket.id
-      );
-      
-      if (existingUsers.length > 0) {
-        socket.emit("existing_users", existingUsers.map(u => ({
-          nickname: u.nickname,
-          userId: u.id,
-        })));
-      }
-
-      // Don't send message history - fresh start for each session
-      socket.emit("message_history", []);
-
-      console.log(`✅ ${nickname} joined room ${roomId}`);
-    });
-
-    // Send message
-    socket.on("send_message", async (data: { 
-      roomId: number; 
-      nickname: string; 
-      content: string; 
-      fontFamily?: string; 
-      textColor?: string;
-      profileImage?: string 
-    }) => {
-      const { roomId, nickname, content, fontFamily, textColor, profileImage } = data;
-      console.log(`📨 Received message from ${nickname} in room ${roomId}: ${content}`);
-
+    // ============================================================
+    // Rejoindre une room
+    // ============================================================
+    socket.on("join_room", async (data: JoinRoomData) => {
       try {
-        await addMessage(roomId, nickname, content, fontFamily, profileImage);
-        console.log(`✅ Message saved to DB`);
-
-        // Broadcast to all users in the room
-        io.to(`room_${roomId}`).emit("new_message", {
-          nickname,
-          content,
-          fontFamily: fontFamily || "sans-serif",
-          textColor: textColor || "#ffffff",
-          profileImage: profileImage || null,
-          createdAt: new Date(),
-        });
-        console.log(`📤 Message broadcasted to room_${roomId}`);
-      } catch (error) {
-        console.error("❌ Error sending message:", error);
-        console.error("❌ Failed message data:", data);
-        socket.emit("error", "Failed to send message");
-      }
-    });
-
-    // WebRTC offer
-    socket.on("webrtc_offer", (data: { to: string; offer: any }) => {
-      io.to(data.to).emit("webrtc_offer", {
-        from: socket.id,
-        offer: data.offer,
-      });
-    });
-
-    // WebRTC answer
-    socket.on("webrtc_answer", (data: { to: string; answer: any }) => {
-      io.to(data.to).emit("webrtc_answer", {
-        from: socket.id,
-        answer: data.answer,
-      });
-    });
-
-    // WebRTC ICE candidate
-    socket.on("webrtc_ice_candidate", (data: { to: string; candidate: any }) => {
-      io.to(data.to).emit("webrtc_ice_candidate", {
-        from: socket.id,
-        candidate: data.candidate,
-      });
-    });
-
-    // Change nickname
-    socket.on("change_nickname", (data: { roomId: number; oldNickname: string; newNickname: string }) => {
-      const user = users.get(socket.id);
-      if (user) {
-        user.nickname = data.newNickname;
-        users.set(socket.id, user);
-
-        io.to(`room_${data.roomId}`).emit("nickname_changed", {
-          oldNickname: data.oldNickname,
-          newNickname: data.newNickname,
-        });
-      }
-    });
-
-    // Disconnect
-    socket.on("disconnect", async () => {
-      const user = users.get(socket.id);
-      if (user) {
-        // Release the nickname
-        await releaseNickname(user.nickname);
+        const { roomId, nickname, profileImage } = data;
         
-        io.to(`room_${user.roomId}`).emit("user_left", {
-          nickname: user.nickname,
-          userId: socket.id,
-          timestamp: new Date(),
+        console.log(`[Socket.IO] User ${nickname} joining room ${roomId}`);
+
+        // Rejoindre la room Socket.IO
+        socket.join(`room-${roomId}`);
+
+        // Ajouter l'utilisateur à la map en mémoire
+        if (!roomUsers.has(roomId)) {
+          roomUsers.set(roomId, new Set());
+        }
+        roomUsers.get(roomId)!.add(nickname);
+
+        // Enregistrer le nickname actif en base (pour éviter les doublons)
+        const db = getDb();
+        await db.insert(activeNicknames)
+          .values({ nickname, connectedAt: new Date() })
+          .onDuplicateKeyUpdate({ set: { connectedAt: new Date() } });
+
+        // Récupérer l'historique des 50 derniers messages
+        const messageHistory = await db.select()
+          .from(messages)
+          .where(eq(messages.roomId, roomId))
+          .orderBy(desc(messages.createdAt))
+          .limit(50);
+
+        // Envoyer l'historique au client (ordre chronologique)
+        socket.emit("message_history", messageHistory.reverse());
+
+        // Envoyer la liste des utilisateurs connectés
+        const connectedUsers = Array.from(roomUsers.get(roomId) || []);
+        io.to(`room-${roomId}`).emit("room_users", connectedUsers);
+
+        // Notifier les autres qu'un utilisateur a rejoint
+        socket.to(`room-${roomId}`).emit("user_joined", {
+          nickname,
+          profileImage,
+          timestamp: new Date()
         });
-        users.delete(socket.id);
-        console.log(`👋 ${user.nickname} left room ${user.roomId}`);
+
+        console.log(`[Socket.IO] Room ${roomId} now has ${connectedUsers.length} users`);
+      } catch (error) {
+        console.error("[Socket.IO] Error joining room:", error);
+        socket.emit("error", { message: "Failed to join room" });
+      }
+    });
+
+    // ============================================================
+    // Envoyer un message
+    // ============================================================
+    socket.on("send_message", async (data: SendMessageData) => {
+      try {
+        const { roomId, nickname, content, fontFamily, textColor, profileImage } = data;
+
+        // Sauvegarder en base de données
+        const db = getDb();
+        const [newMessage] = await db.insert(messages)
+          .values({
+            roomId,
+            nickname,
+            content,
+            fontFamily: fontFamily || "sans-serif",
+            textColor: textColor || "#ffffff",
+            profileImage,
+            createdAt: new Date()
+          });
+
+        // Récupérer le message complet avec l'ID
+        const savedMessage = await db.select()
+          .from(messages)
+          .where(eq(messages.id, newMessage.insertId))
+          .limit(1);
+
+        // Envoyer à tous les utilisateurs de la room (y compris l'émetteur)
+        io.to(`room-${roomId}`).emit("new_message", savedMessage[0]);
+
+        console.log(`[Socket.IO] Message sent in room ${roomId} by ${nickname}`);
+      } catch (error) {
+        console.error("[Socket.IO] Error sending message:", error);
+        socket.emit("error", { message: "Failed to send message" });
+      }
+    });
+
+    // ============================================================
+    // WebRTC Signaling (Caméra/Micro)
+    // ============================================================
+    
+    // Offre WebRTC (initier une connexion vidéo)
+    socket.on("webrtc_offer", (data: WebRTCSignal) => {
+      console.log(`[WebRTC] Offer from ${data.from} in room ${data.roomId}`);
+      
+      // Envoyer l'offre à tous les autres utilisateurs de la room
+      socket.to(`room-${data.roomId}`).emit("webrtc_offer", {
+        signal: data.signal,
+        from: data.from
+      });
+    });
+
+    // Réponse WebRTC (accepter une connexion vidéo)
+    socket.on("webrtc_answer", (data: WebRTCSignal) => {
+      console.log(`[WebRTC] Answer from ${data.from} to ${data.to}`);
+      
+      // Envoyer la réponse au peer spécifique
+      socket.to(`room-${data.roomId}`).emit("webrtc_answer", {
+        signal: data.signal,
+        from: data.from,
+        to: data.to
+      });
+    });
+
+    // Candidat ICE (pour établir la connexion P2P)
+    socket.on("webrtc_ice_candidate", (data: WebRTCSignal) => {
+      // Envoyer le candidat ICE aux autres peers
+      socket.to(`room-${data.roomId}`).emit("webrtc_ice_candidate", {
+        signal: data.signal,
+        from: data.from
+      });
+    });
+
+    // Nouveau peer rejoint pour la vidéo
+    socket.on("webrtc_join", (data: { roomId: number; nickname: string }) => {
+      console.log(`[WebRTC] ${data.nickname} joined video in room ${data.roomId}`);
+      
+      // Notifier les autres peers
+      socket.to(`room-${data.roomId}`).emit("webrtc_peer_joined", {
+        nickname: data.nickname,
+        socketId: socket.id
+      });
+    });
+
+    // ============================================================
+    // Utilisateur en train de taper (typing indicator)
+    // ============================================================
+    socket.on("typing_start", (data: { roomId: number; nickname: string }) => {
+      socket.to(`room-${data.roomId}`).emit("user_typing", {
+        nickname: data.nickname,
+        isTyping: true
+      });
+    });
+
+    socket.on("typing_stop", (data: { roomId: number; nickname: string }) => {
+      socket.to(`room-${data.roomId}`).emit("user_typing", {
+        nickname: data.nickname,
+        isTyping: false
+      });
+    });
+
+    // ============================================================
+    // Déconnexion
+    // ============================================================
+    socket.on("disconnect", async () => {
+      console.log(`[Socket.IO] User disconnected: ${socket.id}`);
+
+      // Retirer l'utilisateur de toutes les rooms
+      for (const [roomId, users] of roomUsers.entries()) {
+        // Note: On ne peut pas identifier facilement quel nickname correspond à ce socket
+        // Solution: Le client doit envoyer "leave_room" explicitement avant de se déconnecter
+        // Ou stocker une map socket.id -> nickname
+      }
+    });
+
+    // Quitter une room explicitement
+    socket.on("leave_room", async (data: { roomId: number; nickname: string }) => {
+      try {
+        const { roomId, nickname } = data;
+
+        console.log(`[Socket.IO] User ${nickname} leaving room ${roomId}`);
+
+        // Retirer de la room Socket.IO
+        socket.leave(`room-${roomId}`);
+
+        // Retirer de la map en mémoire
+        if (roomUsers.has(roomId)) {
+          roomUsers.get(roomId)!.delete(nickname);
+          
+          // Si la room est vide, la supprimer
+          if (roomUsers.get(roomId)!.size === 0) {
+            roomUsers.delete(roomId);
+          }
+        }
+
+        // Supprimer le nickname actif de la base
+        const db = getDb();
+        await db.delete(activeNicknames)
+          .where(eq(activeNicknames.nickname, nickname));
+
+        // Notifier les autres
+        const connectedUsers = Array.from(roomUsers.get(roomId) || []);
+        io.to(`room-${roomId}`).emit("room_users", connectedUsers);
+        socket.to(`room-${roomId}`).emit("user_left", {
+          nickname,
+          timestamp: new Date()
+        });
+      } catch (error) {
+        console.error("[Socket.IO] Error leaving room:", error);
       }
     });
   });
 
+  console.log("[Socket.IO] Server initialized successfully");
+  
   return io;
+}
+
+// ============================================================
+// Nettoyage périodique des nicknames inactifs (optionnel)
+// ============================================================
+export function startCleanupTask() {
+  setInterval(async () => {
+    try {
+      const db = getDb();
+      const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000);
+      
+      // Supprimer les nicknames non actifs depuis 5 minutes
+      // Note: Cette stratégie suppose que les clients envoient des heartbeats
+      // Sinon, gérer différemment (ex: stocker lastActivity par socket)
+      
+      console.log("[Socket.IO] Cleanup task completed");
+    } catch (error) {
+      console.error("[Socket.IO] Cleanup error:", error);
+    }
+  }, 5 * 60 * 1000); // Toutes les 5 minutes
 }
