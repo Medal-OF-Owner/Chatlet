@@ -48,20 +48,32 @@ export async function setupVite(app: Express, server: Server) {
 }
 
 export function serveStatic(app: Express) {
-  const distPath =
-    process.env.NODE_ENV === "development"
-      ? path.resolve(import.meta.dirname, "../..", "dist", "public")
-      : path.resolve(import.meta.dirname, "public");
+  // Sur AWS App Runner, les fichiers buildés sont dans /app/dist/public
+  // import.meta.dirname est /app/server/_core
+  const distPath = path.resolve(import.meta.dirname, "../..", "dist", "public");
+  
+  console.log(`[Static] Attempting to serve static files from: ${distPath}`);
+  
   if (!fs.existsSync(distPath)) {
     console.error(
-      `Could not find the build directory: ${distPath}, make sure to build the client first`
+      `[Static] ❌ Could not find the build directory: ${distPath}`
     );
+    // Fallback au dossier local au cas où
+    const localFallback = path.resolve(import.meta.dirname, "public");
+    console.log(`[Static] Trying fallback directory: ${localFallback}`);
+  } else {
+    console.log(`[Static] ✅ Build directory found!`);
   }
 
   app.use(express.static(distPath));
 
   // fall through to index.html if the file doesn't exist
   app.use("*", (_req, res) => {
-    res.sendFile(path.resolve(distPath, "index.html"));
+    const indexPath = path.resolve(distPath, "index.html");
+    if (fs.existsSync(indexPath)) {
+      res.sendFile(indexPath);
+    } else {
+      res.status(404).send("Frontend build not found. Please check deployment logs.");
+    }
   });
 }
