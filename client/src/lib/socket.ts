@@ -68,7 +68,8 @@ socket.on("connect_error", (error) => {
   // Stratégie de fallback: basculer sur polling si WebSocket échoue
   if (socket.io.opts.transports?.includes("websocket")) {
     console.log("[Socket.IO] Switching to polling transport...");
-    socket.io.opts.transports = ["polling", "websocket"] as any;
+    // @ts-ignore
+    socket.io.opts.transports = ["polling", "websocket"];
   }
 });
 
