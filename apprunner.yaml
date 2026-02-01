@@ -9,6 +9,3 @@ run:
   command: npx tsx server/_core/index.ts
   network:
     port: 8080
-instance:
-  cpu: "1 vCPU"
-  memory: "2 GB"
