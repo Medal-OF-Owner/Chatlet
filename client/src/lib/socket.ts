@@ -209,3 +209,19 @@ export function forceReconnect() {
 }
 
 export default socket;
+
+/**
+ * Obtenir l'instance socket (alias pour l'export par défaut)
+ */
+export function getSocket() {
+  return socket;
+}
+
+/**
+ * Déconnecter le socket
+ */
+export function disconnectSocket() {
+  if (socket.connected) {
+    socket.disconnect();
+  }
+}
