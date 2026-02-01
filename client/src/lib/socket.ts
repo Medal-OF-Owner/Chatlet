@@ -13,7 +13,7 @@ import { io, Socket } from "socket.io-client";
 
 // URL du backend AWS App Runner
 // IMPORTANT: Remplacez par votre vraie URL après déploiement AWS
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 
+const BACKEND_URL = (import.meta as any).env.VITE_BACKEND_URL || 
                     "https://VOTRE_URL_APP_RUNNER.awsapprunner.com";
 
 console.log("[Socket.IO Client] Connecting to backend:", BACKEND_URL);
@@ -23,7 +23,7 @@ console.log("[Socket.IO Client] Connecting to backend:", BACKEND_URL);
 // ============================================================
 export const socket: Socket = io(BACKEND_URL, {
   // Options de connexion
-  transports: ["websocket", "polling"], // Essayer WebSocket en premier
+  transports: ["websocket", "polling"] as any, // Essayer WebSocket en premier
   autoConnect: true, // Connexion automatique
   reconnection: true, // Reconnexion automatique
   reconnectionDelay: 1000, // Délai entre tentatives (1s)
@@ -32,6 +32,7 @@ export const socket: Socket = io(BACKEND_URL, {
   timeout: 20000, // Timeout de connexion (20s)
   
   // Compression des données
+  // @ts-ignore
   perMessageDeflate: {
     threshold: 1024 // Compresser > 1KB
   },
@@ -67,7 +68,7 @@ socket.on("connect_error", (error) => {
   // Stratégie de fallback: basculer sur polling si WebSocket échoue
   if (socket.io.opts.transports?.includes("websocket")) {
     console.log("[Socket.IO] Switching to polling transport...");
-    socket.io.opts.transports = ["polling", "websocket"];
+    socket.io.opts.transports = ["polling", "websocket"] as any;
   }
 });
 
@@ -208,8 +209,6 @@ export function forceReconnect() {
   }
 }
 
-export default socket;
-
 /**
  * Obtenir l'instance socket (alias pour l'export par défaut)
  */
@@ -225,3 +224,5 @@ export function disconnectSocket() {
     socket.disconnect();
   }
 }
+
+export default socket;

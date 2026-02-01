@@ -51,7 +51,7 @@ export function setupSocketIO(server: HTTPServer) {
         "http://localhost:3000",
         /^https?:\/\/.*\.chatlet\.com$/, // Tous les sous-domaines
         /^https?:\/\/.*\.awsapprunner\.com$/ // AWS App Runner
-      ],
+      ] as any,
       methods: ["GET", "POST"],
       credentials: true,
       allowedHeaders: ["Content-Type", "Authorization"]
@@ -62,6 +62,7 @@ export function setupSocketIO(server: HTTPServer) {
     connectTimeout: 45000,
     transports: ["websocket", "polling"], // WebSocket en priorité
     allowUpgrades: true,
+    // @ts-ignore
     perMessageDeflate: {
       threshold: 1024, // Compresser les messages > 1KB
     },
@@ -103,20 +104,22 @@ export function setupSocketIO(server: HTTPServer) {
         roomUsers.get(roomId)!.add(nickname);
 
         // Enregistrer le nickname actif en base (pour éviter les doublons)
-        const db = getDb();
-        await db.insert(activeNicknames)
-          .values({ nickname, connectedAt: new Date() })
-          .onDuplicateKeyUpdate({ set: { connectedAt: new Date() } });
+        const db = await getDb();
+        if (db) {
+          await db.insert(activeNicknames)
+            .values({ nickname, connectedAt: new Date() })
+            .onDuplicateKeyUpdate({ set: { connectedAt: new Date() } });
 
-        // Récupérer l'historique des 50 derniers messages
-        const messageHistory = await db.select()
-          .from(messages)
-          .where(eq(messages.roomId, roomId))
-          .orderBy(desc(messages.createdAt))
-          .limit(50);
+          // Récupérer l'historique des 50 derniers messages
+          const messageHistory = await db.select()
+            .from(messages)
+            .where(eq(messages.roomId, roomId))
+            .orderBy(desc(messages.createdAt))
+            .limit(50);
 
-        // Envoyer l'historique au client (ordre chronologique)
-        socket.emit("message_history", messageHistory.reverse());
+          // Envoyer l'historique au client (ordre chronologique)
+          socket.emit("message_history", messageHistory.reverse());
+        }
 
         // Envoyer la liste des utilisateurs connectés
         const connectedUsers = Array.from(roomUsers.get(roomId) || []);
@@ -144,26 +147,30 @@ export function setupSocketIO(server: HTTPServer) {
         const { roomId, nickname, content, fontFamily, textColor, profileImage } = data;
 
         // Sauvegarder en base de données
-        const db = getDb();
-        const [newMessage] = await db.insert(messages)
-          .values({
-            roomId,
-            nickname,
-            content,
-            fontFamily: fontFamily || "sans-serif",
-            textColor: textColor || "#ffffff",
-            profileImage,
-            createdAt: new Date()
-          });
+        const db = await getDb();
+        if (db) {
+          const [result] = await db.insert(messages)
+            .values({
+              roomId,
+              nickname,
+              content,
+              fontFamily: fontFamily || "sans-serif",
+              textColor: textColor || "#ffffff",
+              profileImage,
+              createdAt: new Date()
+            });
 
-        // Récupérer le message complet avec l'ID
-        const savedMessage = await db.select()
-          .from(messages)
-          .where(eq(messages.id, newMessage.insertId))
-          .limit(1);
+          // Récupérer le message complet avec l'ID
+          const savedMessage = await db.select()
+            .from(messages)
+            .where(eq(messages.id, result.insertId))
+            .limit(1);
 
-        // Envoyer à tous les utilisateurs de la room (y compris l'émetteur)
-        io.to(`room-${roomId}`).emit("new_message", savedMessage[0]);
+          // Envoyer à tous les utilisateurs de la room (y compris l'émetteur)
+          if (savedMessage.length > 0) {
+            io.to(`room-${roomId}`).emit("new_message", savedMessage[0]);
+          }
+        }
 
         console.log(`[Socket.IO] Message sent in room ${roomId} by ${nickname}`);
       } catch (error) {
@@ -243,7 +250,8 @@ export function setupSocketIO(server: HTTPServer) {
       console.log(`[Socket.IO] User disconnected: ${socket.id}`);
 
       // Retirer l'utilisateur de toutes les rooms
-      for (const [roomId, users] of roomUsers.entries()) {
+      // @ts-ignore
+      for (const [roomId, users] of (roomUsers.entries() as any)) {
         // Note: On ne peut pas identifier facilement quel nickname correspond à ce socket
         // Solution: Le client doit envoyer "leave_room" explicitement avant de se déconnecter
         // Ou stocker une map socket.id -> nickname
@@ -271,9 +279,11 @@ export function setupSocketIO(server: HTTPServer) {
         }
 
         // Supprimer le nickname actif de la base
-        const db = getDb();
-        await db.delete(activeNicknames)
-          .where(eq(activeNicknames.nickname, nickname));
+        const db = await getDb();
+        if (db) {
+          await db.delete(activeNicknames)
+            .where(eq(activeNicknames.nickname, nickname));
+        }
 
         // Notifier les autres
         const connectedUsers = Array.from(roomUsers.get(roomId) || []);
@@ -299,14 +309,16 @@ export function setupSocketIO(server: HTTPServer) {
 export function startCleanupTask() {
   setInterval(async () => {
     try {
-      const db = getDb();
-      const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000);
-      
-      // Supprimer les nicknames non actifs depuis 5 minutes
-      // Note: Cette stratégie suppose que les clients envoient des heartbeats
-      // Sinon, gérer différemment (ex: stocker lastActivity par socket)
-      
-      console.log("[Socket.IO] Cleanup task completed");
+      const db = await getDb();
+      if (db) {
+        const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000);
+        
+        // Supprimer les nicknames non actifs depuis 5 minutes
+        // Note: Cette stratégie suppose que les clients envoient des heartbeats
+        // Sinon, gérer différemment (ex: stocker lastActivity par socket)
+        
+        console.log("[Socket.IO] Cleanup task completed");
+      }
     } catch (error) {
       console.error("[Socket.IO] Cleanup error:", error);
     }
